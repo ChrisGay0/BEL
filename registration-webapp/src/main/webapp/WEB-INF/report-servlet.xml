@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+	
+	<bean id="RegisterController" class="com.cgsolutions.report.RegisterController">
+		<property name="methodNameResolver">
+			<ref local="resolver"/>
+		</property>	
+		<property name="roomManager" ref="roomManager"/>
+		<property name="attendanceManager" ref="attendanceManager"/>
+	</bean>
+	
+	<bean id="RegisterCompile" class="org.springframework.web.servlet.view.jasperreports.JasperReportsPdfView">
+		<property name="reportDataKey">
+			<value>dataSource</value>
+		</property>
+		<property name="url">
+			<value>/WEB-INF/reports/register.jasper</value>
+		</property>
+		<property name="subReportUrls">
+			<map>					
+				<entry key="registerSubReport">
+					<value>/WEB-INF/reports/registerSubReport.jasper</value>
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+<!-- 
+<property name="subReportUrls">
+			<map>					
+				<entry key="documentSubReport">
+					<value>/WEB-INF/reports/DocumentInvoiceWorkcards.jasper</value>
+				</entry>
+				<entry key="tradeEstimatesSubReport">
+					<value>/WEB-INF/reports/DocumentInvoiceLabour.jasper</value>
+				</entry>
+				<entry key="materialEstimatesSubReport">
+					<value>/WEB-INF/reports/DocumentInvoiceMaterials.jasper</value>
+				</entry>
+				<entry key="sundryEstimatesSubReport">
+					<value>/WEB-INF/reports/DocumentInvoiceSundries.jasper</value>
+				</entry>
+			</map>
+		</property>
+ -->	
+	<bean id="urlMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+		<property name="mappings">
+			<props>
+				<prop key="/register.pdf">RegisterController</prop>
+			</props>
+		</property>
+	</bean>	
+	
+	<bean id="resolver" class="org.springframework.web.servlet.mvc.multiaction.PropertiesMethodNameResolver">
+		<property name="mappings">
+			<props>
+				<prop key="/register.pdf">printRegister</prop>
+			</props>
+		</property>
+	</bean>	
+	
+	<bean id="nameViewResolver" class="org.springframework.web.servlet.view.BeanNameViewResolver"/>
+</beans>

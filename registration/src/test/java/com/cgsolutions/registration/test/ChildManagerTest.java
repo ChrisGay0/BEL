@@ -1,0 +1,75 @@
+package com.cgsolutions.registration.test;
+
+import static org.junit.Assert.*;
+
+import java.util.List;
+
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.cgsolutions.registration.domain.Child;
+import com.cgsolutions.registration.domain.ChildSearchBean;
+import com.cgsolutions.registration.domain.Room;
+import com.cgsolutions.registration.domain.enums.TypeOfAttendance;
+import com.cgsolutions.registration.service.ChildManager;
+
+@RunWith(SpringJUnit4ClassRunner.class)  
+@ContextConfiguration(locations={"classpath:com/cgsolutions/security/service/services.xml", "classpath:com/cgsolutions/security/service/access.xml", "classpath:com/cgsolutions/registration/service/services.xml"})
+@Transactional
+public class ChildManagerTest {
+	@Autowired
+	private ChildManager childManager;
+	
+	@Test
+	public void createChild() {
+		childManager.createChild(generateChild());
+	}
+	
+	@Test
+	public void deleteChild(){
+		Child child = generateChild();
+		childManager.createChild(child);
+		
+		assertNotNull(childManager.findChild(child.getId()));
+		
+		childManager.deleteChild(child);
+		
+		assertNull(childManager.findChild(child.getId()));
+	}
+	
+	@Test
+	public void findChild(){
+		childManager.findChild(2);
+	}
+	
+	@Test
+	public void testSearch(){
+		ChildSearchBean searchBean = new ChildSearchBean();
+		searchBean.setFirstName("A");
+		searchBean.setSurname("b");
+		searchBean.setRoom(new Room());
+		searchBean.getRoom().setId(1);
+		searchBean.setIncludeLeft(false);
+		
+		childManager.searchForChildren(searchBean);
+	}
+	
+	
+	@Test
+	public void findForRoom(){
+		childManager.findActiveChildrenForRoom(1);
+	}
+	
+	private Child generateChild(){
+		Child child = new Child();
+		child.setFirstName("Grace");
+		child.setSurname("Ambrose");
+		child.setMondayAttendance(TypeOfAttendance.FULL);
+		
+		return child;
+	}
+}

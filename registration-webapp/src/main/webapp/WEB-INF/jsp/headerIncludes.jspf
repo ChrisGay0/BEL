@@ -1,0 +1,26 @@
+<link type='text/css' rel='stylesheet' href='/registration-webapp/stylesheet/reset.css'></link>
+<link type='text/css' rel='stylesheet' href='/registration-webapp/stylesheet/styling.css'></link>
+<script type="text/javascript" src="/registration-webapp/javascript/jquery-1.4.2.js"></script>
+<script type="text/javascript" src="/registration-webapp/javascript/jquery.datepick.js"></script>
+<link type='text/css' rel='stylesheet' href='/registration-webapp/stylesheet/jquery.datepick.redmond.css'></link>
+<script type="text/javascript" src="/registration-webapp/javascript/tabber-minimized.js"></script>
+<link rel="stylesheet" href="/registration-webapp/stylesheet/tabs.css" TYPE="text/css" MEDIA="screen">
+<script type="text/javascript">
+	var defaultDatepickOptions = {
+		showOn: 'both',
+		buttonText: 'Choose a date...',
+		buttonImageOnly: true,
+		buttonImage: '/registration-webapp/images/calendar.gif',
+		dateFormat: 'd M yy',
+		autoSize: true,
+		showAnim: 'fadeIn',
+		alignment: 'right',
+		onClose: function() {}
+	};
+
+	$(function() { 
+		$('input.date').datepick(defaultDatepickOptions);
+	});
+	
+	document.write('<style type="text/css">.tabber{display:none;}<\/style>');
+</script>
