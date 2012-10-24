@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.cgsolutions.registration.domain.Child;
 import com.cgsolutions.registration.domain.Room;
+import com.cgsolutions.registration.domain.enums.Ethnicity;
 import com.cgsolutions.registration.domain.propertyEditors.DatePropertyEditor;
 import com.cgsolutions.registration.domain.propertyEditors.RoomPropertyEditor;
 import com.cgsolutions.registration.service.ChildManager;
@@ -30,6 +31,7 @@ public class CreateChildController {
 	public String showForm(Model model){
 		model.addAttribute("newChild", new Child());
 		model.addAttribute("rooms", roomManager.findAllActive());
+		model.addAttribute("ethnicityList", Ethnicity.values());
 		
 		return "createChild";
 	}

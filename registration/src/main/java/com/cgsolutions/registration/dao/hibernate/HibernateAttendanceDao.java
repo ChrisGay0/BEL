@@ -11,6 +11,8 @@ import org.springframework.stereotype.Repository;
 
 import com.cgsolutions.registration.dao.AttendanceDao;
 import com.cgsolutions.registration.domain.Attendance;
+import com.cgsolutions.registration.domain.Child;
+import com.cgsolutions.registration.domain.Term;
 import com.cgsolutions.security.utility.MyDateUtils;
 
 @Repository
@@ -35,6 +37,26 @@ public class HibernateAttendanceDao extends HibernateDaoSupport implements Atten
 		Query query = getSession().createQuery("from Attendance where room.id = :roomId and attendanceDate = :attendanceDate");
 		query.setParameter("roomId", roomId);
 		query.setParameter("attendanceDate", MyDateUtils.getStartOfDay(day));
+		
+		return query.list();
+	}
+	
+	public void deleteFutureAttendancesForChild(Child child){
+		Query query = getSession().createQuery("delete from Attendance a where child.id = :childId and term.id in (select t.id from Term t where t.startDate > :todaysDate)");
+		query.setParameter("childId", child.getId());
+		query.setParameter("todaysDate", new Date());
+		
+		query.executeUpdate();
+	}
+	
+	public void deleteAttendancesForTerm(Term term){
+		getSession().createQuery("delete from Attendance where term.id = " + term.getId()).executeUpdate();
+	}
+	
+	public List<Attendance> findFtureAttendancesForChild(Child child){
+		Query query = getSession().createQuery("from Attendance a where child.id = :childId and term.id in (select t.id from Term t where t.startDate > :todaysDate)");
+		query.setParameter("childId", child.getId());
+		query.setParameter("todaysDate", new Date());
 		
 		return query.list();
 	}

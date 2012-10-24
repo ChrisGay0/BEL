@@ -1,5 +1,6 @@
 package com.cgsolutions.registration.test;
 
+import static org.junit.Assert.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -45,25 +46,67 @@ public class AttendanceManagerTest {
 	}
 	
 	@Test
+	public void findFutureAttendances(){
+		attendanceManager.findFtureAttendancesForChild(setupChildData());
+	}
+	
+	@Test
 	public void findAttendancesForRoomAndDay(){
 		attendanceManager.findAttendancesForDayAndRoom(13, new Date());
+	}
+	@Test
+	public void deleteForTerm(){
+		Term term = new Term();
+		term.setId(99999);
+		
+		attendanceManager.deleteAttendancesForTerm(term);
 	}
 	
 	@Test
 	public void save(){
 		Attendance attendance = new Attendance();
 		attendanceManager.save(attendance);
-		Assert.assertTrue(attendance.getId() != 0);
+		assertTrue(attendance.getId() != 0);
 	}
 	
 	@Test
 	public void generateAttendances(){
+		setupChildData();
 		Term term = new Term();
-		term.setStartDate(new Date());
+		term.setStartDate(MyDateUtils.incrementByDays(new Date(), 1));
 		term.setEndDate(MyDateUtils.incrementByDays(new Date(), 10));
 		
 		termManager.save(term);
+		List<Attendance> attendances = attendanceManager.generateAttendancesForTerm(term);
 		
+		for(Attendance attendance: attendances){
+			System.out.println("***********" + attendance.getTypeOfAttendance().getDescription());
+			System.out.println("***********" + attendance.getAttendanceDate());
+		}
+		
+	}
+	
+	@Test
+	public void testDeleteFutureAttendances(){
+		Child child = setupChildData();
+		
+		attendanceManager.deleteFutureAttendancesForChild(child);
+	}
+	
+	@Test
+	public void redoAttendancesForChild(){
+		Child child = setupChildData();
+		Term term = new Term();
+		term.setStartDate(MyDateUtils.incrementByDays(new Date(), 1));
+		term.setEndDate(MyDateUtils.incrementByDays(new Date(), 10));
+		
+		termManager.save(term);
+		attendanceManager.generateAttendancesForTerm(term);
+		
+		attendanceManager.redoAttendancesForChild(child);
+	}
+	
+	private Child setupChildData(){
 		Room room = new Room();
 		room.setActive(true);
 		room.setName("Dolphin");
@@ -90,14 +133,6 @@ public class AttendanceManagerTest {
 		
 		childManager.saveChild(child);
 		
-		List<Attendance> attendances = attendanceManager.generateAttendancesForTerm(term);
-		
-		for(Attendance attendance: attendances){
-			System.out.println("***********" + attendance.getTypeOfAttendance().getDescription());
-			System.out.println("***********" + attendance.getAttendanceDate());
-		}
-		
-		child.getOutstandingBills();
-		child.getPaidBills();
+		return child;
 	}
 }

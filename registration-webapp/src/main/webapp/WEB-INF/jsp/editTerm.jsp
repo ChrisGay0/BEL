@@ -54,6 +54,7 @@
 				<c:choose>
 					<c:when test="${term.lockTerm}">
 						<button onclick="document.location = 'viewAttendances.htm?termId=${term.id}';return false;">Show Attendances</button>
+						<button onclick="document.location = 'generateAttendances.htm?redo=Y&termId=${term.id}';return false;">Redo Attendances</button>
 					</c:when>
 					<c:otherwise>
 						<button onclick="document.location = 'generateAttendances.htm?termId=${term.id}';return false;">Generate Attendances</button>

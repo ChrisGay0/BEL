@@ -18,9 +18,6 @@
 	</head>
 	<body>
 		<%@ include file="/WEB-INF/jsp/header.jsp" %>
-		<p>
-			Showing all for term
-		</p>
 		<table class="listTable">
 			<thead>
 				<tr>
@@ -35,6 +32,9 @@
 					</th>
 					<th>
 						Type of Attendance
+					</th>
+					<th>
+						Term
 					</th>
 				</tr>
 			</thead>
@@ -52,7 +52,10 @@
 						</td>
 						<td>
 							${attendance.typeOfAttendance.description}
+						</td>
 						<td>
+							${attendance.term.termName}
+						</td>
 					</tr>
 				</c:forEach>
 			</tbody>

@@ -64,6 +64,9 @@
 				<li onclick="document.location = 'findChild.htm'">
 					Find Child
 				</li>
+				<li onclick="document.location = 'bulkRoomChange.htm'">
+					Bulk Room Change
+				</li>
 			</ul>
 		</div>
 		

@@ -4,11 +4,9 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.util.CollectionUtils;
 
 import com.cgsolutions.registration.dao.RoomDao;
 import com.cgsolutions.registration.domain.Room;
-import com.cgsolutions.registration.domain.SessionCost;
 
 @Service
 public class RoomManager {

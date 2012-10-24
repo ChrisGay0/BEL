@@ -23,6 +23,7 @@ import org.hibernate.annotations.FilterDef;
 import org.hibernate.annotations.Formula;
 import org.hibernate.annotations.ParamDef;
 
+import com.cgsolutions.registration.domain.enums.Ethnicity;
 import com.cgsolutions.registration.domain.enums.TypeOfAttendance;
 import com.cgsolutions.security.utility.MyDateUtils;
 
@@ -54,7 +55,8 @@ public class Child {
 	private TypeOfAttendance thursdayAttendance;
 	@Enumerated(EnumType.STRING)
 	private TypeOfAttendance fridayAttendance;
-	private String ethnicity;
+	@Enumerated(EnumType.STRING)
+	private Ethnicity ethnicity;
 	private String doctorsName;
 	private String doctorsContactNumber;
 	private Integer depositPaid;
@@ -64,17 +66,15 @@ public class Child {
 	private String city;
 	private String county;
 	private String postCode;
+	private String password;
 	private String sex;
+	private Date startDate;
 	private boolean leftSchool;
 	private boolean registrationFeePaid;
+	@Transient
+	private boolean selected;
 	private int fundedSessions;
 	private int fundedLunches;
-	@OneToMany(targetEntity=ChildBill.class)
-	@JoinColumn(name="childId")
-	@Formula(value="from ChildBill where childId = id and balancePaid = billAmount")
-	private List<ChildBill> paidBills;
-	@Transient
-	private List<ChildBill> outstandingBills;
 	@JoinColumn(name="childId")
 	@OneToMany(targetEntity=Guardian.class, cascade=CascadeType.ALL)
 	private List<Guardian> guardians;
@@ -84,6 +84,12 @@ public class Child {
 	@JoinColumn(name="childId")
 	@OneToMany(targetEntity=Authorisation.class, cascade=CascadeType.ALL)
 	private List<Authorisation> authorisations;
+	@JoinColumn(name="childId")
+	@OneToMany(targetEntity=Contact.class, cascade=CascadeType.ALL)
+	private List<Contact> contacts;
+	@JoinColumn(name="childId")
+	@OneToMany(targetEntity=AdditionalSetting.class, cascade=CascadeType.ALL)
+	private List<AdditionalSetting> additionalSettings;
 	
 	public int getId() {
 		return id;
@@ -130,6 +136,12 @@ public class Child {
 	public TypeOfAttendance getMondayAttendance() {
 		return mondayAttendance;
 	}
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
 	public void setMondayAttendance(TypeOfAttendance mondayAttendance) {
 		this.mondayAttendance = mondayAttendance;
 	}
@@ -151,6 +163,18 @@ public class Child {
 	public void setThursdayAttendance(TypeOfAttendance thursdayAttendance) {
 		this.thursdayAttendance = thursdayAttendance;
 	}
+	public List<Contact> getContacts() {
+		return contacts;
+	}
+	public void setContacts(List<Contact> contacts) {
+		this.contacts = contacts;
+	}
+	public Date getStartDate() {
+		return startDate;
+	}
+	public void setStartDate(Date startDate) {
+		this.startDate = startDate;
+	}
 	public TypeOfAttendance getFridayAttendance() {
 		return fridayAttendance;
 	}
@@ -163,10 +187,10 @@ public class Child {
 	public void setLastUpdate(Date lastUpdate) {
 		this.lastUpdate = lastUpdate;
 	}
-	public String getEthnicity() {
+	public Ethnicity getEthnicity() {
 		return ethnicity;
 	}
-	public void setEthnicity(String ethnicity) {
+	public void setEthnicity(Ethnicity ethnicity) {
 		this.ethnicity = ethnicity;
 	}
 	public String getDoctorsName() {
@@ -211,17 +235,11 @@ public class Child {
 	public void setCity(String city) {
 		this.city = city;
 	}
-	public List<ChildBill> getPaidBills() {
-		return paidBills;
+	public List<AdditionalSetting> getAdditionalSettings() {
+		return additionalSettings;
 	}
-	public void setPaidBills(List<ChildBill> paidBills) {
-		this.paidBills = paidBills;
-	}
-	public List<ChildBill> getOutstandingBills() {
-		return outstandingBills;
-	}
-	public void setOutstandingBills(List<ChildBill> outstandingBills) {
-		this.outstandingBills = outstandingBills;
+	public void setAdditionalSettings(List<AdditionalSetting> additionalSettings) {
+		this.additionalSettings = additionalSettings;
 	}
 	public String getCounty() {
 		return county;
@@ -276,6 +294,12 @@ public class Child {
 	}
 	public void setAuthorisations(List<Authorisation> authorisations) {
 		this.authorisations = authorisations;
+	}
+	public boolean isSelected() {
+		return selected;
+	}
+	public void setSelected(boolean selected) {
+		this.selected = selected;
 	}
 	public TypeOfAttendance getTypeOfAttendance(Date attendanceDate){
 		if(MyDateUtils.isItAMonday(attendanceDate)){

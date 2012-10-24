@@ -25,4 +25,7 @@ public class TermManager {
 	public List<Term> findAllTerms(){
 		return termDao.findAllTerms();
 	}
+	public List<Term> findAllFutureTerms(boolean attendancesGenerated){
+		return termDao.findAllFutureTerms(attendancesGenerated);
+	}
 }

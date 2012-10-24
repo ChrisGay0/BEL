@@ -5,14 +5,17 @@
 	<head>
 		<%@ include file="headerIncludes.jspf" %>
 		<script type="text/javascript">
-			function removeRow(image){
-				$(image).previos().previous().remove();
+			function removeRow(rowId){
+				$("#" + rowId).remove();
 			}
 			function cloneRow(rowId, index){
 				if($("#" + rowId + parseInt(index) + 1).length == 0){
 					var $tr    = $("#" + rowId + index);
 					var $clone = $tr.clone();
-					$clone.attr("id", $clone.attr("id").replace(index, parseInt(index + 1)));
+					var newId = $clone.attr("id").replace(index, parseInt(index + 1));
+					$clone.attr("id", newId);
+					$clone.find('img').remove();
+					$clone.find('.deleteColumn').append('<img src="/registration-webapp/images/remove.png" style="cursor: pointer;" height="24px" width="24px" onclick="removeRow(\'' + newId + '\');"/>');
 					$clone.find('input[type=text], textarea').each(function(){
 						var id = $(this).attr("id");
 						id = id.replace(index, parseInt(index + 1));
@@ -28,6 +31,7 @@
 					});
 					$tr.find('input[type=text], textarea').each(function(){
 						$(this).attr("onchange", "");
+						$(this).unbind("change");
 					});
 					
 					$tr.after($clone);
@@ -87,6 +91,14 @@
 						</tr>
 						<tr>
 							<td>
+								Password
+							</td>
+							<td>
+								<form:input path="child.password"/>
+							</td>
+						</tr>
+						<tr>
+							<td>
 								Sex
 							</td>
 							<td>
@@ -101,7 +113,7 @@
 								Ethnicity
 							</td>
 							<td>
-								<form:input path="child.ethnicity"/>
+								<form:select path="child.ethnicity" items="${ethnicityList}" itemLabel="description"/>
 							</td>
 						</tr>
 						<tr>
@@ -162,6 +174,14 @@
 							</td>
 							<td>
 								<form:select path="child.room" items="${rooms}" itemValue="id"/>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								Start Date
+							</td>
+							<td>
+								<form:input path="child.startDate" cssClass="date"/>
 							</td>
 						</tr>
 						<tr>
@@ -284,15 +304,15 @@
 											<tbody>
 												<c:forEach items="${formObject.newIntolerances}" var="newIntolerance" varStatus="listIndex">
 													<spring:nestedPath path="newIntolerances[${listIndex.index}]">
-														<tr id="intolerance${listIndex.index}">
-															<td>
-																<img src="/registration-webapp/images/remove.png" height="16px" width="16px" onclick="removeRow(this);"/>
+														<tr id="intolerance${listIndex.index}" >
+															<td style="vertical-align: top; text-align: center;" class="deleteColumn">
+
 															</td>
-															<td>
+															<td style="vertical-align: top;">
 																<form:input path="intolerance" onchange="cloneRow('intolerance', ${listIndex.index});"/>
 															</td>
 															<td>
-																<form:textarea path="precaution" rows="4" cols="60" onchange="cloneRow('intolerance', ${listIndex.index});"/>
+																<form:textarea path="precaution" rows="4" cols="60"/>
 															</td>
 														</tr>
 													</spring:nestedPath>
@@ -302,10 +322,10 @@
 												<c:forEach items="${formObject.child.intolerances}" var="intolerance" varStatus="listIndex">
 													<spring:nestedPath path="child.intolerances[${listIndex.index}]">
 														<tr valign="top">
-															<td>
+															<td style="vertical-align: top; text-align: center;">
 																<form:checkbox path="selected"/> 
 															</td>
-															<td>
+															<td style="vertical-align: top;">
 																<form:input path="intolerance"/>
 															</td>
 															<td>
@@ -319,6 +339,55 @@
 								</div>
 							</td>
 						</tr>
+					</table>
+				</div>
+				<div class="tabbertab" title="Authorisations">
+					<table class="listTable">
+						<thead>
+							<tr>
+								<th style="text-align: center;">
+									Delete
+								</th>
+								<th>
+									Activity
+								</th>
+								<th>
+									Reason
+								</th>
+							</tr>
+						</thead>
+						<tbody>
+							<c:forEach items="${formObject.newAuthorisations}" var="newAuthorisation" varStatus="listIndex">
+								<spring:nestedPath path="newAuthorisations[${listIndex.index}]">
+									<tr id="authorisation${listIndex.index}">
+										<td style="vertical-align: top; text-align: center;" class="deleteColumn">
+											
+										</td>
+										<td style="vertical-align: top;">
+											<form:input path="activity" onchange="cloneRow('authorisation', ${listIndex.index});"/>
+										</td>
+										<td>
+											<form:textarea path="reason" rows="4" cols="60"/>
+										</td>
+									</tr>
+								</spring:nestedPath>
+							</c:forEach>
+							<c:forEach var="authorisation" items="${formObject.child.authorisations}" varStatus="listIndex"> 
+								<spring:nestedPath path="child.authorisations[${listIndex.index}]">
+									<tr>
+										<td style="vertical-align: top; text-align: center;">
+											<form:checkbox path="selected"/>
+										</td>
+										<td style="vertical-align: top;">
+											<form:input path="activity"/>
+										</td>
+										<td>
+											<form:textarea path="reason" rows="4" cols="60"/>
+										</td>
+									</tr>
+								</spring:nestedPath>
+							</c:forEach>
+						</tbody>
 					</table>
 				</div>
 				<div class="tabbertab" title="Guardians">
@@ -453,6 +522,132 @@
 						</c:forEach>
 					</div>
 				</div>
+				<div class="tabbertab" title="Contacts">
+					<p>Childs Password is '<b>${formObject.child.password}</b>'</p>
+					<table class="listTable">
+						<thead>
+							<tr>
+								<th style="text-align: center;">
+									Delete
+								</th>
+								<th>
+									First Name
+								</th>
+								<th>
+									Surname
+								</th>
+								<th>
+									Phone Number
+								</th>
+								<th>
+									Can Collect
+								</th>
+							</tr>
+						</thead>
+						<tbody>
+							<c:forEach items="${formObject.newContacts}" var="newContact" varStatus="listIndex">
+								<spring:nestedPath path="newContacts[${listIndex.index}]">
+									<tr id="contact${listIndex.index}">
+										<td style="vertical-align: top; text-align: center;" class="deleteColumn">
+											
+										</td>
+										<td style="vertical-align: top;">
+											<form:input path="firstName" onchange="cloneRow('contact', ${listIndex.index});"/>
+										</td>
+										<td style="vertical-align: top;">
+											<form:input path="surname"/>
+										</td>
+										<td style="vertical-align: top;">
+											<form:input path="phoneNumber"/>
+										</td>
+										<td style="vertical-align: top;">
+											<form:checkbox path="allowedToCollect"/>
+										</td>
+									</tr>
+								</spring:nestedPath>
+							</c:forEach>
+							<c:forEach var="contact" items="${formObject.child.contacts}" varStatus="listIndex"> 
+								<spring:nestedPath path="child.contacts[${listIndex.index}]">
+									<tr>
+										<td style="vertical-align: top; text-align: center;">
+											<form:checkbox path="selected"/>
+										</td>
+										<td style="vertical-align: top;">
+											<form:input path="firstName"/>
+										</td>
+										<td style="vertical-align: top;">
+											<form:input path="surname"/>
+										</td>
+										<td style="vertical-align: top;">
+											<form:input path="phoneNumber"/>
+										</td>
+										<td style="vertical-align: top;">
+											<form:checkbox path="allowedToCollect"/>
+										</td>
+									</tr>
+								</spring:nestedPath>
+							</c:forEach>
+						</tbody>
+					</table>
+				</div>
+				<div class="tabbertab" title="Additional Settings">
+					<table class="listTable">
+						<thead>
+							<tr>
+								<th style="text-align: center;">
+									Delete
+								</th>
+								<th>
+									Name
+								</th>
+								<th>
+									Phone Number
+								</th>
+								<th>
+									Share Information
+								</th>
+							</tr>
+						</thead>
+						<tbody>
+							<c:forEach items="${formObject.newSettings}" var="newSetting" varStatus="listIndex">
+								<spring:nestedPath path="newSettings[${listIndex.index}]">
+									<tr id="setting${listIndex.index}">
+										<td style="vertical-align: top; text-align: center;" class="deleteColumn">
+											
+										</td>
+										<td style="vertical-align: top;">
+											<form:input path="name" onchange="cloneRow('setting', ${listIndex.index});"/>
+										</td>
+										<td style="vertical-align: top;">
+											<form:input path="phoneNumber"/>
+										</td>
+										<td style="vertical-align: top;">
+											<form:checkbox path="shareInfo"/>
+										</td>
+									</tr>
+								</spring:nestedPath>
+							</c:forEach>
+							<c:forEach var="contact" items="${formObject.child.additionalSettings}" varStatus="listIndex"> 
+								<spring:nestedPath path="child.additionalSettings[${listIndex.index}]">
+									<tr>
+										<td style="vertical-align: top; text-align: center;">
+											<form:checkbox path="selected"/>
+										</td>
+										<td style="vertical-align: top;">
+											<form:input path="name"/>
+										</td>
+										<td style="vertical-align: top;">
+											<form:input path="phoneNumber"/>
+										</td>
+										<td style="vertical-align: top;">
+											<form:checkbox path="shareInfo"/>
+										</td>
+									</tr>
+								</spring:nestedPath>
+							</c:forEach>
+						</tbody>
+					</table>
+				</div>
 				<div class="tabbertab" title="Financial">
 					<table class="formTable">
 						<tr>
@@ -503,19 +698,6 @@
 									Amount Paid
 								</th>
 							</tr>
-							<c:forEach items="${formObject.child.outstandingBills}" var="outstandingBill">
-								<tr>
-									<td>
-										${outstandingBill.termName}
-									</td>
-									<td>
-										${outstandingBill.billAmount}
-									</td>
-									<td>
-										${outstandingBill.balancePaid}
-									</td>
-								</tr>
-							</c:forEach>
 						</thead>
 					</table>
 				</div>			
@@ -525,7 +707,7 @@
 		<div id="buttonBar"> 
 			<div id="holder">
 				<button onclick="document.pageForm.action.value='Save';document.pageForm.submit();return false;">Save</button>
-				<button onclick="document.pageForm.action.value='Delete Selected';document.pageForm.submit();return false;">Delete Selected</button>
+				<button onclick="window.open('/registration-webapp/generateAttendances.htm?childId=${formObject.child.id}&redo=Y', 'Redo');return false;">Recalculate Attendances</button>
 				<button onclick="document.location = 'addMedicalInfo.htm?childId=${formObject.child.id}';return false;">Add Medical Conditions</button>
 				<button onclick="document.location = 'addGuardian.htm?childId=${formObject.child.id}';return false;">Add Guardian</button>
 			</div>

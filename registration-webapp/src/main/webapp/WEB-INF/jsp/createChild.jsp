@@ -50,7 +50,7 @@
 						Ethnicity
 					</td>
 					<td>
-						<form:input path="ethnicity"/>
+						<form:select path="ethnicity" items="${ethnicityList}" itemLabel="description"/>
 					</td>
 				</tr>
 				<tr>

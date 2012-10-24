@@ -2,6 +2,7 @@ package com.cgsolutions.registration.test;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Test;
@@ -10,9 +11,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
 
 import com.cgsolutions.registration.domain.Child;
 import com.cgsolutions.registration.domain.ChildSearchBean;
+import com.cgsolutions.registration.domain.Intolerance;
 import com.cgsolutions.registration.domain.Room;
 import com.cgsolutions.registration.domain.enums.TypeOfAttendance;
 import com.cgsolutions.registration.service.ChildManager;
@@ -41,6 +44,29 @@ public class ChildManagerTest {
 		assertNull(childManager.findChild(child.getId()));
 	}
 	
+	@Test
+	public void testDeletingLists(){
+		Child child = generateChild();
+		childManager.createChild(child);
+		
+		Intolerance intolerance = new Intolerance();
+		intolerance.setIntolerance("TEST");
+		intolerance.setChildId(child.getId());
+		List<Intolerance> intolerances = new ArrayList<Intolerance>();
+		intolerances.add(intolerance);
+		
+		child.setIntolerances(intolerances);
+		
+		childManager.saveChild(child);
+		
+		assertNotNull(child.getIntolerances());
+		
+		child.getIntolerances().get(0).setSelected(true);
+		
+		childManager.saveChild(child);
+		
+		assertTrue(CollectionUtils.isEmpty(child.getIntolerances()));
+	}
 	@Test
 	public void findChild(){
 		childManager.findChild(2);

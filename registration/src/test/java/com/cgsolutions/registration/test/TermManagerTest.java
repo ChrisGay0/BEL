@@ -45,4 +45,8 @@ public class TermManagerTest {
 	public void testFindAll(){
 		termManager.findAllTerms();
 	}
+	@Test
+	public void testFindAllFutureTerms(){
+		termManager.findAllFutureTerms(true);
+	}
 }

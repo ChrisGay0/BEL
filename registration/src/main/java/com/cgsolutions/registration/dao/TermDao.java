@@ -9,4 +9,5 @@ public interface TermDao {
 	Term find(int termId);
 	Term findCurrentTerm();
 	List<Term> findAllTerms();
+	List<Term> findAllFutureTerms(boolean attendancesGenerated);
 }

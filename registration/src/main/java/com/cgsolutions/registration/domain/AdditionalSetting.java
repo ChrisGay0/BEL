@@ -6,23 +6,22 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.persistence.Version;
 
 @Entity
-@Table(name = "attendance")
-public class Authorisation {
+@Table(name="additional_setting")
+public class AdditionalSetting {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	@Version
 	private Date lastUpdate;
 	private int childId;
-	private String activity;
-	private String reason;
+	private String name;
+	private String phoneNumber;
+	private boolean shareInfo;
 	@Transient
 	private boolean selected;
 	@Transient
@@ -46,17 +45,23 @@ public class Authorisation {
 	public void setChildId(int childId) {
 		this.childId = childId;
 	}
-	public String getActivity() {
-		return activity;
+	public String getName() {
+		return name;
 	}
-	public void setActivity(String activity) {
-		this.activity = activity;
+	public void setName(String name) {
+		this.name = name;
 	}
-	public String getReason() {
-		return reason;
+	public String getPhoneNumber() {
+		return phoneNumber;
 	}
-	public void setReason(String reason) {
-		this.reason = reason;
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
+	}
+	public boolean isShareInfo() {
+		return shareInfo;
+	}
+	public void setShareInfo(boolean shareInfo) {
+		this.shareInfo = shareInfo;
 	}
 	public boolean isSelected() {
 		return selected;

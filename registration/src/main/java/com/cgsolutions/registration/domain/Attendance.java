@@ -22,7 +22,7 @@ public class Attendance {
 		
 	}
 	
-	public Attendance(Term term, Child child, Room room, TypeOfAttendance typeOfAttendance, Date attendanceDate, ChildBill bill){
+	public Attendance(Term term, Child child, Room room, TypeOfAttendance typeOfAttendance, Date attendanceDate){
 		this.term = term;
 		this.child = child;
 		this.room = room;
@@ -30,7 +30,6 @@ public class Attendance {
 		this.attendanceDate = attendanceDate;
 		this.sessionCost = room.getSessionCostForAge(child.getChildsAge());
 		this.lunchCost = room.getLunchCostForAge(child.getChildsAge());
-		this.bill = bill;
 	}
 	
 	@Id
@@ -52,9 +51,8 @@ public class Attendance {
 	private TypeOfAttendance typeOfAttendance;
 	private Float sessionCost;
 	private Float lunchCost;
-	@ManyToOne(targetEntity=ChildBill.class)
 	@JoinColumn(name="billId")
-	private ChildBill bill;
+	private float attendanceCost;
 	
 	public int getId() {
 		return id;
@@ -119,11 +117,28 @@ public class Attendance {
 		this.lastUpdate = lastUpdate;
 	}
 
-	public ChildBill getBill() {
-		return bill;
+	public float getAttendanceCost() {
+		return attendanceCost;
 	}
 
-	public void setBill(ChildBill bill) {
-		this.bill = bill;
+	public void setAttendanceCost(float attendanceCost) {
+		this.attendanceCost = attendanceCost;
+	}
+	
+	public float getBillAmount(){
+		float billAmount = 0;
+		if(this.getTypeOfAttendance().equals(TypeOfAttendance.FULL)){
+			billAmount += this.getRoom().getSessionCostForAge(this.getChild().getChildsAge()) * 2;
+			billAmount += this.getRoom().getLunchCostForAge(this.getChild().getChildsAge());
+		}
+		else if(this.getTypeOfAttendance().equals(TypeOfAttendance.MORNING) || this.getTypeOfAttendance().equals(TypeOfAttendance.AFTERNOON)){
+			billAmount += this.getRoom().getSessionCostForAge(this.getChild().getChildsAge());
+		}
+		else if (this.getTypeOfAttendance().equals(TypeOfAttendance.MORNINGWITHLUNCH) || this.getTypeOfAttendance().equals(TypeOfAttendance.AFTERNOONWITHLUNCH)){
+			billAmount += this.getRoom().getSessionCostForAge(this.getChild().getChildsAge());
+			billAmount += this.getRoom().getLunchCostForAge(this.getChild().getChildsAge());
+		}
+		
+		return billAmount;
 	}
 }

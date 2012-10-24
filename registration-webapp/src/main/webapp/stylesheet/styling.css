@@ -7,6 +7,7 @@ body{
 	font: normal normal normal 75%/1.5 'Arial', 'Helvetica', sans-serif;
 	overflow: visible;
 	border: 2px dotted grey;
+	margin-bottom: 35px;
 }
 
 button{

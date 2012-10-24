@@ -38,4 +38,12 @@ public class HibernateTermDao extends HibernateDaoSupport implements TermDao {
 	public List<Term> findAllTerms(){
 		return getSession().createQuery("from Term order by id desc").list();
 	}
+	
+	public List<Term> findAllFutureTerms(boolean attendancesGenerated){
+		Query query = getSession().createQuery("from Term where startDate > :todaysDate and lockTerm = :lockTerm");
+		query.setParameter("lockTerm", attendancesGenerated);
+		query.setParameter("todaysDate", new Date());
+		
+		return query.list();
+	}
 }
