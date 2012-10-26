@@ -19,19 +19,17 @@
 	</target>
 
 	<target name="copyJsp">
-		<input message="enter number prefix in temp directory" addproperty="tempNumber">
-		</input>
-		<copy todir="${tomcat.home}/webapps/${ant.project.name}/jsp">
-			<fileset dir="src/main/webapp/jsp" />
-		</copy>
-		<copy todir="${tomcat.home}/temp/${tempNumber}-${ant.project.name}/jsp">
-			<fileset dir="src/main/webapp/jsp" />
+		<copy todir="${tomcat.home}/webapps/${ant.project.name}/WEB-INF/jsp">
+			<fileset dir="src/main/webapp/WEB-INF/jsp/" />
 		</copy>
 		<copy todir="${tomcat.home}\webapps\${ant.project.name}/javascript">
 			<fileset dir="src/main/webapp/javascript/" />
 		</copy>
-		<copy todir="${tomcat.home}/temp/${tempNumber}-${ant.project.name}/javascript">
-			<fileset dir="src/main/webapp/javascript" />
+		<copy todir="${tomcat.home}\webapps\${ant.project.name}/stylesheet">
+			<fileset dir="src/main/webapp/stylesheet/" />
+		</copy>
+		<copy todir="${tomcat.home}\webapps\${ant.project.name}/images">
+			<fileset dir="src/main/webapp/images/" />
 		</copy>
 	</target>
 
