@@ -14,6 +14,7 @@ public class Guardian {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column
 	private int id;
+	@Column(nullable=true)
 	private int childId;
 	private String firstName;
 	private String surname;

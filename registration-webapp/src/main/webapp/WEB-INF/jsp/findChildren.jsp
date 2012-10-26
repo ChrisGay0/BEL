@@ -8,7 +8,7 @@
 	<body>
 		<%@ include file="/WEB-INF/jsp/header.jsp" %>
 		<form:form commandName="searchBean" action="/registration-webapp/findChild.htm" method="POST">
-			<table class="formTable">
+			<table class="formTable" style="width: 100%;">
 				<tr>
 					<td>
 						First Name
@@ -40,15 +40,16 @@
 						<form:checkbox path="includeLeft"/>
 					</td>
 				</tr>
+				<tr>
+					<td colspan="4" style="text-align: right;">
+						<button>Search</button>
+					</td>
+				</tr>
 			</table>
-			<input type="submit" value="Search"/>
 		</form:form>
 		<table class="listTable">
 			<thead>
 				<tr>
-					<th>
-						View
-					</th>
 					<th>
 						Name
 					</th>
@@ -62,10 +63,7 @@
 			</thead>
 			<tbody>
 				<c:forEach items="${children}" var="child">
-					<tr>
-						<td>
-							<button onclick="document.location = 'editChild.htm?childId=${child.id}'">View</button>
-						</td>
+					<tr onclick="document.location = 'editChild.htm?childId=${child.id}'" style="cursor: pointer;">
 						<td>
 							${child.firstName} ${child.surname}
 						</td>

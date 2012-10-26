@@ -2,6 +2,7 @@ package com.cgsolutions.registration.domain;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -18,6 +19,7 @@ public class AdditionalSetting {
 	private int id;
 	@Version
 	private Date lastUpdate;
+	@Column(nullable=true)
 	private int childId;
 	private String name;
 	private String phoneNumber;

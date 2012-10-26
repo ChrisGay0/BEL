@@ -7,6 +7,7 @@ import com.cgsolutions.registration.domain.ChildSearchBean;
 
 public interface ChildDao {
 	void saveChild(Child child);
+	void mergeChild(Child child);
 	void deleteChild(Child child);
 	Child findChild(int id);
 	List<Child> searchForChildren(ChildSearchBean searchBean);

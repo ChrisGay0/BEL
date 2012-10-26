@@ -28,33 +28,42 @@
 				</tr>
 				<tr>
 					<td colspan="2">
-						Initial Cost (You can add more later)
+						<h4>Costs</h4>
 					</td>
 				</tr>
-				<tr>
-					<td>
-						Age Under (The age this cost applies to)
-					</td>
-					<td>
-						<form:input path="costs[0].childAgeUnder"/>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						Session Cost
-					</td>
-					<td>
-						<form:input path="costs[0].cost"/>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						Lunch Cost
-					</td>
-					<td>
-						<form:input path="costs[0].lunchCost"/>
-					</td>
-				</tr>
+				<c:forEach items="${newRoom.costs}" var="cost" varStatus="listIndex">
+					<spring:nestedPath path="costs[${listIndex.index}]">
+						<tr>
+							<td colspan="2">
+								<hr/>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								Age Under (The age this cost applies to)
+							</td>
+							<td>
+								<form:input path="childAgeUnder"/>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								Session Cost
+							</td>
+							<td>
+								<form:input path="cost"/>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								Lunch Cost
+							</td>
+							<td>
+								<form:input path="lunchCost"/>
+							</td>
+						</tr>
+					</spring:nestedPath>
+				</c:forEach>
 			</table>
 		</form:form>
 		<div id="buttonBar"> 

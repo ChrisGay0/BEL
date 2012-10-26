@@ -50,7 +50,7 @@
 </tx:advice>
  
 <aop:config>
-    <aop:pointcut id="transactionPointcut" expression="execution(* com.cgsolutions.*.service.*(..))" />
+    <aop:pointcut id="transactionPointcut" expression="execution(* com.cgsolutions..service.*.*(..))" />
     <aop:advisor advice-ref="transactionAdviceAdvice" pointcut-ref="transactionPointcut" />
 </aop:config>
 

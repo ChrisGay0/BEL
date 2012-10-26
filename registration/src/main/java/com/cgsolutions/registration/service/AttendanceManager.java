@@ -100,8 +100,12 @@ public class AttendanceManager {
 		}
 	}
 	
-	public List<Attendance> findFtureAttendancesForChild(Child child){
-		return attendanceDao.findFtureAttendancesForChild(child);
+	public List<Attendance> findFutureAttendancesForChild(Child child){
+		return attendanceDao.findFutureAttendancesForChild(child);
+	}
+	
+	public List<Attendance> findAttendancesForChild(Child child){
+		return attendanceDao.findAttendancesForChild(child);
 	}
 	
 	public void deleteAttendancesForTerm(Term term){

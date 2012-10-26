@@ -7,6 +7,7 @@
 		<script type="text/javascript">
 			$(document).ready(function() {
 				$("#breadcrumb").hide();
+				$("#userId").focus();
 			});
 		</script>
 		<style type="text/css">
@@ -39,7 +40,7 @@
 							Username
 						</td>
 						<td>
-							<input type="text" name="userId"/>
+							<input type="text" name="userId" id="userId"/>
 						</td>
 					</tr>
 					<tr>

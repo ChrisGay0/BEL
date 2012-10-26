@@ -692,13 +692,52 @@
 									Term Name
 								</th>
 								<th>
-									Amount Owed
+									Term Name
 								</th>
 								<th>
-									Amount Paid
+									Start Date
+								</th>
+								<th>
+									End Date
+								</th>
+								<th>
+									Lunches
+								</th>
+								<th>
+									Sessions
+								</th>
+								<th>
+									Cost
 								</th>
 							</tr>
 						</thead>
+						<tbody>
+							<c:forEach items="${formObject.child.bills}" var="bill">
+								<tr>
+									<td>
+										${bill.term.termName}
+									</td>
+									<td>
+										${bill.room.name}
+									</td>
+									<td>
+										<fmt:formatDate value="${bill.term.startDate}" pattern="dd MMM yyyy"/>
+									</td>
+									<td>
+										<fmt:formatDate value="${bill.term.endDate}" pattern="dd MMM yyyy"/>
+									</td>
+									<td>
+										${bill.lunches} (£${bill.totalLunchesCost})
+									</td>
+									<td>
+										${bill.sessions} (£${bill.totalSessionsCost})
+									</td>
+									<td>
+										£${bill.totalCost}
+									</td>
+								</tr>
+							</c:forEach>
+						</tbody>
 					</table>
 				</div>			
 			</div>

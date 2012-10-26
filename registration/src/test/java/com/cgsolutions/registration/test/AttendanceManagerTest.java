@@ -47,7 +47,7 @@ public class AttendanceManagerTest {
 	
 	@Test
 	public void findFutureAttendances(){
-		attendanceManager.findFtureAttendancesForChild(setupChildData());
+		attendanceManager.findFutureAttendancesForChild(setupChildData());
 	}
 	
 	@Test
@@ -128,7 +128,7 @@ public class AttendanceManagerTest {
 		child.setMondayAttendance(TypeOfAttendance.AFTERNOON);
 		child.setTuesdayAttendance(TypeOfAttendance.FULL);
 		child.setWednesdayAttendance(TypeOfAttendance.MORNING);
-		
+		child.setDateOfBirth(new Date());
 		child.setRoom(room);
 		
 		childManager.saveChild(child);

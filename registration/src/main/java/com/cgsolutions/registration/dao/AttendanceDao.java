@@ -12,6 +12,7 @@ public interface AttendanceDao {
 	List<Attendance> findForTerm(int termId);
 	List<Attendance> findAttendancesForDayAndRoom(int roomId, Date day);
 	void deleteFutureAttendancesForChild(Child child);
-	List<Attendance> findFtureAttendancesForChild(Child child);
+	List<Attendance> findFutureAttendancesForChild(Child child);
 	void deleteAttendancesForTerm(Term term);
+	List<Attendance> findAttendancesForChild(Child child);
 }

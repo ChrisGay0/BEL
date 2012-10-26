@@ -24,6 +24,10 @@ public class HibernateChildDao extends HibernateDaoSupport implements ChildDao{
 		getHibernateTemplate().saveOrUpdate(child);
 	}
 
+	public void mergeChild(Child child){
+		getHibernateTemplate().merge(child);
+	}
+	
 	public void deleteChild(Child child) {
 		getHibernateTemplate().delete(child);
 	}

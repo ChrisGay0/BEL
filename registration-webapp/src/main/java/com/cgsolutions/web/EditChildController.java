@@ -21,6 +21,7 @@ import com.cgsolutions.registration.domain.enums.Ethnicity;
 import com.cgsolutions.registration.domain.enums.TypeOfAttendance;
 import com.cgsolutions.registration.domain.propertyEditors.DatePropertyEditor;
 import com.cgsolutions.registration.domain.propertyEditors.RoomPropertyEditor;
+import com.cgsolutions.registration.service.BillManager;
 import com.cgsolutions.registration.service.ChildManager;
 import com.cgsolutions.registration.service.RoomManager;
 import com.cgsolutions.web.forms.ChildEditForm;
@@ -33,10 +34,13 @@ public class EditChildController {
 	private ChildManager childManager;
 	@Autowired
 	private RoomManager roomManager;
+	@Autowired
+	private BillManager billManager;
 	
 	@RequestMapping(method=RequestMethod.GET)
 	public String showForm(Model model, HttpServletRequest request){
 		Child child = childManager.findChild(Integer.parseInt(request.getParameter("childId")));
+		child.setBills(billManager.findBillsForChild(child));
 		ChildEditForm form = new ChildEditForm();
 		form.setChild(child);
 		

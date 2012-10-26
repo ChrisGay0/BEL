@@ -11,9 +11,6 @@
 			<thead>
 				<tr>
 					<th>
-						View
-					</th>
-					<th>
 						Username
 					</th>
 					<th>
@@ -23,10 +20,7 @@
 			</thead>
 			<tbody>
 				<c:forEach items="${users}" var="user">
-					<tr>
-						<td>
-							<button onclick="document.location = 'editUser.htm?userId=${user.userId}'">View</button>
-						</td>
+					<tr onclick="document.location = 'editUser.htm?userId=${user.userId}'" style="cursor: pointer;">
 						<td>
 							${user.userId}
 						</td>

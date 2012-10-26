@@ -44,8 +44,6 @@ public class RoomManagerTest {
 	@Test
 	public void testFindAllActive(){
 		roomManager.findAllActive();
-		
-		Assert.assertTrue(roomManager.find(124).getCosts().size() > 0);
 	}
 	
 	@Test

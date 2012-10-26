@@ -34,7 +34,6 @@ public class Room {
 	private List<Child> children;
 	private boolean active = true;
 	@OneToMany(mappedBy="room", fetch=FetchType.EAGER, cascade=CascadeType.ALL)
-	@OrderBy(value="childAgeUnder")
 	private List<SessionCost> costs;
 	
 	public int getId() {

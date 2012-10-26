@@ -90,6 +90,8 @@ public class Child {
 	@JoinColumn(name="childId")
 	@OneToMany(targetEntity=AdditionalSetting.class, cascade=CascadeType.ALL)
 	private List<AdditionalSetting> additionalSettings;
+	@Transient
+	private List<TermBill> bills;
 	
 	public int getId() {
 		return id;
@@ -371,5 +373,11 @@ public class Child {
 		}
 		
 		return years;
+	}
+	public List<TermBill> getBills() {
+		return bills;
+	}
+	public void setBills(List<TermBill> bills) {
+		this.bills = bills;
 	}
 }

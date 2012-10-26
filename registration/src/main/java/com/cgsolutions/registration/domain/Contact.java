@@ -25,6 +25,7 @@ public class Contact {
 	private String phoneNumber;
 	@Transient
 	private boolean selected;
+	@Column(nullable=true)
 	private int childId;
 	
 	public int getId() {

@@ -26,9 +26,14 @@ public class ChildManager {
 	}
 	
 	public void saveChild(Child child){
-		deleteSelectedItems(child);
+		if(child.getId() != 0 ){
+			deleteSelectedItems(child);
 		
-		childDao.saveChild(child);
+			childDao.mergeChild(child);
+		}
+		else{
+			childDao.saveChild(child);
+		}
 	}
 	
 	public void deleteChild(Child child){

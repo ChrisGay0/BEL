@@ -18,6 +18,7 @@ public class Intolerance {
 	private int id;
 	@Version
 	private Date lastUpdate;
+	@Column(nullable=true)
 	private int childId;
 	private String intolerance;
 	private String precaution;

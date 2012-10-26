@@ -53,10 +53,17 @@ public class HibernateAttendanceDao extends HibernateDaoSupport implements Atten
 		getSession().createQuery("delete from Attendance where term.id = " + term.getId()).executeUpdate();
 	}
 	
-	public List<Attendance> findFtureAttendancesForChild(Child child){
+	public List<Attendance> findFutureAttendancesForChild(Child child){
 		Query query = getSession().createQuery("from Attendance a where child.id = :childId and term.id in (select t.id from Term t where t.startDate > :todaysDate)");
 		query.setParameter("childId", child.getId());
 		query.setParameter("todaysDate", new Date());
+		
+		return query.list();
+	}
+	
+	public List<Attendance> findAttendancesForChild(Child child){
+		Query query = getSession().createQuery("from Attendance a where child.id = :childId");
+		query.setParameter("childId", child.getId());
 		
 		return query.list();
 	}

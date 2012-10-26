@@ -35,12 +35,12 @@
 						<form:checkbox path="active"/>
 					</td>
 				</tr>
-				<tr>
-					<td colspan="2">
-						<hr/>
-					</td>
-				</tr>
 				<c:forEach items="${room.costs}" var="sessionCost" varStatus="listIndex">
+					<tr>
+						<td colspan="2">
+							<hr/>
+						</td>
+					</tr>
 					<spring:nestedPath path="costs[${listIndex.index}]">
 						<tr>
 							<td colspan="2">

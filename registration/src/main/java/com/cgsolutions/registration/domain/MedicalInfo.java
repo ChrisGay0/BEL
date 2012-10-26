@@ -2,6 +2,7 @@ package com.cgsolutions.registration.domain;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,6 +18,7 @@ public class MedicalInfo {
 	private String notes;
 	@Version
 	private Date lastUpdate;
+	@Column(nullable=true)
 	private int childId;
 	
 	public int getId() {

@@ -38,7 +38,7 @@ public class Attendance {
 	@Version
 	private Date lastUpdate;
 	@ManyToOne
-	@JoinColumn(name="childId")
+	@JoinColumn(name="childId", nullable=true)
 	private Child child;
 	@ManyToOne
 	@JoinColumn(name="termId")
@@ -52,7 +52,7 @@ public class Attendance {
 	private Float sessionCost;
 	private Float lunchCost;
 	@JoinColumn(name="billId")
-	private float attendanceCost;
+	private Float attendanceCost;
 	
 	public int getId() {
 		return id;
@@ -117,11 +117,11 @@ public class Attendance {
 		this.lastUpdate = lastUpdate;
 	}
 
-	public float getAttendanceCost() {
+	public Float getAttendanceCost() {
 		return attendanceCost;
 	}
 
-	public void setAttendanceCost(float attendanceCost) {
+	public void setAttendanceCost(Float attendanceCost) {
 		this.attendanceCost = attendanceCost;
 	}
 	

@@ -11,9 +11,6 @@
 			<thead>
 				<tr>
 					<th>
-						View
-					</th>
-					<th>
 						Name
 					</th>
 					<th>
@@ -29,10 +26,7 @@
 			</thead>
 			<tbody>
 				<c:forEach items="${terms}" var="term">
-					<tr>
-						<td>
-							<button onclick="document.location = 'editTerm.htm?termId=${term.id}'">View</button>
-						</td>
+					<tr onclick="document.location = 'editTerm.htm?termId=${term.id}'" style="cursor: pointer;">
 						<td>
 							${term.termName}
 						</td>
@@ -42,7 +36,7 @@
 						<td>
 							<fmt:formatDate value="${term.endDate}" pattern="dd MMM yyyy"/>
 						</td>
-						<td>
+						<td style="text-align: center;">
 							<button onclick="document.location = 'viewAttendances.htm?termId=${term.id}';return false;">Show</button>
 						</td>
 					</tr>

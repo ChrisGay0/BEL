@@ -33,6 +33,7 @@ public class BulkRoomChange {
 	public String showForm(Model model, HttpServletRequest request){
 		model.addAttribute("rooms", roomManager.findAll());
 		model.addAttribute("childrenMoved", request.getParameter("childrenMoved"));
+		model.addAttribute("formObject", new BulkRoomChangeForm());
 		
 		return "bulkRoomChange";
 	}

@@ -48,6 +48,12 @@ h3{
 	font-size: 22px;
 }
 
+h4{
+	text-decoration: underline;
+	font-weight: bolder;
+	font-size: 18px;
+}
+
 ul.list li{
 	width: 100%;
 	background: #EEF3E2;

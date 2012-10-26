@@ -25,21 +25,36 @@ public class CreateRoomController {
 	@RequestMapping(method=RequestMethod.GET)
 	public String showForm(Model model){
 		Room room = new Room();
-		List<SessionCost> costs = new ArrayList<SessionCost>();
-		SessionCost sessionCost = new SessionCost();
-		sessionCost.setChildAgeUnder(5);
-		costs.add(sessionCost);
-		room.setCosts(costs);
-
+		addBlankSessionCosts(room);
+		
 		model.addAttribute("newRoom", room);
 		return "createRoom";
 	}
 	
 	@RequestMapping(method=RequestMethod.POST)
 	public String createRoom(@ModelAttribute("newRoom")Room room){
-		room.getCosts().get(0).setRoom(room);
+		addRoomToCosts(room);
 		roomManager.save(room);
 		
 		return "redirect:editRoom.htm?roomId=" + room.getId();
+	}
+	
+	private void addBlankSessionCosts(Room room){
+		List<SessionCost> costs = new ArrayList<SessionCost>();
+		for(int i = 0; i < 5; i++){
+			SessionCost sessionCost = new SessionCost();
+			if(i == 0){
+				sessionCost.setChildAgeUnder(5);
+			}
+			costs.add(sessionCost);
+		}
+		
+		room.setCosts(costs);
+	}
+	
+	private void addRoomToCosts(Room room){
+		for(SessionCost cost: room.getCosts()){
+			cost.setRoom(room);
+		}
 	}
 }
