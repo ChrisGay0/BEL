@@ -4,6 +4,30 @@
   <artifactId>registration-webapp</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>war</packaging>
+  <build>
+		<resources> 
+			<resource>
+				<directory>src/main/java</directory>
+				<includes>
+					<include>**/*.properties</include>
+					<include>**/*.tld</include>
+					<include>**/*.xml</include>
+					<include>**/*.jasper</include>
+					<include>**/*.ttf</include>
+				</includes>
+			</resource>
+		</resources>
+		<finalName>${pom.artifactId}</finalName>
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.5</source>
+					<target>1.5</target>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
   <dependencies>
 	<dependency>
 		<groupId>com.cgsolutions</groupId>

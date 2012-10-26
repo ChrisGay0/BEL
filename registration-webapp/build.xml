@@ -1,0 +1,49 @@
+<project name="registration-webapp" default="buildAndDeploy">
+
+	<property name="target.dir" value="${basedir}/target" />
+	<property name="tomcat.username" value="admin" />
+	<property name="tomcat.password" value="x" />
+	<property name="tomcat.manager.url" value="http://localhost/manager" />
+
+	<target name="buildAndDeploy">
+		<ant target="package" />
+		<ant target="undeploy" />
+		<ant target="deploy" />
+	</target>
+
+	<target name="package">
+		<exec executable="${maven.home}/bin/mvn.bat" dir="${basedir}">
+			<arg value="clean" />
+			<arg value="package" />
+		</exec>
+	</target>
+
+	<target name="copyJsp">
+		<input message="enter number prefix in temp directory" addproperty="tempNumber">
+		</input>
+		<copy todir="${tomcat.home}/webapps/${ant.project.name}/jsp">
+			<fileset dir="src/main/webapp/jsp" />
+		</copy>
+		<copy todir="${tomcat.home}/temp/${tempNumber}-${ant.project.name}/jsp">
+			<fileset dir="src/main/webapp/jsp" />
+		</copy>
+		<copy todir="${tomcat.home}\webapps\${ant.project.name}/javascript">
+			<fileset dir="src/main/webapp/javascript/" />
+		</copy>
+		<copy todir="${tomcat.home}/temp/${tempNumber}-${ant.project.name}/javascript">
+			<fileset dir="src/main/webapp/javascript" />
+		</copy>
+	</target>
+
+	<target name="deploy">
+		<deploy url="${tomcat.manager.url}" username="${tomcat.username}" password="${tomcat.password}" path="/${ant.project.name}" war="${target.dir}/${ant.project.name}.war" />
+	</target>
+
+	<target name="undeploy">
+		<undeploy url="${tomcat.manager.url}" username="${tomcat.username}" password="${tomcat.password}" path="/${ant.project.name}" failonerror="false" />
+	</target>
+
+	<taskdef name="deploy" classname="org.apache.catalina.ant.DeployTask" />
+	<taskdef name="undeploy" classname="org.apache.catalina.ant.UndeployTask" />
+
+</project>
