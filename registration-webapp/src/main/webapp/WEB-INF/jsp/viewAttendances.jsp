@@ -16,9 +16,18 @@
 			}
 		</style>
 	</head>
-	<body>
-		<%@ include file="/WEB-INF/jsp/header.jsp" %>
-		<table class="listTable">
+	<c:choose>
+		<c:when test="${hideHeader == 'Y'}">
+			<body style="width: 100%;">
+		</c:when>
+		<c:otherwise>
+			<body>
+		</c:otherwise>
+	</c:choose>
+		<c:if test="${hideHeader != 'Y'}">
+			<%@ include file="/WEB-INF/jsp/header.jsp" %>
+		</c:if>
+		<table class="listTable" style="width: 99%;">
 			<thead>
 				<tr>
 					<th>

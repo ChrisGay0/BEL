@@ -9,14 +9,14 @@
 		<%@ include file="/WEB-INF/jsp/header.jsp" %>
 		<br/>
 		<h3>Edit Term</h3>		
-		<form:form name="pageForm" commandName="term" method="post" action="/registration-webapp/editTerm.htm">
+		<form:form name="pageForm" commandName="formObject" method="post" action="/registration-webapp/editTerm.htm">
 			<table class="formTable">
 				<tr>
 					<td>
 						Name
 					</td>
 					<td>
-						<form:input path="termName"/>
+						<form:input path="term.termName"/>
 					</td>
 				</tr>
 				<tr>
@@ -24,7 +24,7 @@
 						Start Date
 					</td>
 					<td>
-						<form:input path="startDate" cssClass="date"/>
+						<form:input path="term.startDate" cssClass="date"/>
 					</td>
 				</tr>
 				<tr>
@@ -32,10 +32,10 @@
 						End Date
 					</td>
 					<td>
-						<form:input path="endDate" cssClass="date"/>
+						<form:input path="term.endDate" cssClass="date"/>
 					</td>
 				</tr>
-				<c:forEach items="${term.exclusionDates}" var="exclusionDate" varStatus="listIndex">
+				<c:forEach items="${formObject.term.exclusionDates}" var="exclusionDate" varStatus="listIndex">
 					<tr>
 						<td>
 							Exclusion Date ${listIndex.index + 1}
@@ -45,19 +45,23 @@
 						</td>
 					</tr>
 				</c:forEach>
+				
+				<c:forEach items="${formObject.newExclusionDates}" var="newExclusionDate" varStatus="listIndex">
+					<form:hidden path="newExclusionDates[${listIndex.index}]"/>
+				</c:forEach>
 			</table>
 		</form:form>
 		<div id="buttonBar"> 
 			<div id="holder">
-				<button onclick="document.pageForm.submit();return false;">Save</button>
-				<button onclick="document.location = 'addExclusionDates.htm?termId=${term.id}';return false;">Add Exclusion Dates</button>
+				<button onclick="document.pageForm.submit();return false;" id="saveButton">Save</button>
+				<button onclick="GB_show('Exclusion Dates', '/registration-webapp/addExclusionDates.htm?termId=${formObject.term.id}', 600, 800);return false;">Add Exclusion Dates</button>
 				<c:choose>
-					<c:when test="${term.lockTerm}">
-						<button onclick="document.location = 'viewAttendances.htm?termId=${term.id}';return false;">Show Attendances</button>
-						<button onclick="document.location = 'generateAttendances.htm?redo=Y&termId=${term.id}';return false;">Redo Attendances</button>
+					<c:when test="${formObject.term.lockTerm}">
+						<button onclick="GB_show('Attendances', '/registration-webapp/viewAttendances.htm?termId=${formObject.term.id}&hideHeader=Y', 600, 800);return false;">Show Attendances</button>
+						<button onclick="document.location = 'generateAttendances.htm?redo=Y&termId=${formObject.term.id}';return false;">Redo Attendances</button>
 					</c:when>
 					<c:otherwise>
-						<button onclick="document.location = 'generateAttendances.htm?termId=${term.id}';return false;">Generate Attendances</button>
+						<button onclick="document.location = 'generateAttendances.htm?termId=${formObject.term.id}';return false;">Generate Attendances</button>
 					</c:otherwise>
 				</c:choose>
 			</div>

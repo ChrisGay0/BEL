@@ -20,24 +20,26 @@
 						End Date
 					</th>
 					<th>
-						Attendances
+						&nbsp;
 					</th>
 				</tr>
 			</thead>
 			<tbody>
 				<c:forEach items="${terms}" var="term">
-					<tr onclick="document.location = 'editTerm.htm?termId=${term.id}'" style="cursor: pointer;">
-						<td>
+					<tr>
+						<td onclick="document.location = 'editTerm.htm?termId=${term.id}'" style="cursor: pointer;">
 							${term.termName}
 						</td>
-						<td>
+						<td onclick="document.location = 'editTerm.htm?termId=${term.id}'" style="cursor: pointer;">
 							<fmt:formatDate value="${term.startDate}" pattern="dd MMM yyyy"/>
 						</td>
-						<td>
+						<td onclick="document.location = 'editTerm.htm?termId=${term.id}'" style="cursor: pointer;">
 							<fmt:formatDate value="${term.endDate}" pattern="dd MMM yyyy"/>
 						</td>
 						<td style="text-align: center;">
-							<button onclick="document.location = 'viewAttendances.htm?termId=${term.id}';return false;">Show</button>
+							<c:if test="${term.lockTerm}">
+								<button onclick="GB_show('Attedances', '/registration-webapp/viewAttendances.htm?termId=${term.id}&hideHeader=Y', 600, 800);return false;">Show Attendances</button>
+							</c:if>
 						</td>
 					</tr>
 				</c:forEach>

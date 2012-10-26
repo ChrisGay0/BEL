@@ -1,0 +1,54 @@
+
+#GB_overlay {
+	background-image: url(/system-webapp/greybox2/overlay.png);
+	position: fixed;
+	margin: auto;
+	top: 0;
+	left: 0;
+	z-index: 151;
+	width: 100%;
+	height: 100%;
+}
+
+* html #GB_overlay {
+	background-color: #000;
+	background-color: transparent;
+	background-image: url(/system-webapp/greybox2/blank.gif);
+	filter: progid : DXImageTransform.Microsoft.AlphaImageLoader (src="/system-webapp/greybox2/overlay.png", sizingMethod="scale");
+}
+
+.GB_window {
+	top: 50px;
+	left: 50%;
+	position: fixed;
+	background: #fff;
+	border: 5px solid #aaa;
+	overflow: auto;
+	width: 400px;
+	height: 400px;
+	z-index: 152;
+}
+
+.GB_frame {
+	border: 0;
+	overflow: auto;
+	width: 100%;
+	height: 378px;
+}
+
+.GB_caption {
+	font: 12px bold helvetica, verdana, sans-serif;
+	color: #fff;
+	background: #888;
+	padding: 2px 0 2px 5px;
+	margin: 0;
+	text-align: left;
+}
+
+.GB_window img {
+	position: absolute;
+	top: 2px;
+	right: 5px;
+	cursor: pointer;
+	cursor: hand;
+}

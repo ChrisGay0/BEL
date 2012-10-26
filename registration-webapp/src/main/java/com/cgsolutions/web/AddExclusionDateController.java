@@ -22,14 +22,14 @@ import com.cgsolutions.registration.service.TermManager;
 
 @Controller
 @RequestMapping("/addExclusionDates.htm")
-@SessionAttributes("term")
+@SessionAttributes("exclusionTerm")
 public class AddExclusionDateController {
 	@Autowired
 	private TermManager termManager;
 	
 	@RequestMapping(method=RequestMethod.GET)
 	public String showForm(Model model, HttpServletRequest request){
-		Term term = termManager.find(Integer.parseInt(request.getParameter("termId")));
+		/*Term term = termManager.find(Integer.parseInt(request.getParameter("termId")));
 		//Should really take this into a form object with AutoPopulating list
 		List<Date> newDates = new ArrayList<Date>();
 		newDates.add(null);
@@ -40,22 +40,24 @@ public class AddExclusionDateController {
 		
 		term.getExclusionDates().toString();
 		term.setNewExclusionDates(newDates);
-		model.addAttribute("term", term);
-		
+		model.addAttribute("exclusionTerm", term);
+		model.addAttribute("added", request.getParameter("added"));
+		*/
 		return "addDates";
 	}
 	
 	@RequestMapping(method=RequestMethod.POST)
-	public String saveTermWithDates(@ModelAttribute("term")Term term){
+	public String saveTermWithDates(@ModelAttribute("exclusionTerm")Term term){
 		for(Date date: term.getNewExclusionDates()){
 			if(date != null){
 				term.addExclusionDate(date);
 			}
 		}
+		term.getNewExclusionDates().clear();
 		
 		termManager.save(term);
 		
-		return "redirect:editTerm.htm?termId=" + term.getId();
+		return "addExclusionDates?termId=" + term.getId() + "&added=Y";
 	}
 	
 	@InitBinder

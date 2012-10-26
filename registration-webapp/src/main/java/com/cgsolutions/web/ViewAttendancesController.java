@@ -30,6 +30,8 @@ public class ViewAttendancesController {
 			Child child = childManager.findChild(Integer.parseInt(request.getParameter("childId")));
 			model.addAttribute("attendances", attendanceManager.findFutureAttendancesForChild(child));
 		}
+		
+		model.addAttribute("hideHeader", request.getParameter("hideHeader"));
 
 		return "viewAttendances";
 	}

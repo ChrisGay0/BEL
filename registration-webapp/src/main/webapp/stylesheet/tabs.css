@@ -43,24 +43,25 @@ ul.tabbernav li a
  margin-left: 3px;
  border: 1px solid #778;
  border-bottom: none;
- background: #DDE;
+ background: #ebece4;
  text-decoration: none;
+ padding-top: 5px;
+ padding-bottom: 5px;
 }
 
-ul.tabbernav li a:link { color: #448; }
-ul.tabbernav li a:visited { color: #667; }
+ul.tabbernav li a:link { color: #008b00; }
+ul.tabbernav li a:visited { color: #008b00; }
 
 ul.tabbernav li a:hover
 {
- color: #000;
- background: #AAE;
+ background: #EEF3E2;
  border-color: #227;
 }
 
 ul.tabbernav li.tabberactive a
 {
- background-color: #fff;
- border-bottom: 1px solid #fff;
+ background-color: #f8f8f8;
+ border-bottom: 1px solid #f8f8f8;
 }
 
 ul.tabbernav li.tabberactive a:hover

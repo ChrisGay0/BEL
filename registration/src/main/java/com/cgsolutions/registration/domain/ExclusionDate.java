@@ -16,6 +16,8 @@ public class ExclusionDate {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
+	@Version
+	private Date lastUpdate;
 	private Date exclusionDate;
 	private int termId;
 	
@@ -37,5 +39,10 @@ public class ExclusionDate {
 	public void setTermId(int termId) {
 		this.termId = termId;
 	}
-	
+	public Date getLastUpdate() {
+		return lastUpdate;
+	}
+	public void setLastUpdate(Date lastUpdate) {
+		this.lastUpdate = lastUpdate;
+	}
 }

@@ -28,6 +28,7 @@ public class Term {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
+	@Version
 	private Date lastUpdate;
 	private String termName;
 	private Date startDate;
