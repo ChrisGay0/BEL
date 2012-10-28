@@ -53,6 +53,7 @@ public class Attendance {
 	private Float lunchCost;
 	@JoinColumn(name="billId")
 	private Float attendanceCost;
+	private boolean chargeableExclusionDate;
 	
 	public int getId() {
 		return id;
@@ -74,6 +75,13 @@ public class Attendance {
 	}
 	public Float getSessionCost() {
 		return sessionCost;
+	}
+	public boolean isChargeableExclusionDate() {
+		return chargeableExclusionDate;
+	}
+
+	public void setChargeableExclusionDate(boolean chargeableExclusionDate) {
+		this.chargeableExclusionDate = chargeableExclusionDate;
 	}
 
 	public void setSessionCost(Float sessionCost) {

@@ -31,7 +31,7 @@ GB_show = function(caption, url, height, width) {
 	// Create the new greybox window and caption
 	$body.append('<div class="GB_window" id="' + id + '">' + 
 			'<div class="GB_caption"></div>' + 
-			'<img src="/system-webapp/greybox2/close.gif" title="Close window" onclick="GB_hide();" /></div>');
+			'<img src="/registration-webapp/greybox/close.gif" title="Close window" onclick="GB_hide();" /></div>');
 	
 	// Create the iframe and set the caption; ensure the overlay is visible
 	$('#GB_overlay').show();

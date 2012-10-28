@@ -15,12 +15,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.cgsolutions.registration.domain.Child;
-import com.cgsolutions.registration.domain.Intolerance;
 import com.cgsolutions.registration.domain.Room;
 import com.cgsolutions.registration.domain.enums.Ethnicity;
 import com.cgsolutions.registration.domain.enums.TypeOfAttendance;
 import com.cgsolutions.registration.domain.propertyEditors.DatePropertyEditor;
 import com.cgsolutions.registration.domain.propertyEditors.RoomPropertyEditor;
+import com.cgsolutions.registration.service.AttendanceManager;
 import com.cgsolutions.registration.service.BillManager;
 import com.cgsolutions.registration.service.ChildManager;
 import com.cgsolutions.registration.service.RoomManager;
@@ -36,6 +36,8 @@ public class EditChildController {
 	private RoomManager roomManager;
 	@Autowired
 	private BillManager billManager;
+	@Autowired
+	private AttendanceManager attendanceManager;
 	
 	@RequestMapping(method=RequestMethod.GET)
 	public String showForm(Model model, HttpServletRequest request){
@@ -50,6 +52,15 @@ public class EditChildController {
 		model.addAttribute("ethnicityList", Ethnicity.values());
 		
 		return "editChild";
+	}
+	
+	@RequestMapping(method=RequestMethod.GET, params="deleteAttendances=Y")
+	public String deletCurrentAttendances(Model model, HttpServletRequest request){
+		Child child = childManager.findChild(Integer.parseInt(request.getParameter("childId")));
+		
+		model.addAttribute("attendancesDeleted", attendanceManager.deleteAttendancesForCurrentTerm(child));
+		
+		return showForm(model, request);
 	}
 	
 	@RequestMapping(params="action=Save", method=RequestMethod.POST)

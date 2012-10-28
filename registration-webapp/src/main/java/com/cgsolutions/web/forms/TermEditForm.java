@@ -4,16 +4,30 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.util.AutoPopulatingList;
+
+import com.cgsolutions.registration.domain.ExclusionDate;
+import com.cgsolutions.registration.domain.MedicalInfo;
 import com.cgsolutions.registration.domain.Term;
 
 public class TermEditForm {
 	private Term term;
-	private List<String> newExclusionDates = new ArrayList<String>();
+	private List<ExclusionDate> newDates = new AutoPopulatingList<ExclusionDate>(ExclusionDate.class);
 	
 	public TermEditForm(){
-		for(int i = 0; i < 5; i++){
-			this.newExclusionDates.add(null);
+		newDates.add(new ExclusionDate());
+	}
+	
+	public List<ExclusionDate> getAddedDates(){
+		List<ExclusionDate> returnList = new ArrayList<ExclusionDate>();
+		for(ExclusionDate date: this.newDates){
+			if(date.getExclusionDate() != null){
+				date.setTermId(term.getId());
+				returnList.add(date);
+			}
 		}
+		
+		return returnList;
 	}
 	
 	public Term getTerm() {
@@ -22,10 +36,12 @@ public class TermEditForm {
 	public void setTerm(Term term) {
 		this.term = term;
 	}
-	public List<String> getNewExclusionDates() {
-		return newExclusionDates;
+
+	public List<ExclusionDate> getNewDates() {
+		return newDates;
 	}
-	public void setNewExclusionDates(List<String> newExclusionDates) {
-		this.newExclusionDates = newExclusionDates;
+
+	public void setNewDates(List<ExclusionDate> newDates) {
+		this.newDates = newDates;
 	}
 }

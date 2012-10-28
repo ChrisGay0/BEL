@@ -35,26 +35,69 @@
 						<form:input path="term.endDate" cssClass="date"/>
 					</td>
 				</tr>
-				<c:forEach items="${formObject.term.exclusionDates}" var="exclusionDate" varStatus="listIndex">
-					<tr>
-						<td>
-							Exclusion Date ${listIndex.index + 1}
-						</td>
-						<td>
-							<fmt:formatDate value="${exclusionDate.exclusionDate}" pattern="dd MMM yyyy"/>
-						</td>
-					</tr>
-				</c:forEach>
-				
-				<c:forEach items="${formObject.newExclusionDates}" var="newExclusionDate" varStatus="listIndex">
-					<form:hidden path="newExclusionDates[${listIndex.index}]"/>
-				</c:forEach>
+				<tr>
+					<td colspan="2">
+						<table class="listTable" style="width: 100%">
+							<thead>
+								<tr>
+									<th style="width: 10%">
+										Delete
+									</th>
+									<th style="width: 30%">
+										Exclusion Date &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+									</th>
+									<th style="width: 50%">
+										Reason
+									</th>
+									<th style="width: 10%">
+										Chargeable
+									</th>
+								</tr>
+							</thead>
+							<tbody>
+								<c:forEach items="${formObject.newDates}" var="newDate" varStatus="listIndex">
+									<spring:nestedPath path="newDates[${listIndex.index}]">
+										<tr id="date${listIndex.index}" >
+											<td style="vertical-align: top; text-align: center;" class="deleteColumn">
+
+											</td>
+											<td style="vertical-align: top;">
+												<form:input path="exclusionDate" cssClass="date" onchange="cloneRow('date', ${listIndex.index});"/>
+											</td>
+											<td>
+												<form:input path="reason" size="80"/>
+											</td>
+											<td>
+												<form:checkbox path="chargeable"/>
+											</td>
+										</tr>
+									</spring:nestedPath>
+								</c:forEach>
+								<c:forEach items="${formObject.term.exclusionDates}" var="exclusionDate" varStatus="listIndex">
+									<tr>
+										<td style="text-align: center;">
+											<form:checkbox path="term.exclusionDates[${listIndex.index}].selected"/>
+										</td>
+										<td>
+											<fmt:formatDate value="${exclusionDate.exclusionDate}" pattern="dd MMM yyyy"/>
+										</td>
+										<td>
+											<form:input path="term.exclusionDates[${listIndex.index}].reason" size="80" maxlength="255"/>
+										</td>
+										<td>
+											<form:checkbox path="term.exclusionDates[${listIndex.index}].chargeable"/>
+										</td>
+									</tr>
+								</c:forEach>
+							</tbody>
+						</table>
+					</td>
+				</tr>
 			</table>
 		</form:form>
 		<div id="buttonBar"> 
 			<div id="holder">
 				<button onclick="document.pageForm.submit();return false;" id="saveButton">Save</button>
-				<button onclick="GB_show('Exclusion Dates', '/registration-webapp/addExclusionDates.htm?termId=${formObject.term.id}', 600, 800);return false;">Add Exclusion Dates</button>
 				<c:choose>
 					<c:when test="${formObject.term.lockTerm}">
 						<button onclick="GB_show('Attendances', '/registration-webapp/viewAttendances.htm?termId=${formObject.term.id}&hideHeader=Y', 600, 800);return false;">Show Attendances</button>

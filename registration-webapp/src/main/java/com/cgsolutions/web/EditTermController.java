@@ -40,12 +40,7 @@ public class EditTermController {
 	
 	@RequestMapping(method=RequestMethod.POST)
 	public String saveTerm(@ModelAttribute("formObject")TermEditForm form){
-		for(String date: form.getNewExclusionDates()){
-			if(StringUtils.hasText(date)){
-				form.getTerm().addExclusionDate(MyDateUtils.getDateFromString(date, "dd MMM yyyy"));
-			}
-		}
-		
+		form.getTerm().getExclusionDates().addAll(form.getAddedDates());
 		termManager.save(form.getTerm());
 		
 		return "redirect:editTerm.htm?termId=" + form.getTerm().getId();

@@ -28,7 +28,7 @@ public class HibernateTermDao extends HibernateDaoSupport implements TermDao {
 	}
 	
 	public Term findCurrentTerm(){
-		Query query = getSession().createQuery("from Term where startDate >= :start and endDate <= :end");
+		Query query = getSession().createQuery("from Term where startDate <= :start and endDate >= :end");
 		query.setParameter("start", new Date());
 		query.setParameter("end", new Date());
 		

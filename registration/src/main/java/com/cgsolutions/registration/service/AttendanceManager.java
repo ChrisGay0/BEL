@@ -69,6 +69,16 @@ public class AttendanceManager {
 		attendanceDao.deleteFutureAttendancesForChild(child);
 	}
 	
+	public int deleteAttendancesForCurrentTerm(Child child){
+		Term term = termManager.findCurrentTerm();
+		if(term != null){
+			return attendanceDao.deleteAttendances(child, term);
+		}
+		else{
+			return 0;
+		}
+	}
+	
 	public void redoAttendancesForTerm(Term term){
 		deleteAttendancesForTerm(term);
 		generateAttendancesForTerm(term);
@@ -81,8 +91,16 @@ public class AttendanceManager {
 				//decrementing by 1 just in case the start date is the first date of the term
 				if(date.after(MyDateUtils.decrementByDays(child.getStartDate(), 1))){
 					if(child.getTypeOfAttendance(date) != null){
-						if(!term.isDateInExclusionsList(date)){
+						if(!term.isDateInExclusionsList(date) ){
 							Attendance attendance = new Attendance(term, child, room, child.getTypeOfAttendance(date), date);
+							save(attendance);
+							newAttendances.add(attendance);
+							//bill.getAttendances().add(attendance);
+							attendance.setAttendanceCost(attendance.getBillAmount());
+						}
+						else if(term.isExclusionsDateChargeable(date)){
+							Attendance attendance = new Attendance(term, child, room, child.getTypeOfAttendance(date), date);
+							attendance.setChargeableExclusionDate(true);
 							save(attendance);
 							newAttendances.add(attendance);
 							//bill.getAttendances().add(attendance);

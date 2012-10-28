@@ -5,37 +5,18 @@
 	<head>
 		<%@ include file="headerIncludes.jspf" %>
 		<script type="text/javascript">
+			$(document).ready(function() {
+				if("${attendancesDeleted}" != ""){
+					alert("${attendancesDeleted} attendances deleted");
+				}
+			});
+			
+			function deleteAttendances(){
+				document.location = "editChild.htm?deleteAttendances=Y&childId=${formObject.child.id}";
+			}
+			
 			function removeRow(rowId){
 				$("#" + rowId).remove();
-			}
-			function cloneRow(rowId, index){
-				if($("#" + rowId + parseInt(index) + 1).length == 0){
-					var $tr    = $("#" + rowId + index);
-					var $clone = $tr.clone();
-					var newId = $clone.attr("id").replace(index, parseInt(index + 1));
-					$clone.attr("id", newId);
-					$clone.find('img').remove();
-					$clone.find('.deleteColumn').append('<img src="/registration-webapp/images/remove.png" style="cursor: pointer;" height="24px" width="24px" onclick="removeRow(\'' + newId + '\');"/>');
-					$clone.find('input[type=text], textarea').each(function(){
-						var id = $(this).attr("id");
-						id = id.replace(index, parseInt(index + 1));
-						var name = $(this).attr("id");
-						name = name.replace(index, "[" + parseInt(index + 1) + "]");
-						$(this).val("");
-						$(this).attr("id", id);
-						$(this).attr("name", name);
-						$(this).attr("onchange", "");
-						$(this).bind('change',function(){
-							cloneRow(rowId, index + 1);
-						});
-					});
-					$tr.find('input[type=text], textarea').each(function(){
-						$(this).attr("onchange", "");
-						$(this).unbind("change");
-					});
-					
-					$tr.after($clone);
-				}
 			}
 		</script>
 	</head>
@@ -263,27 +244,53 @@
 							<td colspan="2">
 								<div class="tabber">
 									<div class="tabbertab" title="Conditions">
-										<table>
-											<c:forEach items="${formObject.child.medicalInfo}" var="medicalInfo" varStatus="listIndex">
-												<spring:nestedPath path="child.medicalInfo[${listIndex.index}]">
-													<tr>
-														<td>
-															Medical Condition
-														</td>
-														<td>
-															<form:input path="medicalCondition"/>
-														</td>
-													</tr>
-													<tr>
-														<td valign="top">
-															Notes
-														</td>
-														<td>
-															<form:textarea path="notes" rows="4" cols="60"/>
-														</td>
-													</tr>
-												</spring:nestedPath>
-											</c:forEach>
+										<table class="listTable">
+											<thead>
+												<tr>
+													<th>
+														Delete
+													</th>
+													<th>
+														Condition
+													</th>
+													<th>
+														Notes
+													</th>
+												</tr>
+											</thead>
+											<tbody>
+												<c:forEach items="${formObject.newMedicalInfos}" var="newMedicalInfo" varStatus="listIndex">
+													<spring:nestedPath path="newMedicalInfos[${listIndex.index}]">
+														<tr id="medicalCondition${listIndex.index}" >
+															<td style="vertical-align: top; text-align: center;" class="deleteColumn">
+
+															</td>
+															<td style="vertical-align: top;">
+																<form:input path="medicalCondition" onchange="cloneRow('medicalCondition', ${listIndex.index});"/>
+															</td>
+															<td>
+																<form:textarea path="notes" rows="4" cols="60"/>
+															</td>
+														</tr>
+													</spring:nestedPath>
+												</c:forEach>
+											</tbody>
+											<tbody>
+												<c:forEach items="${formObject.child.medicalInfo}" var="info" varStatus="listIndex">
+													<spring:nestedPath path="child.medicalInfo[${listIndex.index}]">
+														<tr valign="top">
+															<td style="vertical-align: top; text-align: center;">
+																<form:checkbox path="selected"/> 
+															</td>
+															<td style="vertical-align: top;">
+																<form:input path="medicalCondition"/>
+															</td>
+															<td>
+																<form:textarea path="notes" rows="4" cols="60"/>
+															</td>
+													</spring:nestedPath>
+												</c:forEach>
+											</tbody>
 										</table>
 									</div>
 									<div class="tabbertab" title="Intolerances">
@@ -713,7 +720,7 @@
 						</thead>
 						<tbody>
 							<c:forEach items="${formObject.child.bills}" var="bill">
-								<tr>
+								<tr style="cursor: pointer;" onclick="GB_show('Attendances', '/registration-webapp/viewAttendances.htm?termId=${bill.term.id}&hideHeader=Y', 600, 800);">
 									<td>
 										${bill.term.termName}
 									</td>
@@ -747,8 +754,8 @@
 			<div id="holder">
 				<button onclick="document.pageForm.action.value='Save';document.pageForm.submit();return false;">Save</button>
 				<button onclick="window.open('/registration-webapp/generateAttendances.htm?childId=${formObject.child.id}&redo=Y', 'Redo');return false;">Recalculate Attendances</button>
-				<button onclick="document.location = 'addMedicalInfo.htm?childId=${formObject.child.id}';return false;">Add Medical Conditions</button>
 				<button onclick="document.location = 'addGuardian.htm?childId=${formObject.child.id}';return false;">Add Guardian</button>
+				<button onclick="deleteAttendances();return false;">Delete Attendances</button>
 			</div>
 		</div>
 	</body>

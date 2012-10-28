@@ -130,4 +130,17 @@ public class Term {
 		return false;
 		
 	}
+	
+	public boolean isExclusionsDateChargeable(Date date){
+		if(!CollectionUtils.isEmpty(this.exclusionDates)){
+			for(ExclusionDate exclusionDate: this.exclusionDates){
+				if(MyDateUtils.getStringFromDate(date, "dd MMM yyyy").equals(MyDateUtils.getStringFromDate(exclusionDate.getExclusionDate(), "dd MMM yyyy"))){
+					return exclusionDate.isChargeable();
+				}
+			}
+		}
+		
+		return false;
+		
+	}
 }
