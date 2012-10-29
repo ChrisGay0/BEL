@@ -14,6 +14,7 @@ import com.cgsolutions.registration.domain.Child;
 import com.cgsolutions.registration.domain.ChildSearchBean;
 import com.cgsolutions.registration.domain.Contact;
 import com.cgsolutions.registration.domain.Intolerance;
+import com.cgsolutions.registration.domain.MedicalInfo;
 import com.cgsolutions.registration.domain.Room;
 
 @Service
@@ -81,6 +82,14 @@ public class ChildManager {
 			for(AdditionalSetting setting: new ArrayList<AdditionalSetting>(child.getAdditionalSettings())){
 				if(setting.isSelected()){
 					child.getAdditionalSettings().remove(setting);
+				}
+			}
+		}
+		
+		if(!CollectionUtils.isEmpty(child.getMedicalInfo())){
+			for(MedicalInfo info: new ArrayList<MedicalInfo>(child.getMedicalInfo())){
+				if(info.isSelected()){
+					child.getMedicalInfo().remove(info);
 				}
 			}
 		}

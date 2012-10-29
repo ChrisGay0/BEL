@@ -63,6 +63,13 @@ public class AttendanceManagerTest {
 	}
 	
 	@Test
+	public void deleteAttendances(){
+		Child child = setupChildData();
+		
+		attendanceManager.deleteAttendancesForCurrentTerm(child);
+	}
+	
+	@Test
 	public void save(){
 		Attendance attendance = new Attendance();
 		attendanceManager.save(attendance);

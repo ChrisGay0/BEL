@@ -11,6 +11,8 @@ import com.cgsolutions.registration.domain.Authorisation;
 import com.cgsolutions.registration.domain.Child;
 import com.cgsolutions.registration.domain.Contact;
 import com.cgsolutions.registration.domain.Intolerance;
+import com.cgsolutions.registration.domain.MedicalInfo;
+import com.cgsolutions.registration.domain.Payment;
 
 public class ChildEditForm {
 	private Child child;
@@ -18,12 +20,16 @@ public class ChildEditForm {
 	private List<Authorisation> newAuthorisations = new AutoPopulatingList<Authorisation>(Authorisation.class);
 	private List<Contact> newContacts = new AutoPopulatingList<Contact>(Contact.class);
 	private List<AdditionalSetting> newSettings = new AutoPopulatingList<AdditionalSetting>(AdditionalSetting.class);
+	private List<MedicalInfo> newMedicalInfos = new AutoPopulatingList<MedicalInfo>(MedicalInfo.class);
+	private List<Payment> newPayments= new AutoPopulatingList<Payment>(Payment.class);
 	
 	public ChildEditForm(){
 		newIntolerances.add(new Intolerance());
 		newAuthorisations.add(new Authorisation());
 		newContacts.add(new Contact());
 		newSettings.add(new AdditionalSetting());
+		newMedicalInfos.add(new MedicalInfo());
+		newPayments.add(new Payment());
 	}
 
 	public Child getChild() {
@@ -35,6 +41,8 @@ public class ChildEditForm {
 		this.child.getAuthorisations().addAll(getAddedAuthorisations());
 		this.child.getContacts().addAll(getAddedContacts());
 		this.child.getAdditionalSettings().addAll(getAddedSettings());
+		this.child.getMedicalInfo().addAll(getAddedMedicalInfos());
+		this.child.getPayments().addAll(getAddedPayments());
 		
 		return child;
 	}
@@ -45,6 +53,30 @@ public class ChildEditForm {
 			if(StringUtils.hasText(intolerance.getIntolerance())){
 				intolerance.setChildId(this.child.getId());
 				returnList.add(intolerance);
+			}
+		}
+		
+		return returnList;
+	}
+	
+	private List<Payment> getAddedPayments(){
+		List<Payment> returnList = new ArrayList<Payment>();
+		for(Payment payment: this.newPayments){
+			if(payment.getAmount() != null){
+				payment.setChildId(this.child.getId());
+				returnList.add(payment);
+			}
+		}
+		
+		return returnList;
+	}
+	
+	private List<MedicalInfo> getAddedMedicalInfos(){
+		List<MedicalInfo> returnList = new ArrayList<MedicalInfo>();
+		for(MedicalInfo medicalInfo: this.newMedicalInfos){
+			if(StringUtils.hasText(medicalInfo.getMedicalCondition())){
+				medicalInfo.setChildId(this.child.getId());
+				returnList.add(medicalInfo);
 			}
 		}
 		
@@ -109,6 +141,14 @@ public class ChildEditForm {
 		return newContacts;
 	}
 
+	public List<MedicalInfo> getNewMedicalInfos() {
+		return newMedicalInfos;
+	}
+
+	public void setNewMedicalInfos(List<MedicalInfo> newMedicalInfos) {
+		this.newMedicalInfos = newMedicalInfos;
+	}
+
 	public List<AdditionalSetting> getNewSettings() {
 		return newSettings;
 	}
@@ -119,5 +159,13 @@ public class ChildEditForm {
 
 	public void setNewContacts(List<Contact> newContacts) {
 		this.newContacts = newContacts;
+	}
+
+	public List<Payment> getNewPayments() {
+		return newPayments;
+	}
+
+	public void setNewPayments(List<Payment> newPayments) {
+		this.newPayments = newPayments;
 	}
 }

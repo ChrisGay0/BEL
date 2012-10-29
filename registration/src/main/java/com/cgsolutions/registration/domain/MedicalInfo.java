@@ -7,9 +7,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.persistence.Version;
 
 @Entity
+@Table(name="medical_info")
 public class MedicalInfo {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -20,6 +23,8 @@ public class MedicalInfo {
 	private Date lastUpdate;
 	@Column(nullable=true)
 	private int childId;
+	@Transient
+	private boolean selected;
 	
 	public int getId() {
 		return id;
@@ -51,5 +56,11 @@ public class MedicalInfo {
 	}
 	public void setLastUpdate(Date lastUpdate) {
 		this.lastUpdate = lastUpdate;
+	}
+	public boolean isSelected() {
+		return selected;
+	}
+	public void setSelected(boolean selected) {
+		this.selected = selected;
 	}
 }

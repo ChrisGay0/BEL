@@ -2,7 +2,6 @@ package com.cgsolutions.registration.domain;
 
 import java.util.Date;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,14 +10,14 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Version;
 
-import org.hibernate.annotations.Target;
-
 @Entity
 @Table(name="session_cost")
 public class SessionCost {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
+	@Version
+	private Date lastUpdate;
 	private int childAgeUnder;
 	private Float cost;
 	@ManyToOne
@@ -54,5 +53,11 @@ public class SessionCost {
 	}
 	public void setLunchCost(Float lunchCost) {
 		this.lunchCost = lunchCost;
+	}
+	public Date getLastUpdate() {
+		return lastUpdate;
+	}
+	public void setLastUpdate(Date lastUpdate) {
+		this.lastUpdate = lastUpdate;
 	}
 }

@@ -67,4 +67,12 @@ public class HibernateAttendanceDao extends HibernateDaoSupport implements Atten
 		
 		return query.list();
 	}
+	
+	public int deleteAttendances(Child child, Term term){
+		Query query = getSession().createQuery("delete from Attendance where child.id = :childId and term.id = :termId");
+		query.setParameter("childId", child.getId());
+		query.setParameter("termId", term.getId());
+		
+		return query.executeUpdate();
+	}
 }

@@ -5,37 +5,18 @@
 	<head>
 		<%@ include file="headerIncludes.jspf" %>
 		<script type="text/javascript">
+			$(document).ready(function() {
+				if("${attendancesDeleted}" != ""){
+					alert("${attendancesDeleted} attendances deleted");
+				}
+			});
+			
+			function deleteAttendances(){
+				document.location = "editChild.htm?deleteAttendances=Y&childId=${formObject.child.id}";
+			}
+			
 			function removeRow(rowId){
 				$("#" + rowId).remove();
-			}
-			function cloneRow(rowId, index){
-				if($("#" + rowId + parseInt(index) + 1).length == 0){
-					var $tr    = $("#" + rowId + index);
-					var $clone = $tr.clone();
-					var newId = $clone.attr("id").replace(index, parseInt(index + 1));
-					$clone.attr("id", newId);
-					$clone.find('img').remove();
-					$clone.find('.deleteColumn').append('<img src="/registration-webapp/images/remove.png" style="cursor: pointer;" height="24px" width="24px" onclick="removeRow(\'' + newId + '\');"/>');
-					$clone.find('input[type=text], textarea').each(function(){
-						var id = $(this).attr("id");
-						id = id.replace(index, parseInt(index + 1));
-						var name = $(this).attr("id");
-						name = name.replace(index, "[" + parseInt(index + 1) + "]");
-						$(this).val("");
-						$(this).attr("id", id);
-						$(this).attr("name", name);
-						$(this).attr("onchange", "");
-						$(this).bind('change',function(){
-							cloneRow(rowId, index + 1);
-						});
-					});
-					$tr.find('input[type=text], textarea').each(function(){
-						$(this).attr("onchange", "");
-						$(this).unbind("change");
-					});
-					
-					$tr.after($clone);
-				}
 			}
 		</script>
 	</head>
@@ -263,27 +244,53 @@
 							<td colspan="2">
 								<div class="tabber">
 									<div class="tabbertab" title="Conditions">
-										<table>
-											<c:forEach items="${formObject.child.medicalInfo}" var="medicalInfo" varStatus="listIndex">
-												<spring:nestedPath path="child.medicalInfo[${listIndex.index}]">
-													<tr>
-														<td>
-															Medical Condition
-														</td>
-														<td>
-															<form:input path="medicalCondition"/>
-														</td>
-													</tr>
-													<tr>
-														<td valign="top">
-															Notes
-														</td>
-														<td>
-															<form:textarea path="notes" rows="4" cols="60"/>
-														</td>
-													</tr>
-												</spring:nestedPath>
-											</c:forEach>
+										<table class="listTable">
+											<thead>
+												<tr>
+													<th>
+														Delete
+													</th>
+													<th>
+														Condition
+													</th>
+													<th>
+														Notes
+													</th>
+												</tr>
+											</thead>
+											<tbody>
+												<c:forEach items="${formObject.newMedicalInfos}" var="newMedicalInfo" varStatus="listIndex">
+													<spring:nestedPath path="newMedicalInfos[${listIndex.index}]">
+														<tr id="medicalCondition${listIndex.index}" >
+															<td style="vertical-align: top; text-align: center;" class="deleteColumn">
+
+															</td>
+															<td style="vertical-align: top;">
+																<form:input path="medicalCondition" onchange="cloneRow('medicalCondition', ${listIndex.index});"/>
+															</td>
+															<td>
+																<form:textarea path="notes" rows="4" cols="60"/>
+															</td>
+														</tr>
+													</spring:nestedPath>
+												</c:forEach>
+											</tbody>
+											<tbody>
+												<c:forEach items="${formObject.child.medicalInfo}" var="info" varStatus="listIndex">
+													<spring:nestedPath path="child.medicalInfo[${listIndex.index}]">
+														<tr valign="top">
+															<td style="vertical-align: top; text-align: center;">
+																<form:checkbox path="selected"/> 
+															</td>
+															<td style="vertical-align: top;">
+																<form:input path="medicalCondition"/>
+															</td>
+															<td>
+																<form:textarea path="notes" rows="4" cols="60"/>
+															</td>
+													</spring:nestedPath>
+												</c:forEach>
+											</tbody>
 										</table>
 									</div>
 									<div class="tabbertab" title="Intolerances">
@@ -649,96 +656,168 @@
 					</table>
 				</div>
 				<div class="tabbertab" title="Financial">
-					<table class="formTable">
-						<tr>
-							<td>
-								Registration Fee Paid
-							</td>
-							<td>
-								<form:checkbox path="child.registrationFeePaid"/>
-							</td>
-						</tr>
-						<tr>
-							<td>
-								Deposit(£)
-							</td>
-							<td>
-								<form:input path="child.depositPaid" size="4"/>
-							</td>
-						</tr>
-						<tr>
-							<td>
-								Funded Sessions
-							</td>
-							<td>
-								<form:input path="child.fundedSessions"/>
-							</td>
-						</tr>
-						<tr>
-							<td>
-								Funded Lunches
-							</td>
-							<td>
-								<form:input path="child.fundedLunches"/>
-							</td>
-						</tr>
-					</table>
-				</div>
-				<div class="tabbertab" title="Bills">
-					<table class="listTable">
-						<thead>
-							<tr>
-								<th>
-									Term Name
-								</th>
-								<th>
-									Term Name
-								</th>
-								<th>
-									Start Date
-								</th>
-								<th>
-									End Date
-								</th>
-								<th>
-									Lunches
-								</th>
-								<th>
-									Sessions
-								</th>
-								<th>
-									Cost
-								</th>
-							</tr>
-						</thead>
-						<tbody>
-							<c:forEach items="${formObject.child.bills}" var="bill">
+					<h4 style="float: right;">Current Balance ${formObject.child.currentBalance}</h4>
+					<div class="tabber">
+						<div class="tabbertab" title="General">
+							<table class="formTable">
 								<tr>
 									<td>
-										${bill.term.termName}
+										Registration Fee Paid
 									</td>
 									<td>
-										${bill.room.name}
-									</td>
-									<td>
-										<fmt:formatDate value="${bill.term.startDate}" pattern="dd MMM yyyy"/>
-									</td>
-									<td>
-										<fmt:formatDate value="${bill.term.endDate}" pattern="dd MMM yyyy"/>
-									</td>
-									<td>
-										${bill.lunches} (£${bill.totalLunchesCost})
-									</td>
-									<td>
-										${bill.sessions} (£${bill.totalSessionsCost})
-									</td>
-									<td>
-										£${bill.totalCost}
+										<form:checkbox path="child.registrationFeePaid"/>
 									</td>
 								</tr>
-							</c:forEach>
-						</tbody>
-					</table>
+								<tr>
+									<td>
+										Deposit(£)
+									</td>
+									<td>
+										<form:input path="child.depositPaid" size="4"/>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										Funded Sessions
+									</td>
+									<td>
+										<form:input path="child.fundedSessions"/>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										Funded Lunches
+									</td>
+									<td>
+										<form:input path="child.fundedLunches"/>
+									</td>
+								</tr>
+							</table>
+						</div>
+						<div class="tabbertab" title="Bills">
+							<table class="listTable">
+								<thead>
+									<tr>
+										<th>
+											Term Name
+										</th>
+										<th>
+											Term Name
+										</th>
+										<th>
+											Start Date
+										</th>
+										<th>
+											End Date
+										</th>
+										<th>
+											Lunches
+										</th>
+										<th>
+											Sessions
+										</th>
+										<th>
+											Cost
+										</th>
+									</tr>
+								</thead>
+								<tbody>
+									<c:forEach items="${formObject.child.bills}" var="bill">
+										<tr style="cursor: pointer;" onclick="GB_show('Attendances', '/registration-webapp/viewAttendances.htm?termId=${bill.term.id}&hideHeader=Y', 600, 800);">
+											<td>
+												${bill.term.termName}
+											</td>
+											<td>
+												${bill.room.name}
+											</td>
+											<td>
+												<fmt:formatDate value="${bill.term.startDate}" pattern="dd MMM yyyy"/>
+											</td>
+											<td>
+												<fmt:formatDate value="${bill.term.endDate}" pattern="dd MMM yyyy"/>
+											</td>
+											<td>
+												${bill.lunches} (£${bill.totalLunchesCost})
+											</td>
+											<td>
+												${bill.sessions} (£${bill.totalSessionsCost})
+											</td>
+											<td>
+												£${bill.totalCost}
+											</td>
+										</tr>
+									</c:forEach>
+								</tbody>
+							</table>
+						</div>
+						<div class="tabbertab" title="Payments">
+							<table class="listTable">
+								<thead>
+									<tr>
+										<th>
+											Remove
+										</th>
+										<th>
+											Payment Date
+										</th>
+										<th>
+											Amount
+										</th>
+										<th>
+											Payment Type
+										</th>
+										<th>
+											Comments
+										</th>
+									</tr>
+								</thead>
+								<tbody>
+									<c:forEach items="${formObject.newPayments}" var="newPayment" varStatus="listIndex">
+										<spring:nestedPath path="newPayments[${listIndex.index}]">
+											<tr id="payment${listIndex.index}">
+												<td style="vertical-align: top; text-align: center;" class="deleteColumn">
+													
+												</td>
+												<td style="vertical-align: top;">
+													<form:input path="datePaid" onchange="cloneRow('payment', ${listIndex.index});" cssClass="date"/>
+												</td>
+												<td style="vertical-align: top;">
+													<form:input path="amount" size="5" maxlength="11"/>
+												</td>
+												<td style="vertical-align: top;">
+													<form:select path="paymentType" items="${paymentList}" itemLabel="description"/>
+												</td>
+												<td>
+													<form:input path="comments" size="60" maxlength="255"/>
+												</td>
+											</tr>
+										</spring:nestedPath>
+									</c:forEach>
+									<c:forEach var="payment" items="${formObject.child.payments}" varStatus="listIndex"> 
+										<spring:nestedPath path="child.payments[${listIndex.index}]">
+											<tr>
+												<td style="vertical-align: top; text-align: center;">
+													&nbsp;
+												</td>
+												<td style="vertical-align: top;">
+													<fmt:formatDate value="${payment.datePaid}" pattern="dd MMM yyyy"/>
+												</td>
+												<td style="vertical-align: top;">
+													<form:input path="amount" size="5" maxlength="11"/>
+												</td>
+												<td style="vertical-align: top;">
+													<form:select path="paymentType" items="${paymentList}" itemLabel="description"/>
+												</td>
+												<td>
+													<form:input path="comments" size="60" maxlength="255"/>
+												</td>
+											</tr>
+										</spring:nestedPath>
+									</c:forEach>
+								</tbody>
+							</table>
+						</div>
+					</div>
 				</div>			
 			</div>
 			<input type="hidden" name="action" value=""/>
@@ -747,8 +826,8 @@
 			<div id="holder">
 				<button onclick="document.pageForm.action.value='Save';document.pageForm.submit();return false;">Save</button>
 				<button onclick="window.open('/registration-webapp/generateAttendances.htm?childId=${formObject.child.id}&redo=Y', 'Redo');return false;">Recalculate Attendances</button>
-				<button onclick="document.location = 'addMedicalInfo.htm?childId=${formObject.child.id}';return false;">Add Medical Conditions</button>
 				<button onclick="document.location = 'addGuardian.htm?childId=${formObject.child.id}';return false;">Add Guardian</button>
+				<button onclick="deleteAttendances();return false;">Delete Attendances</button>
 			</div>
 		</div>
 	</body>
