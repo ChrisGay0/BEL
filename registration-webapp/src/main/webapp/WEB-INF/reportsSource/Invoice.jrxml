@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Invoice" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="155"/>
+	<parameter name="school" class="com.cgsolutions.registration.domain.School" isForPrompting="false"/>
+	<parameter name="term" class="com.cgsolutions.registration.domain.Term" isForPrompting="false"/>
+	<field name="child" class="com.cgsolutions.registration.domain.Child"/>
+	<field name="totalSessions" class="java.lang.Integer"/>
+	<field name="sessionCost" class="java.lang.Float"/>
+	<field name="totalLunches" class="java.lang.Integer"/>
+	<field name="lunchCost" class="java.lang.Float"/>
+	<field name="currentBalance" class="java.lang.Float"/>
+	<field name="totalSessionCost" class="java.lang.Float"/>
+	<field name="totalLunchCost" class="java.lang.Float"/>
+	<field name="totalCost" class="java.lang.Float"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="121" splitType="Prevent">
+			<textField>
+				<reportElement x="12" y="0" width="327" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{school}.getName()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="12" y="20" width="327" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{school}.getAddressLine1()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="12" y="40" width="327" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{school}.getAddressLine2()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="12" y="60" width="327" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{school}.getAddressLine3()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="12" y="80" width="327" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{school}.getCounty()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="12" y="100" width="327" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{school}.getPostCode()]]></textFieldExpression>
+			</textField>
+			<image onErrorType="Icon">
+				<reportElement x="439" y="10" width="100" height="50"/>
+			</image>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="357" splitType="Stretch">
+			<staticText>
+				<reportElement positionType="Float" x="12" y="17" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[Parent Name:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="12" y="37" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[Address:]]></text>
+			</staticText>
+			<textField>
+				<reportElement positionType="Float" x="112" y="17" width="327" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{child}.getGuardians().get(0).getFirstName() + " " +
+$F{child}.getGuardians().get(0).getSurname()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement positionType="Float" x="112" y="37" width="327" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{child}.getAddressLine1()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement positionType="Float" x="112" y="77" width="327" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{child}.getAddressLine3()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement positionType="Float" x="112" y="57" width="327" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{child}.getAddressLine2()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement positionType="Float" x="112" y="97" width="327" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{child}.getCounty()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement positionType="Float" x="112" y="117" width="327" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{child}.getPostCode()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" x="12" y="170" width="189" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[FOR THE HALF-TERM commencing]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="12" y="146" width="38" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[RE:]]></text>
+			</staticText>
+			<textField>
+				<reportElement positionType="Float" x="50" y="146" width="327" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{child}.getFirstName() + " " + $F{child}.getSurname()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" x="288" y="170" width="64" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[and ending]]></text>
+			</staticText>
+			<textField pattern="dd MMM yyyy">
+				<reportElement positionType="Float" x="201" y="170" width="87" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.util.Date"><![CDATA[$P{term}.getStartDate()]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd MMM yyyy">
+				<reportElement positionType="Float" x="352" y="170" width="87" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.util.Date"><![CDATA[$P{term}.getEndDate()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" x="288" y="196" width="89" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[No of sessions]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="377" y="196" width="86" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Price per session]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="463" y="196" width="76" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[£]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="12" y="216" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[Fees:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="12" y="236" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[Deposit:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="12" y="256" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[Registration Fee:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="12" y="276" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[Lunches:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="12" y="296" width="131" height="20"/>
+				<textElement/>
+				<text><![CDATA[Balance Carried Forward]]></text>
+			</staticText>
+			<textField>
+				<reportElement positionType="Float" x="288" y="216" width="89" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{totalSessions}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement positionType="Float" x="377" y="216" width="86" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA["£" + $F{sessionCost}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement positionType="Float" x="463" y="216" width="86" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA["£" + $F{totalSessionCost}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement positionType="Float" x="288" y="276" width="89" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{totalLunches}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement positionType="Float" x="463" y="276" width="86" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA["£" + $F{totalLunchCost}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement positionType="Float" x="377" y="276" width="86" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA["£" + $F{lunchCost}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement positionType="Float" x="463" y="296" width="86" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA["£" + $F{currentBalance}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" x="12" y="329" width="100" height="20"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total Due:]]></text>
+			</staticText>
+			<textField>
+				<reportElement positionType="Float" x="463" y="316" width="86" height="20"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["£" + $F{totalCost}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="32" splitType="Stretch">
+			<textField isStretchWithOverflow="true">
+				<reportElement x="12" y="12" width="537" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{school}.getInvoiceTerms()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

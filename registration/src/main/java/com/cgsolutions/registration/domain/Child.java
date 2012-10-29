@@ -1,5 +1,7 @@
 package com.cgsolutions.registration.domain;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.Date;
 import java.util.List;
 
@@ -18,10 +20,7 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.persistence.Version;
 
-import org.hibernate.annotations.Filter;
-import org.hibernate.annotations.FilterDef;
-import org.hibernate.annotations.Formula;
-import org.hibernate.annotations.ParamDef;
+import org.springframework.util.CollectionUtils;
 
 import com.cgsolutions.registration.domain.enums.Ethnicity;
 import com.cgsolutions.registration.domain.enums.TypeOfAttendance;
@@ -76,20 +75,23 @@ public class Child {
 	private int fundedSessions;
 	private int fundedLunches;
 	@JoinColumn(name="childId")
-	@OneToMany(targetEntity=Guardian.class, cascade=CascadeType.ALL)
+	@OneToMany(targetEntity=Guardian.class, cascade=CascadeType.ALL, orphanRemoval=true)
 	private List<Guardian> guardians;
 	@JoinColumn(name="childId")
-	@OneToMany(targetEntity=Intolerance.class, cascade=CascadeType.ALL)
+	@OneToMany(targetEntity=Intolerance.class, cascade=CascadeType.ALL, orphanRemoval=true)
 	private List<Intolerance> intolerances;
 	@JoinColumn(name="childId")
-	@OneToMany(targetEntity=Authorisation.class, cascade=CascadeType.ALL)
+	@OneToMany(targetEntity=Authorisation.class, cascade=CascadeType.ALL, orphanRemoval=true)
 	private List<Authorisation> authorisations;
 	@JoinColumn(name="childId")
-	@OneToMany(targetEntity=Contact.class, cascade=CascadeType.ALL)
+	@OneToMany(targetEntity=Contact.class, cascade=CascadeType.ALL, orphanRemoval=true)
 	private List<Contact> contacts;
 	@JoinColumn(name="childId")
-	@OneToMany(targetEntity=AdditionalSetting.class, cascade=CascadeType.ALL)
+	@OneToMany(targetEntity=AdditionalSetting.class, cascade=CascadeType.ALL, orphanRemoval=true)
 	private List<AdditionalSetting> additionalSettings;
+	@JoinColumn(name="childId")
+	@OneToMany(targetEntity=Payment.class, cascade=CascadeType.ALL, orphanRemoval=true)
+	private List<Payment> payments;
 	@Transient
 	private List<TermBill> bills;
 	
@@ -303,6 +305,12 @@ public class Child {
 	public void setSelected(boolean selected) {
 		this.selected = selected;
 	}
+	public List<Payment> getPayments() {
+		return payments;
+	}
+	public void setPayments(List<Payment> payments) {
+		this.payments = payments;
+	}
 	public TypeOfAttendance getTypeOfAttendance(Date attendanceDate){
 		if(MyDateUtils.isItAMonday(attendanceDate)){
 			return this.mondayAttendance;
@@ -379,5 +387,35 @@ public class Child {
 	}
 	public void setBills(List<TermBill> bills) {
 		this.bills = bills;
+	}
+	
+	public String getCurrentBalance(){
+		BigDecimal total = new BigDecimal(getPaymentTotal() - getBillTotal());
+		BigDecimal rounded = total.setScale(2, BigDecimal.ROUND_HALF_UP);
+		
+		return rounded.toPlainString();
+	}
+	
+	public float getBillTotal(){
+		float billTotal = 0;
+		if(!CollectionUtils.isEmpty(this.bills)){
+			for(TermBill bill: this.getBills()){
+				billTotal += bill.getTotalCost();
+			}
+		}
+		
+		return billTotal;
+	}
+	
+	public float getPaymentTotal(){
+		float paymentsTotal = 0;
+		
+		if(!CollectionUtils.isEmpty(this.getPayments())){
+			for(Payment payment: this.getPayments()){
+				paymentsTotal += payment.getAmount();
+			}
+		}
+		
+		return paymentsTotal;
 	}
 }

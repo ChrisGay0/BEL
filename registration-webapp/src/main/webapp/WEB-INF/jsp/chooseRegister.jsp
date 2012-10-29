@@ -7,7 +7,7 @@
 		<script type="text/javascript">
 			function doPrint(){
 				var roomIds = $("#rooms").val();
-				window.open('/registration-webapp/register.pdf?day=' + $("#day").val() + "&roomIds=" + roomIds);
+				window.open('/registration-webapp/register.pdf?day=' + $("#day").val() + "&roomIds=" + roomIds + "&daysToPrint=" + $("#daysToPrint").val());
 			}
 		</script>
 	</head>
@@ -18,10 +18,32 @@
 			<table class="formTable">
 				<tr>
 					<td>
-						Register date
+						Week Starting
 					</td>
 					<td>
 						<input type="text" id="day" class="date"/>
+					</td>
+					<td>
+						Days to print
+					</td>
+					<td>
+						<select id="daysToPrint">
+							<option value="1">
+								1
+							</option>
+							<option value="2">
+								2
+							</option>
+							<option value="3">
+								3
+							</option>
+							<option value="4">
+								4
+							</option>
+							<option value="5" selected="selected">
+								5
+							</option>
+						</select>
 					</td>
 				</tr>
 				<tr valign="top">
@@ -43,7 +65,7 @@
 		</form>
 		<div id="buttonBar"> 
 			<div id="holder">
-				<button onclick="doPrint();return false;">Print Register</button>
+				<button onclick="doPrint();return false;">Print Register(s)</button>
 			</div>
 		</div>
 	</body>

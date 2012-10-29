@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import com.cgsolutions.registration.domain.Child;
 import com.cgsolutions.registration.domain.Room;
 import com.cgsolutions.registration.domain.enums.Ethnicity;
+import com.cgsolutions.registration.domain.enums.PaymentType;
 import com.cgsolutions.registration.domain.enums.TypeOfAttendance;
 import com.cgsolutions.registration.domain.propertyEditors.DatePropertyEditor;
 import com.cgsolutions.registration.domain.propertyEditors.RoomPropertyEditor;
@@ -50,6 +51,7 @@ public class EditChildController {
 		model.addAttribute("rooms", roomManager.findAllActive());
 		model.addAttribute("typeOfAttendances", TypeOfAttendance.values());
 		model.addAttribute("ethnicityList", Ethnicity.values());
+		model.addAttribute("paymentList", PaymentType.values());
 		
 		return "editChild";
 	}

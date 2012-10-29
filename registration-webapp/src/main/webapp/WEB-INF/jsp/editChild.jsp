@@ -475,54 +475,108 @@
 												<form:checkbox path="sameAddressAsChild"/>
 											</td>
 										</tr>
-										<tr>
-											<td>
-												Address Line 1
-											</td>
-											<td>
-												<form:input path="addressLine1"/>
-											</td>
-										</tr>
-										<tr>
-											<td>
-												Address Line 2
-											</td>
-											<td>
-												<form:input path="addressLine2"/>
-											</td>
-										</tr>
-										<tr>
-											<td>
-												Address Line 3
-											</td>
-											<td>
-												<form:input path="addressLine3"/>
-											</td>
-										</tr>
-										<tr>
-											<td>
-												City
-											</td>
-											<td>
-												<form:input path="city"/>
-											</td>
-										</tr>
-										<tr>
-											<td>
-												County
-											</td>
-											<td>
-												<form:input path="county"/>
-											</td>
-										</tr>
-										<tr>
-											<td>
-												Post Code
-											</td>
-											<td>
-												<form:input path="postCode"/>
-											</td>
-										</tr>
+										<c:choose>
+											<c:when test="${guardian.sameAddressAsChild}">
+												<tr>
+													<td>
+														Address Line 1
+													</td>
+													<td>
+														${formObject.child.addressLine1}
+													</td>
+												</tr>
+												<tr>
+													<td>
+														Address Line 2
+													</td>
+													<td>
+														${formObject.child.addressLine2}
+													</td>
+												</tr>
+												<tr>
+													<td>
+														Address Line 3
+													</td>
+													<td>
+														${formObject.child.addressLine3}
+													</td>
+												</tr>
+												<tr>
+													<td>
+														City
+													</td>
+													<td>
+														${formObject.child.city}
+													</td>
+												</tr>
+												<tr>
+													<td>
+														County
+													</td>
+													<td>
+														${formObject.child.county}
+													</td>
+												</tr>
+												<tr>
+													<td>
+														Post Code
+													</td>
+													<td>
+														${formObject.child.postCode}
+													</td>
+												</tr>
+											</c:when>
+											<c:otherwise>
+												<tr>
+													<td>
+														Address Line 1
+													</td>
+													<td>
+														<form:input path="addressLine1"/>
+													</td>
+												</tr>
+												<tr>
+													<td>
+														Address Line 2
+													</td>
+													<td>
+														<form:input path="addressLine2"/>
+													</td>
+												</tr>
+												<tr>
+													<td>
+														Address Line 3
+													</td>
+													<td>
+														<form:input path="addressLine3"/>
+													</td>
+												</tr>
+												<tr>
+													<td>
+														City
+													</td>
+													<td>
+														<form:input path="city"/>
+													</td>
+												</tr>
+												<tr>
+													<td>
+														County
+													</td>
+													<td>
+														<form:input path="county"/>
+													</td>
+												</tr>
+												<tr>
+													<td>
+														Post Code
+													</td>
+													<td>
+														<form:input path="postCode"/>
+													</td>
+												</tr>
+											</c:otherwise>
+										</c:choose>
 									</table>
 								</div>
 							</spring:nestedPath>
@@ -656,96 +710,168 @@
 					</table>
 				</div>
 				<div class="tabbertab" title="Financial">
-					<table class="formTable">
-						<tr>
-							<td>
-								Registration Fee Paid
-							</td>
-							<td>
-								<form:checkbox path="child.registrationFeePaid"/>
-							</td>
-						</tr>
-						<tr>
-							<td>
-								Deposit(£)
-							</td>
-							<td>
-								<form:input path="child.depositPaid" size="4"/>
-							</td>
-						</tr>
-						<tr>
-							<td>
-								Funded Sessions
-							</td>
-							<td>
-								<form:input path="child.fundedSessions"/>
-							</td>
-						</tr>
-						<tr>
-							<td>
-								Funded Lunches
-							</td>
-							<td>
-								<form:input path="child.fundedLunches"/>
-							</td>
-						</tr>
-					</table>
-				</div>
-				<div class="tabbertab" title="Bills">
-					<table class="listTable">
-						<thead>
-							<tr>
-								<th>
-									Term Name
-								</th>
-								<th>
-									Term Name
-								</th>
-								<th>
-									Start Date
-								</th>
-								<th>
-									End Date
-								</th>
-								<th>
-									Lunches
-								</th>
-								<th>
-									Sessions
-								</th>
-								<th>
-									Cost
-								</th>
-							</tr>
-						</thead>
-						<tbody>
-							<c:forEach items="${formObject.child.bills}" var="bill">
+					<h4 style="float: right;">Current Balance ${formObject.child.currentBalance}</h4>
+					<div class="tabber">
+						<div class="tabbertab" title="General">
+							<table class="formTable">
 								<tr style="cursor: pointer;" onclick="GB_show('Attendances', '/registration-webapp/viewAttendances.htm?termId=${bill.term.id}&hideHeader=Y', 600, 800);">
 									<td>
-										${bill.term.termName}
+										Registration Fee Paid
 									</td>
 									<td>
-										${bill.room.name}
-									</td>
-									<td>
-										<fmt:formatDate value="${bill.term.startDate}" pattern="dd MMM yyyy"/>
-									</td>
-									<td>
-										<fmt:formatDate value="${bill.term.endDate}" pattern="dd MMM yyyy"/>
-									</td>
-									<td>
-										${bill.lunches} (£${bill.totalLunchesCost})
-									</td>
-									<td>
-										${bill.sessions} (£${bill.totalSessionsCost})
-									</td>
-									<td>
-										£${bill.totalCost}
+										<form:checkbox path="child.registrationFeePaid"/>
 									</td>
 								</tr>
-							</c:forEach>
-						</tbody>
-					</table>
+								<tr>
+									<td>
+										Deposit(£)
+									</td>
+									<td>
+										<form:input path="child.depositPaid" size="4"/>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										Funded Sessions
+									</td>
+									<td>
+										<form:input path="child.fundedSessions"/>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										Funded Lunches
+									</td>
+									<td>
+										<form:input path="child.fundedLunches"/>
+									</td>
+								</tr>
+							</table>
+						</div>
+						<div class="tabbertab" title="Bills">
+							<table class="listTable">
+								<thead>
+									<tr>
+										<th>
+											Term Name
+										</th>
+										<th>
+											Term Name
+										</th>
+										<th>
+											Start Date
+										</th>
+										<th>
+											End Date
+										</th>
+										<th>
+											Lunches
+										</th>
+										<th>
+											Sessions
+										</th>
+										<th>
+											Cost
+										</th>
+									</tr>
+								</thead>
+								<tbody>
+									<c:forEach items="${formObject.child.bills}" var="bill">
+										<tr style="cursor: pointer;" onclick="GB_show('Attendances', '/registration-webapp/viewAttendances.htm?termId=${bill.term.id}&hideHeader=Y', 600, 800);">
+											<td>
+												${bill.term.termName}
+											</td>
+											<td>
+												${bill.room.name}
+											</td>
+											<td>
+												<fmt:formatDate value="${bill.term.startDate}" pattern="dd MMM yyyy"/>
+											</td>
+											<td>
+												<fmt:formatDate value="${bill.term.endDate}" pattern="dd MMM yyyy"/>
+											</td>
+											<td>
+												${bill.lunches} (£${bill.totalLunchesCost})
+											</td>
+											<td>
+												${bill.sessions} (£${bill.totalSessionsCost})
+											</td>
+											<td>
+												£${bill.totalCost}
+											</td>
+										</tr>
+									</c:forEach>
+								</tbody>
+							</table>
+						</div>
+						<div class="tabbertab" title="Payments">
+							<table class="listTable">
+								<thead>
+									<tr>
+										<th>
+											Remove
+										</th>
+										<th>
+											Payment Date
+										</th>
+										<th>
+											Amount
+										</th>
+										<th>
+											Payment Type
+										</th>
+										<th>
+											Comments
+										</th>
+									</tr>
+								</thead>
+								<tbody>
+									<c:forEach items="${formObject.newPayments}" var="newPayment" varStatus="listIndex">
+										<spring:nestedPath path="newPayments[${listIndex.index}]">
+											<tr id="payment${listIndex.index}">
+												<td style="vertical-align: top; text-align: center;" class="deleteColumn">
+													
+												</td>
+												<td style="vertical-align: top;">
+													<form:input path="datePaid" onchange="cloneRow('payment', ${listIndex.index});" cssClass="date"/>
+												</td>
+												<td style="vertical-align: top;">
+													<form:input path="amount" size="5" maxlength="11"/>
+												</td>
+												<td style="vertical-align: top;">
+													<form:select path="paymentType" items="${paymentList}" itemLabel="description"/>
+												</td>
+												<td>
+													<form:input path="comments" size="60" maxlength="255"/>
+												</td>
+											</tr>
+										</spring:nestedPath>
+									</c:forEach>
+									<c:forEach var="payment" items="${formObject.child.payments}" varStatus="listIndex"> 
+										<spring:nestedPath path="child.payments[${listIndex.index}]">
+											<tr>
+												<td style="vertical-align: top; text-align: center;">
+													&nbsp;
+												</td>
+												<td style="vertical-align: top;">
+													<fmt:formatDate value="${payment.datePaid}" pattern="dd MMM yyyy"/>
+												</td>
+												<td style="vertical-align: top;">
+													<form:input path="amount" size="5" maxlength="11"/>
+												</td>
+												<td style="vertical-align: top;">
+													<form:select path="paymentType" items="${paymentList}" itemLabel="description"/>
+												</td>
+												<td>
+													<form:input path="comments" size="60" maxlength="255"/>
+												</td>
+											</tr>
+										</spring:nestedPath>
+									</c:forEach>
+								</tbody>
+							</table>
+						</div>
+					</div>
 				</div>			
 			</div>
 			<input type="hidden" name="action" value=""/>
@@ -753,7 +879,9 @@
 		<div id="buttonBar"> 
 			<div id="holder">
 				<button onclick="document.pageForm.action.value='Save';document.pageForm.submit();return false;">Save</button>
+				<button onclick="GB_show('Add Guardian', '/registration-webapp/addGuardian.htm?childId=${formObject.child.id}', 600, 850);return false;">Add Guardian</button>
 				<button onclick="window.open('/registration-webapp/generateAttendances.htm?childId=${formObject.child.id}&redo=Y', 'Redo');return false;">Recalculate Attendances</button>
+				<button onclick="deleteAttendances();return false;">Delete Attendances</button>
 				<button onclick="document.location = 'addGuardian.htm?childId=${formObject.child.id}';return false;">Add Guardian</button>
 				<button onclick="deleteAttendances();return false;">Delete Attendances</button>
 			</div>

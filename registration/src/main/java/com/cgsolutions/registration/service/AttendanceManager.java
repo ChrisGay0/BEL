@@ -126,6 +126,10 @@ public class AttendanceManager {
 		return attendanceDao.findAttendancesForChild(child);
 	}
 	
+	public List<Child> findChildrenForTerm(Term term){
+		return attendanceDao.findChildrenForTerm(term);
+	}
+	
 	public void deleteAttendancesForTerm(Term term){
 		attendanceDao.deleteAttendancesForTerm(term);
 	}

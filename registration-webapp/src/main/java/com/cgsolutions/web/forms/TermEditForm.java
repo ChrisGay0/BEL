@@ -7,7 +7,6 @@ import java.util.List;
 import org.springframework.util.AutoPopulatingList;
 
 import com.cgsolutions.registration.domain.ExclusionDate;
-import com.cgsolutions.registration.domain.MedicalInfo;
 import com.cgsolutions.registration.domain.Term;
 
 public class TermEditForm {

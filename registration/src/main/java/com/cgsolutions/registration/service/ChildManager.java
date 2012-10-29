@@ -30,7 +30,7 @@ public class ChildManager {
 		if(child.getId() != 0 ){
 			deleteSelectedItems(child);
 		
-			childDao.mergeChild(child);
+			childDao.saveChild(child);
 		}
 		else{
 			childDao.saveChild(child);
