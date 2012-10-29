@@ -75,22 +75,22 @@ public class Child {
 	private int fundedSessions;
 	private int fundedLunches;
 	@JoinColumn(name="childId")
-	@OneToMany(targetEntity=Guardian.class, cascade=CascadeType.ALL)
+	@OneToMany(targetEntity=Guardian.class, cascade=CascadeType.ALL, orphanRemoval=true)
 	private List<Guardian> guardians;
 	@JoinColumn(name="childId")
-	@OneToMany(targetEntity=Intolerance.class, cascade=CascadeType.ALL)
+	@OneToMany(targetEntity=Intolerance.class, cascade=CascadeType.ALL, orphanRemoval=true)
 	private List<Intolerance> intolerances;
 	@JoinColumn(name="childId")
-	@OneToMany(targetEntity=Authorisation.class, cascade=CascadeType.ALL)
+	@OneToMany(targetEntity=Authorisation.class, cascade=CascadeType.ALL, orphanRemoval=true)
 	private List<Authorisation> authorisations;
 	@JoinColumn(name="childId")
-	@OneToMany(targetEntity=Contact.class, cascade=CascadeType.ALL)
+	@OneToMany(targetEntity=Contact.class, cascade=CascadeType.ALL, orphanRemoval=true)
 	private List<Contact> contacts;
 	@JoinColumn(name="childId")
-	@OneToMany(targetEntity=AdditionalSetting.class, cascade=CascadeType.ALL)
+	@OneToMany(targetEntity=AdditionalSetting.class, cascade=CascadeType.ALL, orphanRemoval=true)
 	private List<AdditionalSetting> additionalSettings;
 	@JoinColumn(name="childId")
-	@OneToMany(targetEntity=Payment.class, cascade=CascadeType.ALL)
+	@OneToMany(targetEntity=Payment.class, cascade=CascadeType.ALL, orphanRemoval=true)
 	private List<Payment> payments;
 	@Transient
 	private List<TermBill> bills;

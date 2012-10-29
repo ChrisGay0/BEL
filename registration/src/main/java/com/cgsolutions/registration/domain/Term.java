@@ -34,7 +34,7 @@ public class Term {
 	private Date startDate;
 	private Date endDate;
 	private boolean lockTerm;
-	@OneToMany(targetEntity=ExclusionDate.class, cascade=CascadeType.ALL)
+	@OneToMany(targetEntity=ExclusionDate.class, cascade=CascadeType.ALL, orphanRemoval=true)
 	@JoinColumn(name="termId")
 	private List<ExclusionDate> exclusionDates;
 	@Transient
