@@ -91,7 +91,7 @@
 				<li onclick="document.location = 'chooseRegister.htm'">
 					Registers
 				</li>
-				<li onclick="document.location = 'chooseRegister.htm'">
+				<li onclick="window.open('/registration-webapp/invoice.pdf?termId=109');">
 					Billing
 				</li>
 			</ul>

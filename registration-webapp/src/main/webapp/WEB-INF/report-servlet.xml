@@ -25,6 +25,25 @@
 			</map>
 		</property>
 	</bean>
+	
+	<bean id="InvoiceController" class="com.cgsolutions.report.InvoiceController">
+		<property name="methodNameResolver">
+			<ref local="resolver"/>
+		</property>	
+		<property name="termManager" ref="termManager"/>
+		<property name="schoolManager" ref="schoolManager"/>
+		<property name="attendanceManager" ref="attendanceManager"/>
+		<property name="billManager" ref="billManager"/>
+	</bean>
+	
+	<bean id="InvoiceCompile" class="org.springframework.web.servlet.view.jasperreports.JasperReportsPdfView">
+		<property name="reportDataKey">
+			<value>dataSource</value>
+		</property>
+		<property name="url">
+			<value>/WEB-INF/reports/Invoice.jasper</value>
+		</property>
+	</bean>
 
 <!-- 
 <property name="subReportUrls">
@@ -48,6 +67,7 @@
 		<property name="mappings">
 			<props>
 				<prop key="/register.pdf">RegisterController</prop>
+				<prop key="/invoice.pdf">InvoiceController</prop>
 			</props>
 		</property>
 	</bean>	
@@ -56,6 +76,7 @@
 		<property name="mappings">
 			<props>
 				<prop key="/register.pdf">printRegister</prop>
+				<prop key="/invoice.pdf">printInvoice</prop>
 			</props>
 		</property>
 	</bean>	

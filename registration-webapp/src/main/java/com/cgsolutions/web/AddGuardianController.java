@@ -23,6 +23,7 @@ import com.cgsolutions.registration.domain.Term;
 import com.cgsolutions.registration.domain.propertyEditors.DatePropertyEditor;
 import com.cgsolutions.registration.service.ChildManager;
 import com.cgsolutions.registration.service.TermManager;
+import com.lowagie.text.pdf.codec.GifImage;
 
 @Controller
 @RequestMapping("/addGuardian.htm")
@@ -35,22 +36,24 @@ public class AddGuardianController {
 	public String showForm(Model model, HttpServletRequest request){
 		model.addAttribute("childId", request.getParameter("childId"));
 		model.addAttribute("newGuardian", new Guardian());
+		model.addAttribute("added", request.getParameter("added"));
 		
 		return "addGuardian";
 	}
 	
 	@RequestMapping(method=RequestMethod.POST)
-	public String saveTermWithDates(@ModelAttribute("newGuardian")Guardian guardian, HttpServletRequest request){
+	public String saveGuardian(@ModelAttribute("newGuardian")Guardian guardian, HttpServletRequest request){
 		Child child = childManager.findChild(Integer.parseInt(request.getParameter("childId")));
-		if(CollectionUtils.isEmpty(child.getGuardians())){
+		if(CollectionUtils.isEmpty(child.getGuardians()) && child.getGuardians() == null){
 			child.setGuardians(new ArrayList<Guardian>());
 		}
+		
 		guardian.setChildId(child.getId());
 		child.getGuardians().add(guardian);
 		
 		childManager.saveChild(child);
 		
-		return "redirect:editChild.htm?childId=" + child.getId();
+		return "redirect:addGuardian.htm?childId=" + child.getId() + "&added=Y";
 	}
 	
 	@InitBinder

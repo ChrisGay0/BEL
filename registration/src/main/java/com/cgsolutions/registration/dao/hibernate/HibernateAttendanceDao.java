@@ -34,7 +34,7 @@ public class HibernateAttendanceDao extends HibernateDaoSupport implements Atten
 	}
 	
 	public List<Attendance> findAttendancesForDayAndRoom(int roomId, Date day){
-		Query query = getSession().createQuery("from Attendance where room.id = :roomId and attendanceDate = :attendanceDate");
+		Query query = getSession().createQuery("from Attendance where room.id = :roomId and attendanceDate = :attendanceDate order by child.surname desc");
 		query.setParameter("roomId", roomId);
 		query.setParameter("attendanceDate", MyDateUtils.getStartOfDay(day));
 		
@@ -74,5 +74,11 @@ public class HibernateAttendanceDao extends HibernateDaoSupport implements Atten
 		query.setParameter("termId", term.getId());
 		
 		return query.executeUpdate();
+	}
+	
+	public List<Child> findChildrenForTerm(Term term){
+		Query query = getSession().createQuery("select distinct(a.child) from Attendance a where a.term.id = " + term.getId());
+		
+		return query.list();
 	}
 }

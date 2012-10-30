@@ -33,6 +33,8 @@ public class Guardian {
 	private String city;
 	private String county;
 	private String postCode;
+	private String occupation;
+	
 	public int getId() {
 		return id;
 	}
@@ -134,5 +136,11 @@ public class Guardian {
 	}
 	public void setPostCode(String postCode) {
 		this.postCode = postCode;
+	}
+	public String getOccupation() {
+		return occupation;
+	}
+	public void setOccupation(String occupation) {
+		this.occupation = occupation;
 	}
 }

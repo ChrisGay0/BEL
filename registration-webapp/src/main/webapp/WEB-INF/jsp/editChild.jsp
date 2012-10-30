@@ -475,54 +475,108 @@
 												<form:checkbox path="sameAddressAsChild"/>
 											</td>
 										</tr>
-										<tr>
-											<td>
-												Address Line 1
-											</td>
-											<td>
-												<form:input path="addressLine1"/>
-											</td>
-										</tr>
-										<tr>
-											<td>
-												Address Line 2
-											</td>
-											<td>
-												<form:input path="addressLine2"/>
-											</td>
-										</tr>
-										<tr>
-											<td>
-												Address Line 3
-											</td>
-											<td>
-												<form:input path="addressLine3"/>
-											</td>
-										</tr>
-										<tr>
-											<td>
-												City
-											</td>
-											<td>
-												<form:input path="city"/>
-											</td>
-										</tr>
-										<tr>
-											<td>
-												County
-											</td>
-											<td>
-												<form:input path="county"/>
-											</td>
-										</tr>
-										<tr>
-											<td>
-												Post Code
-											</td>
-											<td>
-												<form:input path="postCode"/>
-											</td>
-										</tr>
+										<c:choose>
+											<c:when test="${guardian.sameAddressAsChild}">
+												<tr>
+													<td>
+														Address Line 1
+													</td>
+													<td>
+														${formObject.child.addressLine1}
+													</td>
+												</tr>
+												<tr>
+													<td>
+														Address Line 2
+													</td>
+													<td>
+														${formObject.child.addressLine2}
+													</td>
+												</tr>
+												<tr>
+													<td>
+														Address Line 3
+													</td>
+													<td>
+														${formObject.child.addressLine3}
+													</td>
+												</tr>
+												<tr>
+													<td>
+														City
+													</td>
+													<td>
+														${formObject.child.city}
+													</td>
+												</tr>
+												<tr>
+													<td>
+														County
+													</td>
+													<td>
+														${formObject.child.county}
+													</td>
+												</tr>
+												<tr>
+													<td>
+														Post Code
+													</td>
+													<td>
+														${formObject.child.postCode}
+													</td>
+												</tr>
+											</c:when>
+											<c:otherwise>
+												<tr>
+													<td>
+														Address Line 1
+													</td>
+													<td>
+														<form:input path="addressLine1"/>
+													</td>
+												</tr>
+												<tr>
+													<td>
+														Address Line 2
+													</td>
+													<td>
+														<form:input path="addressLine2"/>
+													</td>
+												</tr>
+												<tr>
+													<td>
+														Address Line 3
+													</td>
+													<td>
+														<form:input path="addressLine3"/>
+													</td>
+												</tr>
+												<tr>
+													<td>
+														City
+													</td>
+													<td>
+														<form:input path="city"/>
+													</td>
+												</tr>
+												<tr>
+													<td>
+														County
+													</td>
+													<td>
+														<form:input path="county"/>
+													</td>
+												</tr>
+												<tr>
+													<td>
+														Post Code
+													</td>
+													<td>
+														<form:input path="postCode"/>
+													</td>
+												</tr>
+											</c:otherwise>
+										</c:choose>
 									</table>
 								</div>
 							</spring:nestedPath>
@@ -660,7 +714,7 @@
 					<div class="tabber">
 						<div class="tabbertab" title="General">
 							<table class="formTable">
-								<tr>
+								<tr style="cursor: pointer;">
 									<td>
 										Registration Fee Paid
 									</td>
@@ -825,8 +879,8 @@
 		<div id="buttonBar"> 
 			<div id="holder">
 				<button onclick="document.pageForm.action.value='Save';document.pageForm.submit();return false;">Save</button>
+				<button onclick="GB_show('Add Guardian', '/registration-webapp/addGuardian.htm?childId=${formObject.child.id}', 600, 850);return false;">Add Guardian</button>
 				<button onclick="window.open('/registration-webapp/generateAttendances.htm?childId=${formObject.child.id}&redo=Y', 'Redo');return false;">Recalculate Attendances</button>
-				<button onclick="document.location = 'addGuardian.htm?childId=${formObject.child.id}';return false;">Add Guardian</button>
 				<button onclick="deleteAttendances();return false;">Delete Attendances</button>
 			</div>
 		</div>
