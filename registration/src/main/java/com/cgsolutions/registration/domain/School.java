@@ -28,6 +28,7 @@ public class School {
 	private String invoiceTerms;
 	private float depositAmount;
 	private float registrationFee;
+	private String manager;
 	
 	public int getId() {
 		return id;
@@ -106,5 +107,11 @@ public class School {
 	}
 	public void setRegistrationFee(float registrationFee) {
 		this.registrationFee = registrationFee;
+	}
+	public String getManager() {
+		return manager;
+	}
+	public void setManager(String manager) {
+		this.manager = manager;
 	}
 }

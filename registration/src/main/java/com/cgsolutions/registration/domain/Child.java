@@ -432,4 +432,22 @@ public class Child {
 		
 		return paymentsTotal;
 	}
+	
+	public String getGuardianNames(){
+		String names = "";
+		for(Guardian guardian: this.guardians){
+			names += guardian.getTitle() + " " + guardian.getFirstName() + " " + guardian.getSurname() + " & ";
+		}
+		
+		return names.substring(0, names.length() - 3);
+	}
+	
+	public String getGuardianTitleAndSurnames(){
+		String names = "";
+		for(Guardian guardian: this.guardians){
+			names += guardian.getTitle() + " " + guardian.getSurname() + " & ";
+		}
+		
+		return names.substring(0, names.length() - 3);
+	}
 }

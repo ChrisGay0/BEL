@@ -18,6 +18,10 @@
 			function removeRow(rowId){
 				$("#" + rowId).remove();
 			}
+			
+			function printWelcomeLetter(){
+				window.open('/registration-webapp/welcomeLetter.pdf?childId=${formObject.child.id}');
+			}
 		</script>
 	</head>
 	<body>
@@ -882,6 +886,7 @@
 				<button onclick="GB_show('Add Guardian', '/registration-webapp/addGuardian.htm?childId=${formObject.child.id}', 600, 850);return false;">Add Guardian</button>
 				<button onclick="window.open('/registration-webapp/generateAttendances.htm?childId=${formObject.child.id}&redo=Y', 'Redo');return false;">Recalculate Attendances</button>
 				<button onclick="deleteAttendances();return false;">Delete Attendances</button>
+				<button onclick="printWelcomeLetter();return false;">Welcome Letter</button>
 			</div>
 		</div>
 	</body>

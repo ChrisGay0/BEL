@@ -21,6 +21,14 @@
 				</tr>
 				<tr>
 					<td>
+						Managers name
+					</td>
+					<td>
+						<form:input path="manager"/>
+					</td>
+				</tr>
+				<tr>
+					<td>
 						Address Line 1
 					</td>
 					<td>

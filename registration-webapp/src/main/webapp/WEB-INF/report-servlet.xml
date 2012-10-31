@@ -44,6 +44,23 @@
 			<value>/WEB-INF/reports/Invoice.jasper</value>
 		</property>
 	</bean>
+	
+	<bean id="WelcomeLetterController" class="com.cgsolutions.report.WelcomeLetterController">
+		<property name="methodNameResolver">
+			<ref local="resolver"/>
+		</property>	
+		<property name="childManager" ref="childManager"/>
+		<property name="schoolManager" ref="schoolManager"/>
+	</bean>
+	
+	<bean id="WelcomeLetterCompile" class="org.springframework.web.servlet.view.jasperreports.JasperReportsPdfView">
+		<property name="reportDataKey">
+			<value>dataSource</value>
+		</property>
+		<property name="url">
+			<value>/WEB-INF/reports/WelcomeLetter.jasper</value>
+		</property>
+	</bean>
 
 <!-- 
 <property name="subReportUrls">
@@ -68,6 +85,7 @@
 			<props>
 				<prop key="/register.pdf">RegisterController</prop>
 				<prop key="/invoice.pdf">InvoiceController</prop>
+				<prop key="/welcomeLetter.pdf">WelcomeLetterController</prop>
 			</props>
 		</property>
 	</bean>	
@@ -77,6 +95,7 @@
 			<props>
 				<prop key="/register.pdf">printRegister</prop>
 				<prop key="/invoice.pdf">printInvoice</prop>
+				<prop key="/welcomeLetter.pdf">printLetter</prop>
 			</props>
 		</property>
 	</bean>	
