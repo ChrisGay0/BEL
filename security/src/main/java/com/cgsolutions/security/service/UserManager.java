@@ -24,4 +24,8 @@ public class UserManager {
 	public List<User> findAll(){
 		return userDao.findAll();
 	}
+
+	public void setUserDao(UserDao userDao) {
+		this.userDao = userDao;
+	}
 }

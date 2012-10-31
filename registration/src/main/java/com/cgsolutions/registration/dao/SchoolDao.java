@@ -4,4 +4,5 @@ import com.cgsolutions.registration.domain.School;
 
 public interface SchoolDao {
 	School find();
+	void save(School school);
 }

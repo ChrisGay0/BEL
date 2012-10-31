@@ -47,8 +47,8 @@
 					</td>
 				</tr>
 				<tr valign="top">
-					<td>
-						<p style="vertical-align: top;">Room(s)</p>
+					<td style="vertical-align: top;">
+						Room(s)
 					</td>
 					<td>
 						<select id="rooms" multiple="multiple" style="width: 200px;height: 100px;">

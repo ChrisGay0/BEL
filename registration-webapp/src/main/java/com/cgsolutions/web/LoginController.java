@@ -20,6 +20,16 @@ public class LoginController {
 	
 	@RequestMapping(method=RequestMethod.GET)
 	public String login(){
+		//generate the system user if this is the first time the system has been loaded
+		if(userManager.find("SYSTEM") == null){
+			User user = new User();
+			user.setUserId("SYSTEM");
+			user.setFirstName("System");
+			user.setSurname("Default");
+			user.setPassword("database");
+						
+			userManager.save(user);
+		}
 		return "login";
 	}
 	

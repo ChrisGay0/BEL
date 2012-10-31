@@ -15,5 +15,7 @@ public class SchoolManager {
 		return schoolDao.find();
 	}
 	
-	
+	public void save(School school){
+		schoolDao.save(school);
+	}
 }
