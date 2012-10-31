@@ -42,9 +42,9 @@ public class AddGuardianController {
 	}
 	
 	@RequestMapping(method=RequestMethod.POST)
-	public String saveTermWithDates(@ModelAttribute("newGuardian")Guardian guardian, HttpServletRequest request){
+	public String saveGuardian(@ModelAttribute("newGuardian")Guardian guardian, HttpServletRequest request){
 		Child child = childManager.findChild(Integer.parseInt(request.getParameter("childId")));
-		if(CollectionUtils.isEmpty(child.getGuardians())){
+		if(CollectionUtils.isEmpty(child.getGuardians()) && child.getGuardians() == null){
 			child.setGuardians(new ArrayList<Guardian>());
 		}
 		

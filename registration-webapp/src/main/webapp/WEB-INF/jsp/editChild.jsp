@@ -714,7 +714,7 @@
 					<div class="tabber">
 						<div class="tabbertab" title="General">
 							<table class="formTable">
-								<tr style="cursor: pointer;" onclick="GB_show('Attendances', '/registration-webapp/viewAttendances.htm?termId=${bill.term.id}&hideHeader=Y', 600, 800);">
+								<tr style="cursor: pointer;">
 									<td>
 										Registration Fee Paid
 									</td>
@@ -881,8 +881,6 @@
 				<button onclick="document.pageForm.action.value='Save';document.pageForm.submit();return false;">Save</button>
 				<button onclick="GB_show('Add Guardian', '/registration-webapp/addGuardian.htm?childId=${formObject.child.id}', 600, 850);return false;">Add Guardian</button>
 				<button onclick="window.open('/registration-webapp/generateAttendances.htm?childId=${formObject.child.id}&redo=Y', 'Redo');return false;">Recalculate Attendances</button>
-				<button onclick="deleteAttendances();return false;">Delete Attendances</button>
-				<button onclick="document.location = 'addGuardian.htm?childId=${formObject.child.id}';return false;">Add Guardian</button>
 				<button onclick="deleteAttendances();return false;">Delete Attendances</button>
 			</div>
 		</div>

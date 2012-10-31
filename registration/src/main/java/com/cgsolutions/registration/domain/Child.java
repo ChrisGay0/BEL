@@ -58,7 +58,8 @@ public class Child {
 	private Ethnicity ethnicity;
 	private String doctorsName;
 	private String doctorsContactNumber;
-	private Integer depositPaid;
+	private Float depositPaid;
+	private Float depositRequired;
 	private String addressLine1;
 	private String addressLine2;
 	private String addressLine3;
@@ -70,12 +71,13 @@ public class Child {
 	private Date startDate;
 	private boolean leftSchool;
 	private boolean registrationFeePaid;
+	private float registrationFee;
 	@Transient
 	private boolean selected;
 	private int fundedSessions;
 	private int fundedLunches;
 	@JoinColumn(name="childId")
-	@OneToMany(targetEntity=Guardian.class, cascade=CascadeType.ALL, orphanRemoval=true)
+	@OneToMany(targetEntity=Guardian.class, cascade=CascadeType.ALL)
 	private List<Guardian> guardians;
 	@JoinColumn(name="childId")
 	@OneToMany(targetEntity=Intolerance.class, cascade=CascadeType.ALL, orphanRemoval=true)
@@ -179,6 +181,12 @@ public class Child {
 	public void setStartDate(Date startDate) {
 		this.startDate = startDate;
 	}
+	public Float getDepositRequired() {
+		return depositRequired;
+	}
+	public void setDepositRequired(Float depositRequired) {
+		this.depositRequired = depositRequired;
+	}
 	public TypeOfAttendance getFridayAttendance() {
 		return fridayAttendance;
 	}
@@ -209,10 +217,10 @@ public class Child {
 	public void setDoctorsContactNumber(String doctorsContactNumber) {
 		this.doctorsContactNumber = doctorsContactNumber;
 	}
-	public Integer getDepositPaid() {
+	public Float getDepositPaid() {
 		return depositPaid;
 	}
-	public void setDepositPaid(Integer depositPaid) {
+	public void setDepositPaid(Float depositPaid) {
 		this.depositPaid = depositPaid;
 	}
 	public String getAddressLine1() {
@@ -310,6 +318,12 @@ public class Child {
 	}
 	public void setPayments(List<Payment> payments) {
 		this.payments = payments;
+	}
+	public float getRegistrationFee() {
+		return registrationFee;
+	}
+	public void setRegistrationFee(float registrationFee) {
+		this.registrationFee = registrationFee;
 	}
 	public TypeOfAttendance getTypeOfAttendance(Date attendanceDate){
 		if(MyDateUtils.isItAMonday(attendanceDate)){

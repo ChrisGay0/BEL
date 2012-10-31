@@ -16,13 +16,20 @@ import com.cgsolutions.registration.domain.Contact;
 import com.cgsolutions.registration.domain.Intolerance;
 import com.cgsolutions.registration.domain.MedicalInfo;
 import com.cgsolutions.registration.domain.Room;
+import com.cgsolutions.registration.domain.School;
 
 @Service
 public class ChildManager {
 	@Autowired
 	private ChildDao childDao;
+	@Autowired
+	private SchoolManager schoolManager;
 	
 	public void createChild(Child child){
+		School school = schoolManager.find();
+		child.setRegistrationFee(school.getRegistrationFee());
+		child.setDepositRequired(school.getDepositAmount());
+		
 		childDao.saveChild(child);
 	}
 	

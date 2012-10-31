@@ -48,7 +48,8 @@ public class InvoiceController extends MultiActionController {
 						}
 					}
 					//Current balance shouldn't include this terms cost
-					bean.setCurrentBalance(Float.parseFloat(child.getCurrentBalance()) - bean.getTotalCost());
+					bean.setCurrentBalance(Float.parseFloat(child.getCurrentBalance()) + (bean.getTotalLunchCost() + bean.getTotalSessionCost()));
+					
 					datasource.add(bean);
 
 				}

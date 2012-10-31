@@ -26,6 +26,8 @@ public class School {
 	private String contactNumber;
 	private String charityNumber;
 	private String invoiceTerms;
+	private float depositAmount;
+	private float registrationFee;
 	
 	public int getId() {
 		return id;
@@ -92,5 +94,17 @@ public class School {
 	}
 	public void setInvoiceTerms(String invoiceTerms) {
 		this.invoiceTerms = invoiceTerms;
+	}
+	public float getDepositAmount() {
+		return depositAmount;
+	}
+	public void setDepositAmount(float depositAmount) {
+		this.depositAmount = depositAmount;
+	}
+	public float getRegistrationFee() {
+		return registrationFee;
+	}
+	public void setRegistrationFee(float registrationFee) {
+		this.registrationFee = registrationFee;
 	}
 }

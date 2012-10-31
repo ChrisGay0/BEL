@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import com.cgsolutions.registration.dao.AttendanceDao;
 import com.cgsolutions.registration.domain.Attendance;
@@ -127,7 +128,15 @@ public class AttendanceManager {
 	}
 	
 	public List<Child> findChildrenForTerm(Term term){
-		return attendanceDao.findChildrenForTerm(term);
+		List<Child> children = attendanceDao.findChildrenForTerm(term);
+		if(!CollectionUtils.isEmpty(children)){
+			for(Child child: children){
+				child.getPayments().toString();
+				child.getGuardians().toString();
+			}
+		}
+		
+		return children;
 	}
 	
 	public void deleteAttendancesForTerm(Term term){

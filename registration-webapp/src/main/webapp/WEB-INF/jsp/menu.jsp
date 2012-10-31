@@ -31,7 +31,7 @@
 		<div id="school">
 			<h2>School</h2>
 			<ul class="list">
-				<li>
+				<li onclick="document.location = 'editSchool.htm'">
 					Edit School Details
 				</li>
 				<li onclick="document.location = 'createRoom.htm'">
@@ -79,7 +79,7 @@
 				<li onclick="document.location = 'findUser.htm'">
 					Find User
 				</li>
-				<li>
+				<li onclick="document.location = 'changePassword.htm'">
 					Change Password
 				</li>
 			</ul>
@@ -91,7 +91,7 @@
 				<li onclick="document.location = 'chooseRegister.htm'">
 					Registers
 				</li>
-				<li onclick="window.open('/registration-webapp/invoice.pdf?termId=109');">
+				<li onclick="document.location = 'billing.htm'">
 					Billing
 				</li>
 			</ul>

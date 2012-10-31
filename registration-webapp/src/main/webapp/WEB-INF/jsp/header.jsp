@@ -19,7 +19,7 @@
 			$clone.attr("id", newId);
 			$clone.find('img').remove();
 			$clone.find('.deleteColumn').append('<img src="/registration-webapp/images/remove.png" style="cursor: pointer;" height="24px" width="24px" onclick="removeRow(\'' + newId + '\');"/>');
-			$clone.find('input[type=text], textarea').each(function(){
+			$clone.find('input[type=text], select, textarea').each(function(){
 				var id = $(this).attr("id");
 				id = id.replace(index, parseInt(index + 1));
 				var name = $(this).attr("id");
