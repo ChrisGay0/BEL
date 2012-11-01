@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="WelcomeLetter" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="7a13726b-0e05-42be-afd9-c31a7948f81e">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="235"/>
 	<parameter name="welcomeLetter" class="com.cgsolutions.registration.domain.WelcomeLetter" isForPrompting="false"/>
 	<parameter name="school" class="com.cgsolutions.registration.domain.School" isForPrompting="false"/>
 	<field name="child" class="com.cgsolutions.registration.domain.Child"/>
@@ -19,7 +19,7 @@
 		<band splitType="Stretch"/>
 	</columnHeader>
 	<detail>
-		<band height="444" splitType="Stretch">
+		<band height="528" splitType="Stretch">
 			<textField>
 				<reportElement uuid="43cec140-4109-488e-a363-2c2849acb59a" positionType="Float" x="19" y="14" width="355" height="20"/>
 				<textElement>
@@ -492,13 +492,42 @@ $F{child}.getFridayAttendance().toString().equals("FULL"))]]></printWhenExpressi
 				</textElement>
 				<text><![CDATA[Friday]]></text>
 			</staticText>
+			<staticText>
+				<reportElement uuid="b25aaccc-8be1-4336-8ca0-369605bdd830" positionType="Float" x="19" y="444" width="100" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Yours faithfully]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="1120855f-4769-47db-83e8-165d264f5975" positionType="Float" x="19" y="479" width="283" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{school}.getManager()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="d63dc9ec-7549-4347-9cff-be64e3577f0e" positionType="Float" x="19" y="499" width="100" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Manager]]></text>
+			</staticText>
 		</band>
 	</detail>
 	<columnFooter>
 		<band splitType="Stretch"/>
 	</columnFooter>
 	<pageFooter>
-		<band splitType="Stretch"/>
+		<band height="62" splitType="Stretch">
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="6ebe091e-d909-4d08-9569-fd2c5ab8f99a" positionType="Float" x="19" y="0" width="526" height="21"/>
+				<textElement markup="none">
+					<font fontName="SansSerif" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{welcomeLetter}.getFooter()]]></textFieldExpression>
+			</textField>
+		</band>
 	</pageFooter>
 	<summary>
 		<band splitType="Stretch"/>
