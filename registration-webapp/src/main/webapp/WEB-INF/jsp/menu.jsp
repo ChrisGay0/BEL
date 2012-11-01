@@ -91,8 +91,14 @@
 				<li onclick="document.location = 'chooseRegister.htm'">
 					Registers
 				</li>
-				<li onclick="document.location = 'billing.htm'">
-					Billing
+				<li onclick="document.location = 'invoice.htm'">
+					Invoice
+				</li>
+				<li onclick="document.location = 'outstandingPayments.htm'">
+					Outstanding Payments
+				</li>
+				<li onclick="window.open('/registration-webapp/welcomeLetter.pdf');">
+					Print Welcome Letters
 				</li>
 			</ul>
 		</div>

@@ -16,6 +16,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderColumn;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.persistence.Version;
@@ -74,6 +75,7 @@ public class Child {
 	private float registrationFee;
 	@Transient
 	private boolean selected;
+	private boolean welcomeLetterPrinted;
 	private int fundedSessions;
 	private int fundedLunches;
 	@JoinColumn(name="childId")
@@ -349,7 +351,7 @@ public class Child {
 	public boolean shouldAttendMorning(Date day){
 		TypeOfAttendance attendance = getTypeOfAttendance(day);
 		if(attendance != null){
-			return attendance.equals(TypeOfAttendance.FULL) || attendance.equals(TypeOfAttendance.MORNING);
+			return attendance.equals(TypeOfAttendance.FULL) || attendance.equals(TypeOfAttendance.MORNING) || attendance.equals(TypeOfAttendance.MORNINGWITHLUNCH);
 		}
 		else{
 			return false;
@@ -359,7 +361,7 @@ public class Child {
 	public boolean shouldAttendAfternoon(Date day){
 		TypeOfAttendance attendance = getTypeOfAttendance(day);
 		if(attendance != null){
-			return attendance.equals(TypeOfAttendance.FULL) || attendance.equals(TypeOfAttendance.AFTERNOON);
+			return attendance.equals(TypeOfAttendance.FULL) || attendance.equals(TypeOfAttendance.AFTERNOON) || attendance.equals(TypeOfAttendance.AFTERNOONWITHLUNCH);
 		}
 		else{
 			return false;
@@ -369,7 +371,7 @@ public class Child {
 	public boolean shouldHaveLunch(Date day){
 		TypeOfAttendance attendance = getTypeOfAttendance(day);
 		if(attendance != null){
-			return attendance.equals(TypeOfAttendance.FULL);
+			return attendance.equals(TypeOfAttendance.FULL) || attendance.equals(TypeOfAttendance.MORNINGWITHLUNCH) || attendance.equals(TypeOfAttendance.AFTERNOONWITHLUNCH);
 		}
 		else{
 			return false;
@@ -449,5 +451,11 @@ public class Child {
 		}
 		
 		return names.substring(0, names.length() - 3);
+	}
+	public boolean isWelcomeLetterPrinted() {
+		return welcomeLetterPrinted;
+	}
+	public void setWelcomeLetterPrinted(boolean welcomeLetterPrinted) {
+		this.welcomeLetterPrinted = welcomeLetterPrinted;
 	}
 }

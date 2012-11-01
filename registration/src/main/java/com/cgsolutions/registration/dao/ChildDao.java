@@ -12,4 +12,6 @@ public interface ChildDao {
 	Child findChild(int id);
 	List<Child> searchForChildren(ChildSearchBean searchBean);
 	List<Child> findActiveChildrenForRoom(int roomId);
+	List<Child> findChildrenNeedingWelcomeLetters();
+	List<Child> findChildrenCurrentlyAttending();
 }

@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Invoice" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="155"/>
+	<property name="ireport.y" value="0"/>
 	<parameter name="school" class="com.cgsolutions.registration.domain.School" isForPrompting="false"/>
 	<parameter name="term" class="com.cgsolutions.registration.domain.Term" isForPrompting="false"/>
 	<field name="child" class="com.cgsolutions.registration.domain.Child"/>
@@ -156,7 +156,7 @@ $F{child}.getGuardians().get(0).getSurname()]]></textFieldExpression>
 				<text><![CDATA[Price per session]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="463" y="196" width="76" height="20"/>
+				<reportElement positionType="Float" x="463" y="196" width="86" height="20"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
@@ -187,40 +187,40 @@ $F{child}.getGuardians().get(0).getSurname()]]></textFieldExpression>
 				<textElement/>
 				<text><![CDATA[Balance Carried Forward]]></text>
 			</staticText>
-			<textField>
+			<textField pattern="">
 				<reportElement positionType="Float" x="288" y="216" width="89" height="20"/>
 				<textElement/>
 				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{totalSessions}]]></textFieldExpression>
 			</textField>
-			<textField>
-				<reportElement positionType="Float" x="377" y="216" width="86" height="20"/>
+			<textField pattern="0.00">
+				<reportElement positionType="Float" x="388" y="216" width="75" height="20"/>
 				<textElement/>
-				<textFieldExpression class="java.lang.String"><![CDATA["£" + $F{sessionCost}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.Float"><![CDATA[$F{sessionCost}]]></textFieldExpression>
 			</textField>
-			<textField>
-				<reportElement positionType="Float" x="463" y="216" width="86" height="20"/>
+			<textField pattern="0.00">
+				<reportElement positionType="Float" x="474" y="216" width="75" height="20"/>
 				<textElement/>
-				<textFieldExpression class="java.lang.String"><![CDATA["£" + $F{totalSessionCost}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.Float"><![CDATA[$F{totalSessionCost}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField pattern="">
 				<reportElement positionType="Float" x="288" y="276" width="89" height="20"/>
 				<textElement/>
 				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{totalLunches}]]></textFieldExpression>
 			</textField>
-			<textField>
-				<reportElement positionType="Float" x="463" y="276" width="86" height="20"/>
+			<textField pattern="0.00">
+				<reportElement positionType="Float" x="474" y="276" width="75" height="20"/>
 				<textElement/>
-				<textFieldExpression class="java.lang.String"><![CDATA["£" + $F{totalLunchCost}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.Float"><![CDATA[$F{totalLunchCost}]]></textFieldExpression>
 			</textField>
-			<textField>
-				<reportElement positionType="Float" x="377" y="276" width="86" height="20"/>
+			<textField pattern="0.00">
+				<reportElement positionType="Float" x="388" y="276" width="75" height="20"/>
 				<textElement/>
-				<textFieldExpression class="java.lang.String"><![CDATA["£" + $F{lunchCost}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.Float"><![CDATA[$F{lunchCost}]]></textFieldExpression>
 			</textField>
-			<textField>
-				<reportElement positionType="Float" x="463" y="296" width="86" height="20"/>
+			<textField pattern="0.00">
+				<reportElement positionType="Float" x="474" y="296" width="75" height="20"/>
 				<textElement/>
-				<textFieldExpression class="java.lang.String"><![CDATA["£" + $F{currentBalance}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.Float"><![CDATA[$F{currentBalance}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement positionType="Float" x="12" y="329" width="100" height="20"/>
@@ -229,12 +229,86 @@ $F{child}.getGuardians().get(0).getSurname()]]></textFieldExpression>
 				</textElement>
 				<text><![CDATA[Total Due:]]></text>
 			</staticText>
-			<textField>
-				<reportElement positionType="Float" x="463" y="316" width="86" height="20"/>
+			<textField pattern="0.00">
+				<reportElement positionType="Float" x="474" y="329" width="75" height="20"/>
 				<textElement>
 					<font size="12" isBold="true"/>
 				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA["£" + $F{totalCost}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.Float"><![CDATA[$F{totalCost}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" x="377" y="216" width="11" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[£]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="463" y="216" width="11" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[£]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="377" y="276" width="11" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[£]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="463" y="276" width="11" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[£]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="463" y="296" width="11" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[£]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="463" y="329" width="11" height="20"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[£]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="464" y="236" width="10" height="20">
+					<printWhenExpression><![CDATA[$F{child}.getDepositPaid() < $F{child}.getDepositRequired()]]></printWhenExpression>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[£]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="463" y="256" width="11" height="20">
+					<printWhenExpression><![CDATA[!$F{child}.isRegistrationFeePaid()]]></printWhenExpression>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[£]]></text>
+			</staticText>
+			<textField pattern="0.00">
+				<reportElement x="474" y="236" width="75" height="20">
+					<printWhenExpression><![CDATA[$F{child}.getDepositPaid() < $F{child}.getDepositRequired()]]></printWhenExpression>
+				</reportElement>
+				<textElement/>
+				<textFieldExpression class="java.lang.Float"><![CDATA[$F{child}.getDepositRequired()]]></textFieldExpression>
+			</textField>
+			<textField pattern="0.00">
+				<reportElement x="474" y="256" width="75" height="20">
+					<printWhenExpression><![CDATA[!$F{child}.isRegistrationFeePaid()]]></printWhenExpression>
+				</reportElement>
+				<textElement/>
+				<textFieldExpression class="java.lang.Float"><![CDATA[$F{child}.getRegistrationFee()]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

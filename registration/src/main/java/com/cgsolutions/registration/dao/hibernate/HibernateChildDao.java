@@ -60,4 +60,16 @@ public class HibernateChildDao extends HibernateDaoSupport implements ChildDao{
 		
 		return query.list();
 	}
+	
+	public List<Child> findChildrenNeedingWelcomeLetters(){
+		Query query = getSession().createQuery("from Child where leftSchool = false and welcomeLetterPrinted = false and startDate is not null");
+		
+		return query.list();
+	}
+	
+	public List<Child> findChildrenCurrentlyAttending(){
+		Query query = getSession().createQuery("from Child where leftSchool = false and startDate is not null");
+		
+		return query.list();
+	}
 }

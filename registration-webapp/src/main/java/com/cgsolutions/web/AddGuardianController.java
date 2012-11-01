@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.CollectionUtils;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -42,12 +43,12 @@ public class AddGuardianController {
 	}
 	
 	@RequestMapping(method=RequestMethod.POST)
-	public String saveGuardian(@ModelAttribute("newGuardian")Guardian guardian, HttpServletRequest request){
+	public String saveGuardian(@ModelAttribute("newGuardian")Guardian guardian, BindingResult result, HttpServletRequest request){
 		Child child = childManager.findChild(Integer.parseInt(request.getParameter("childId")));
 		if(CollectionUtils.isEmpty(child.getGuardians()) && child.getGuardians() == null){
 			child.setGuardians(new ArrayList<Guardian>());
 		}
-		
+
 		guardian.setChildId(child.getId());
 		child.getGuardians().add(guardian);
 		

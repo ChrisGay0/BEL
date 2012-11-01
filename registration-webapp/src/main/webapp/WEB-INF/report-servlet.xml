@@ -34,6 +34,7 @@
 		<property name="schoolManager" ref="schoolManager"/>
 		<property name="attendanceManager" ref="attendanceManager"/>
 		<property name="billManager" ref="billManager"/>
+		<property name="childManager" ref="childManager"/>
 	</bean>
 	
 	<bean id="InvoiceCompile" class="org.springframework.web.servlet.view.jasperreports.JasperReportsPdfView">

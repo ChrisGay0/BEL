@@ -128,15 +128,7 @@ public class AttendanceManager {
 	}
 	
 	public List<Child> findChildrenForTerm(Term term){
-		List<Child> children = attendanceDao.findChildrenForTerm(term);
-		if(!CollectionUtils.isEmpty(children)){
-			for(Child child: children){
-				child.getPayments().toString();
-				child.getGuardians().toString();
-			}
-		}
-		
-		return children;
+		return attendanceDao.findChildrenForTerm(term);
 	}
 	
 	public void deleteAttendancesForTerm(Term term){

@@ -22,6 +22,10 @@
 			function printWelcomeLetter(){
 				window.open('/registration-webapp/welcomeLetter.pdf?childId=${formObject.child.id}');
 			}
+			
+			function printCurrentInvoice(){
+				window.open('/registration-webapp/invoice.pdf?childId=${formObject.child.id}');
+			}
 		</script>
 	</head>
 	<body>
@@ -409,6 +413,14 @@
 									<table class="formTable">
 										<tr>
 											<td>
+												Title
+											</td>
+											<td>
+												<form:input path="title"/>
+											</td>
+										</tr>
+										<tr>
+											<td>
 												FirstName
 											</td>
 											<td>
@@ -421,14 +433,6 @@
 											</td>
 											<td>
 												<form:input path="surname"/>
-											</td>
-										</tr>
-										<tr>
-											<td>
-												Title
-											</td>
-											<td>
-												<form:input path="title"/>
 											</td>
 										</tr>
 										<tr>
@@ -883,10 +887,11 @@
 		<div id="buttonBar"> 
 			<div id="holder">
 				<button onclick="document.pageForm.action.value='Save';document.pageForm.submit();return false;">Save</button>
-				<button onclick="GB_show('Add Guardian', '/registration-webapp/addGuardian.htm?childId=${formObject.child.id}', 600, 850);return false;">Add Guardian</button>
+				<button onclick="GB_show('Add Guardian', '/registration-webapp/addGuardian.htm?childId=${formObject.child.id}', 600, 800);return false;">Add Guardian</button>
 				<button onclick="window.open('/registration-webapp/generateAttendances.htm?childId=${formObject.child.id}&redo=Y', 'Redo');return false;">Recalculate Attendances</button>
 				<button onclick="deleteAttendances();return false;">Delete Attendances</button>
 				<button onclick="printWelcomeLetter();return false;">Welcome Letter</button>
+				<button onclick="printCurrentInvoice();return false;">Current Invoice</button>
 			</div>
 		</div>
 	</body>

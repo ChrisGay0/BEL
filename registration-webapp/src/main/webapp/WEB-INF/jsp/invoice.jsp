@@ -13,7 +13,7 @@
 	</head>
 	<body>
 		<%@ include file="/WEB-INF/jsp/header.jsp" %>
-		<h3>Select the term to print bills for</h3>		
+		<h3>Select the term to print invoices for</h3>		
 		<form>
 			<table class="formTable">
 				<tr>
@@ -34,7 +34,7 @@
 		</form>
 		<div id="buttonBar"> 
 			<div id="holder">
-				<button onclick="doPrint();return false;">Print Bills</button>
+				<button onclick="doPrint();return false;">Print Invoices</button>
 			</div>
 		</div>
 	</body>

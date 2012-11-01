@@ -90,6 +90,16 @@ public class ChildManagerTest {
 		childManager.findActiveChildrenForRoom(1);
 	}
 	
+	@Test
+	public void findChildrenNeedingWelcomeLetters(){
+		childManager.findChildrenNeedingWelcomeLetters();
+	}
+	
+	@Test
+	public void findChildrenCurrentlyAttending(){
+		childManager.findChildrenCurrentlyAttending();
+	}
+	
 	private Child generateChild(){
 		Child child = new Child();
 		child.setFirstName("Grace");

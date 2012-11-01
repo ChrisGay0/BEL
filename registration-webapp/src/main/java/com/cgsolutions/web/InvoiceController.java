@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.cgsolutions.registration.service.TermManager;
 
 @Controller
-@RequestMapping("/billing.htm")
-public class BillingController {
+@RequestMapping("/invoice.htm")
+public class InvoiceController {
 	@Autowired
 	private TermManager termManager;
 	
@@ -20,6 +20,6 @@ public class BillingController {
 	public String showForm(Model model, HttpServletRequest request){
 		model.addAttribute("terms", termManager.findAllTerms());
 		
-		return "billing";
+		return "invoice";
 	}
 }

@@ -119,4 +119,12 @@ public class ChildManager {
 		
 		return childrenMoved;
 	}
+	
+	public List<Child> findChildrenCurrentlyAttending(){
+		return childDao.findChildrenCurrentlyAttending();
+	}
+	
+	public List<Child> findChildrenNeedingWelcomeLetters(){
+		return childDao.findChildrenNeedingWelcomeLetters();
+	}
 }

@@ -44,10 +44,19 @@
 	</filter-mapping>
 	
 	<filter-mapping>
+		<filter-name>OpenSessionInViewFilter</filter-name>
+		<url-pattern>*.pdf</url-pattern>
+	</filter-mapping>
+	
+	<filter-mapping>
 		<filter-name>SecurityFilter</filter-name>
 		<url-pattern>*.htm</url-pattern>
 	</filter-mapping>
-
+	
+	<session-config>
+    	<session-timeout>120</session-timeout>
+  	</session-config>
+	
 	<listener>
 		<listener-class>
 			org.springframework.web.context.ContextLoaderListener
