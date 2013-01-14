@@ -60,6 +60,10 @@ public class ChildManager {
 		return childDao.searchForChildren(searchBean);
 	}
 	
+	public List<Child> findChildrenOnWaitingList(int roomId){
+		return childDao.findChildrenOnWaitingList(roomId);
+	}
+	
 	public void deleteSelectedItems(Child child){
 		if(!CollectionUtils.isEmpty(child.getIntolerances())){
 			for(Intolerance intolerance: new ArrayList<Intolerance>(child.getIntolerances())){

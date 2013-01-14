@@ -68,6 +68,14 @@ public class HibernateAttendanceDao extends HibernateDaoSupport implements Atten
 		return query.list();
 	}
 	
+	public List<Attendance> findAttendancesForChild(Child child, Date termStartsBefore){
+		Query query = getSession().createQuery("from Attendance a where child.id = :childId and term.startDate < :startDate");
+		query.setParameter("childId", child.getId());
+		query.setParameter("startDate", termStartsBefore);
+		
+		return query.list();
+	}
+	
 	public int deleteAttendances(Child child, Term term){
 		Query query = getSession().createQuery("delete from Attendance where child.id = :childId and term.id = :termId");
 		query.setParameter("childId", child.getId());
@@ -80,5 +88,20 @@ public class HibernateAttendanceDao extends HibernateDaoSupport implements Atten
 		Query query = getSession().createQuery("select distinct(a.child) from Attendance a where a.term.id = " + term.getId());
 		
 		return query.list();
+	}
+	
+	public List<Attendance> findAttendancesForChildInTerm(Child child, Term term){
+		Query query = getSession().createQuery("from Attendance where child.id = :childId and term.id = :termId");
+		query.setParameter("childId", child.getId());
+		query.setParameter("termId", term.getId());
+		
+		return query.list();
+	}
+	
+	public void deleteAttendance(Attendance attendance){
+		Query query = getSession().createQuery("delete from Attendance where id = :attendanceId");
+		query.setParameter("attendanceId", attendance.getId());
+		
+		query.executeUpdate();
 	}
 }

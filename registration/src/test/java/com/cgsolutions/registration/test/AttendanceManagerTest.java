@@ -119,6 +119,13 @@ public class AttendanceManagerTest {
 		attendanceManager.redoAttendancesForChild(child);
 	}
 	
+	@Test
+	public void findAttendancesForChildInTerm(){
+		Term term = new Term();
+		term.setId(Integer.MAX_VALUE);
+		attendanceManager.findAttendancesForChildInTerm(setupChildData(), term);
+	}
+	
 	private Child setupChildData(){
 		Room room = new Room();
 		room.setActive(true);

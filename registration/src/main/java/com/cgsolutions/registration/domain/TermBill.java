@@ -7,7 +7,9 @@ public class TermBill {
 	private int lunches;
 	private float lunchesCost;
 	private float sessionsCost;
-
+	private int fundedSessions;
+	private int fundedLunches;
+	
 	public Term getTerm() {
 		return term;
 	}
@@ -45,12 +47,24 @@ public class TermBill {
 		this.sessionsCost = sessionsCost;
 	}
 	public float getTotalLunchesCost(){
-		return this.getLunchesCost() * this.lunches;
+		return this.getLunchesCost() * (this.lunches - this.fundedLunches);
 	}
 	public float getTotalSessionsCost(){
-		return this.getSessionsCost() * this.sessions;
+		return this.getSessionsCost() * (this.sessions - this.fundedSessions);
 	}
 	public float getTotalCost(){
 		return getTotalSessionsCost() + getTotalLunchesCost();
+	}
+	public int getFundedSessions() {
+		return fundedSessions;
+	}
+	public void setFundedSessions(int fundedSessions) {
+		this.fundedSessions = fundedSessions;
+	}
+	public int getFundedLunches() {
+		return fundedLunches;
+	}
+	public void setFundedLunches(int fundedLunches) {
+		this.fundedLunches = fundedLunches;
 	}
 }

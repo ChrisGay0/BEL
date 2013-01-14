@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.persistence.Version;
 
 import com.cgsolutions.registration.domain.enums.TypeOfAttendance;
@@ -28,8 +29,11 @@ public class Attendance {
 		this.room = room;
 		this.typeOfAttendance = typeOfAttendance;
 		this.attendanceDate = attendanceDate;
-		this.sessionCost = room.getSessionCostForAge(child.getChildsAge());
-		this.lunchCost = room.getLunchCostForAge(child.getChildsAge());
+		this.sessionCost = room.getSessionCostForAge(child.getChildsAge(term.getStartDateOfFullTerm()));
+		this.lunchCost = room.getLunchCostForAge(child.getChildsAge(term.getStartDateOfFullTerm()));
+		this.fundedLunchesPerWeek = child.getFundedLunches();
+		this.fundedSessionsPerWeek = child.getFundedSessions();
+		this.weeksInTerm = (int)term.getWeeksInTerm();
 	}
 	
 	@Id
@@ -51,9 +55,12 @@ public class Attendance {
 	private TypeOfAttendance typeOfAttendance;
 	private Float sessionCost;
 	private Float lunchCost;
-	@JoinColumn(name="billId")
-	private Float attendanceCost;
+	private int fundedSessionsPerWeek;
+	private int fundedLunchesPerWeek;
+	private int weeksInTerm;
 	private boolean chargeableExclusionDate;
+	@Transient
+	private boolean selected;
 	
 	public int getId() {
 		return id;
@@ -76,6 +83,7 @@ public class Attendance {
 	public Float getSessionCost() {
 		return sessionCost;
 	}
+
 	public boolean isChargeableExclusionDate() {
 		return chargeableExclusionDate;
 	}
@@ -125,26 +133,50 @@ public class Attendance {
 		this.lastUpdate = lastUpdate;
 	}
 
-	public Float getAttendanceCost() {
-		return attendanceCost;
+	public int getFundedSessionsPerWeek() {
+		return fundedSessionsPerWeek;
 	}
 
-	public void setAttendanceCost(Float attendanceCost) {
-		this.attendanceCost = attendanceCost;
+	public void setFundedSessionsPerWeek(int fundedSessionsPerWeek) {
+		this.fundedSessionsPerWeek = fundedSessionsPerWeek;
 	}
-	
+
+	public int getFundedLunchesPerWeek() {
+		return fundedLunchesPerWeek;
+	}
+
+	public void setFundedLunchesPerWeek(int fundedLunchesPerWeek) {
+		this.fundedLunchesPerWeek = fundedLunchesPerWeek;
+	}
+
+	public int getWeeksInTerm() {
+		return weeksInTerm;
+	}
+
+	public void setWeeksInTerm(int weeksInTerm) {
+		this.weeksInTerm = weeksInTerm;
+	}
+
+	public boolean isSelected() {
+		return selected;
+	}
+
+	public void setSelected(boolean selected) {
+		this.selected = selected;
+	}
+
 	public float getBillAmount(){
 		float billAmount = 0;
 		if(this.getTypeOfAttendance().equals(TypeOfAttendance.FULL)){
-			billAmount += this.getRoom().getSessionCostForAge(this.getChild().getChildsAge()) * 2;
-			billAmount += this.getRoom().getLunchCostForAge(this.getChild().getChildsAge());
+			billAmount += this.getRoom().getSessionCostForAge(this.getChild().getChildsAge(term.getStartDateOfFullTerm())) * 2;
+			billAmount += this.getRoom().getLunchCostForAge(this.getChild().getChildsAge(term.getStartDateOfFullTerm()));
 		}
 		else if(this.getTypeOfAttendance().equals(TypeOfAttendance.MORNING) || this.getTypeOfAttendance().equals(TypeOfAttendance.AFTERNOON)){
-			billAmount += this.getRoom().getSessionCostForAge(this.getChild().getChildsAge());
+			billAmount += this.getRoom().getSessionCostForAge(this.getChild().getChildsAge(term.getStartDateOfFullTerm()));
 		}
 		else if (this.getTypeOfAttendance().equals(TypeOfAttendance.MORNINGWITHLUNCH) || this.getTypeOfAttendance().equals(TypeOfAttendance.AFTERNOONWITHLUNCH)){
-			billAmount += this.getRoom().getSessionCostForAge(this.getChild().getChildsAge());
-			billAmount += this.getRoom().getLunchCostForAge(this.getChild().getChildsAge());
+			billAmount += this.getRoom().getSessionCostForAge(this.getChild().getChildsAge(term.getStartDateOfFullTerm()));
+			billAmount += this.getRoom().getLunchCostForAge(this.getChild().getChildsAge(term.getStartDateOfFullTerm()));
 		}
 		
 		return billAmount;

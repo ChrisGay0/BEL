@@ -52,6 +52,7 @@ public class EditChildController {
 		model.addAttribute("typeOfAttendances", TypeOfAttendance.values());
 		model.addAttribute("ethnicityList", Ethnicity.values());
 		model.addAttribute("paymentList", PaymentType.values());
+		model.addAttribute("lastViewedTab", request.getParameter("lastViewedTab"));
 		
 		return "editChild";
 	}
@@ -66,12 +67,12 @@ public class EditChildController {
 	}
 	
 	@RequestMapping(params="action=Save", method=RequestMethod.POST)
-	public String saveChild(@ModelAttribute("formObject")ChildEditForm form){
+	public String saveChild(@ModelAttribute("formObject")ChildEditForm form, HttpServletRequest request){
 		childManager.saveChild(form.getChildWithNewData());
 		
-		return "redirect:editChild.htm?childId=" + form.getChild().getId();
+		return "redirect:editChild.htm?childId=" + form.getChild().getId() + "&lastViewedTab=" + request.getParameter("lastViewedTab");
 	}
-	
+	 
 	@InitBinder
 	public void binder(WebDataBinder binder) {
 		binder.registerCustomEditor(Date.class, new DatePropertyEditor());

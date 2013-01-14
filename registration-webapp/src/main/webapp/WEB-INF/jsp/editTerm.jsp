@@ -4,18 +4,25 @@
 <html>
 	<head>	
 		<%@ include file="headerIncludes.jspf" %>
+		<script type="text/javascript">
+			$(document).ready(function() {
+				$("#searchNav").css("visibility", "visible").click(function(){
+					document.location = 'findTerm.htm';
+				});
+			});
+		</script>
 	</head>
 	<body>
 		<%@ include file="/WEB-INF/jsp/header.jsp" %>
 		<br/>
 		<h3>Edit Term</h3>		
 		<form:form name="pageForm" commandName="formObject" method="post" action="/registration-webapp/editTerm.htm">
-			<table class="formTable">
+			<table class="formTable" style="width: 100%">
 				<tr>
-					<td>
+					<td width="40%">
 						Name
 					</td>
-					<td>
+					<td width="59%">
 						<form:input path="term.termName"/>
 					</td>
 				</tr>
@@ -36,7 +43,18 @@
 					</td>
 				</tr>
 				<tr>
-					<td colspan="2">
+					<td>
+						Start Date of full term (Normally January, April or September)
+					</td>
+					<td>
+						<form:input path="term.startDateOfFullTerm" cssClass="date"/>
+					</td>
+				</tr>
+				<tr style="width: 100%">
+					<td colspan="2" style="text-align: center;">
+						<h4>
+							Exclusion Dates
+						</h4>
 						<table class="listTable" style="width: 100%">
 							<thead>
 								<tr>

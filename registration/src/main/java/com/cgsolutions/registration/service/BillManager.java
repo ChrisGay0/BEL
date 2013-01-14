@@ -1,6 +1,7 @@
 package com.cgsolutions.registration.service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,7 +21,7 @@ public class BillManager {
 	private AttendanceManager attendanceManager;
 	
 	public List<TermBill> findBillsForChild(Child child){
-		List<Attendance> attendances = attendanceManager.findAttendancesForChild(child);
+		List<Attendance> attendances = attendanceManager.findAttendancesForChild(child, new Date());
 		List<TermBill> bills = new ArrayList<TermBill>();
 		Map<Integer, List<Attendance>> attendancesForTerm = new HashMap<Integer, List<Attendance>>();
 		
@@ -59,6 +60,11 @@ public class BillManager {
 						bill.setLunches(bill.getLunches() + 1);
 					}
 				}
+				
+				//remove the funded sessions and lunches from the bill
+				int weeks = attendancesForTerm.get(key).get(0).getWeeksInTerm();
+				bill.setFundedSessions(weeks * attendancesForTerm.get(key).get(0).getFundedSessionsPerWeek());
+				bill.setFundedLunches(weeks * attendancesForTerm.get(key).get(0).getFundedLunchesPerWeek());
 				
 				bills.add(bill);
 			}

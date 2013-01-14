@@ -68,8 +68,8 @@ public class InvoiceController extends MultiActionController {
 			bean.setChild(child);
 			for(TermBill bill: child.getBills()){
 				if(bill.getTerm().getId() == term.getId()){
-					bean.setTotalLunches(bill.getLunches());
-					bean.setTotalSessions(bill.getSessions());
+					bean.setTotalLunches(bill.getLunches() - bill.getFundedLunches());
+					bean.setTotalSessions(bill.getSessions() - bill.getFundedSessions());
 					bean.setSessionCost(bill.getSessionsCost());
 					bean.setLunchCost(bill.getLunchesCost());
 				}

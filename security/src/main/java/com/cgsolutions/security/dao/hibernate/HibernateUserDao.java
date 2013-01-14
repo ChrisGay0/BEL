@@ -28,4 +28,8 @@ public class HibernateUserDao extends HibernateDaoSupport implements UserDao{
 	public List<User> findAll(){
 		return getSession().createQuery("from User order by userId").list();
 	}
+	
+	public String getSchoolName(){
+		return (String)getSession().createSQLQuery("select name from school").uniqueResult();
+	}
 }

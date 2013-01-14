@@ -39,6 +39,7 @@ public class Term {
 	private List<ExclusionDate> exclusionDates;
 	@Transient
 	private List<Date> newExclusionDates;
+	private Date startDateOfFullTerm;
 	
 	public int getId() {
 		return id;
@@ -51,6 +52,12 @@ public class Term {
 	}
 	public void setStartDate(Date startDate) {
 		this.startDate = startDate;
+	}
+	public Date getStartDateOfFullTerm() {
+		return startDateOfFullTerm;
+	}
+	public void setStartDateOfFullTerm(Date startDateOfFullTerm) {
+		this.startDateOfFullTerm = startDateOfFullTerm;
 	}
 	public Date getEndDate() {
 		return endDate;
@@ -142,5 +149,20 @@ public class Term {
 		
 		return false;
 		
+	}
+	
+	public double getWeeksInTerm(){
+		int daysInTerm = MyDateUtils.getDifferenceInDaysBetweenDates(this.startDate, this.endDate);
+		double weeksInTerm = Math.floor(daysInTerm / 7);
+		if(daysInTerm % 7 != 0){
+			weeksInTerm++;
+		}
+		
+		return weeksInTerm;
+	}
+	
+	public boolean isStartOfFullTerm(){
+		String startMonth = MyDateUtils.getStringFromDate(this.startDate, "MMM");
+		return startMonth.equalsIgnoreCase("jan") || startMonth.equalsIgnoreCase("apr") || startMonth.equalsIgnoreCase("sep");
 	}
 }

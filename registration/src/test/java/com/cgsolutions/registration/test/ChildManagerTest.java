@@ -33,6 +33,11 @@ public class ChildManagerTest {
 	}
 	
 	@Test
+	public void testFindChildrenOnWaitingList(){
+		childManager.findChildrenOnWaitingList(1);
+	}
+	
+	@Test
 	public void deleteChild(){
 		Child child = generateChild();
 		childManager.createChild(child);

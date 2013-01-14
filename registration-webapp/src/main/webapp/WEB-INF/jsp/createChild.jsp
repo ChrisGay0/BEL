@@ -36,6 +36,22 @@
 				</tr>
 				<tr>
 					<td>
+						Date Registered
+					</td>
+					<td>
+						<form:input path="registeredDate" cssClass="date"/>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						Requested Start Date
+					</td>
+					<td>
+						<form:input path="requestedStartDate" cssClass="date"/>
+					</td>
+				</tr>
+				<tr>
+					<td>
 						Sex
 					</td>
 					<td>

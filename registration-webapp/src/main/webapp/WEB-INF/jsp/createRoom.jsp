@@ -43,7 +43,7 @@
 								Age Under (The age this cost applies to)
 							</td>
 							<td>
-								<form:input path="childAgeUnder"/>
+								<form:input path="childAgeUnder" size="3"/>
 							</td>
 						</tr>
 						<tr>
@@ -51,7 +51,7 @@
 								Session Cost
 							</td>
 							<td>
-								<form:input path="cost"/>
+								£<form:input path="cost" cssClass="numeric" size="5"/>
 							</td>
 						</tr>
 						<tr>
@@ -59,7 +59,7 @@
 								Lunch Cost
 							</td>
 							<td>
-								<form:input path="lunchCost"/>
+								£<form:input path="lunchCost" cssClass="numeric" size="5"/>
 							</td>
 						</tr>
 					</spring:nestedPath>
@@ -68,7 +68,7 @@
 		</form:form>
 		<div id="buttonBar"> 
 			<div id="holder">
-				<button onclick="document.pageForm.submit();return false;">Create</button>
+				<button onclick="doSubmit(document.pageForm);return false;">Create</button>
 			</div>
 		</div>
 	</body>

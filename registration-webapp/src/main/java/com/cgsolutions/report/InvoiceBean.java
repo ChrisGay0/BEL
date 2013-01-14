@@ -57,8 +57,13 @@ public class InvoiceBean {
 		if(!child.isRegistrationFeePaid()){
 			total += child.getRegistrationFee();
 		}
-		if(child.getDepositPaid() < child.getDepositRequired()){
-			total += (child.getDepositRequired() - child.getDepositPaid());
+		if(child.getDepositPaid() == null || child.getDepositPaid() < child.getDepositRequired()){
+			if(child.getDepositPaid() == null){
+				total += child.getDepositRequired();
+			}
+			else{
+				total += (child.getDepositRequired() - child.getDepositPaid());
+			}
 		}
 		return total;
 	}

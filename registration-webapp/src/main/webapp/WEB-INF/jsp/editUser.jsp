@@ -4,6 +4,13 @@
 <html>
 	<head>	
 		<%@ include file="headerIncludes.jspf" %>
+		<script type="text/javascript">
+			$(document).ready(function() {
+				$("#searchNav").css("visibility", "visible").click(function(){
+					document.location = 'findUser.htm';
+				});
+			});
+		</script>
 	</head>
 	<body>
 		<%@ include file="/WEB-INF/jsp/header.jsp" %>

@@ -4,6 +4,13 @@
 <html>
 	<head>
 		<%@ include file="headerIncludes.jspf" %>
+		<script type="text/javascript">
+			$(document).ready(function() {
+				$("#searchNav").css("visibility", "visible").click(function(){
+					document.location = 'findRoom.htm';
+				});
+			});
+		</script>
 	</head>
 	<body>
 		<%@ include file="/WEB-INF/jsp/header.jsp" %>
@@ -35,40 +42,32 @@
 						<form:checkbox path="active"/>
 					</td>
 				</tr>
-				<c:forEach items="${room.costs}" var="sessionCost" varStatus="listIndex">
+			</table>
+			<table class="listTable">
+				<thead>
 					<tr>
-						<td colspan="2">
-							<hr/>
-						</td>
+						<th>
+							Age Under
+						</th>
+						<th>
+							Session Cost
+						</th>
+						<th>
+							Lunch Cost
+						</th>
 					</tr>
+				</thead>
+				<c:forEach items="${room.costs}" var="sessionCost" varStatus="listIndex">
 					<spring:nestedPath path="costs[${listIndex.index}]">
 						<tr>
-							<td colspan="2">
-								Cost ${listIndex.index + 1}
-							</td>
-						</tr>
-						<tr>
 							<td>
-								Age Under (The age this cost applies to)
+								<form:input path="childAgeUnder" size="3"/>
 							</td>
 							<td>
-								<form:input path="childAgeUnder"/>
-							</td>
-						</tr>
-						<tr>
-							<td>
-								Session Cost
+								£<form:input path="cost" cssClass="numeric" size="5"/>
 							</td>
 							<td>
-								<form:input path="cost"/>
-							</td>
-						</tr>
-						<tr>
-							<td>
-								Lunch Cost
-							</td>
-							<td>
-								<form:input path="lunchCost"/>
+								£<form:input path="lunchCost" cssClass="numeric" size="5"/>
 							</td>
 						</tr>
 					</spring:nestedPath>
@@ -77,7 +76,7 @@
 		</form:form>
 		<div id="buttonBar"> 
 			<div id="holder">
-				<button onclick="document.pageForm.submit();return false;">Save</button>
+				<button onclick="doSubmit(document.pageForm);return false;">Save</button>
 			</div>
 		</div>
 	</body>

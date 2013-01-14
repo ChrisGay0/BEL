@@ -28,7 +28,7 @@
 		</style>
 	</head>
 	<body>
-		<h1>Burwell Early Learners</h1>
+		<h1>${schoolName}</h1>
 		<p>
 			Please enter your username and password below.
 		</p>

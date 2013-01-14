@@ -58,7 +58,7 @@ public class AttendanceManager {
 		deleteFutureAttendancesForChild(child);
 		List<Attendance> newAttendances = new ArrayList<Attendance>();
 		
-		//Find only fture terms which have had attendances generated
+		//Find only future terms which have had attendances generated
 		for(Term term: termManager.findAllFutureTerms(true)){
 			generateAttendancesForTerm(term, child, child.getRoom(), term.getWeekdayTermDates(), newAttendances);
 		}
@@ -84,20 +84,20 @@ public class AttendanceManager {
 		deleteAttendancesForTerm(term);
 		generateAttendancesForTerm(term);
 	}
+	
 	private void generateAttendancesForTerm(Term term, Child child, Room room, List<Date> attendanceDates, List<Attendance> newAttendances){
 		if(child.getStartDate() != null){
 			//ChildBill bill = new ChildBill(child.getId());
 			
 			for(Date date: attendanceDates){
-				//decrementing by 1 just in case the start date is the first date of the term
-				if(date.after(MyDateUtils.decrementByDays(child.getStartDate(), 1))){
+				if(term.getEndDate().after(child.getStartDate())){
 					if(child.getTypeOfAttendance(date) != null){
 						if(!term.isDateInExclusionsList(date) ){
 							Attendance attendance = new Attendance(term, child, room, child.getTypeOfAttendance(date), date);
 							save(attendance);
 							newAttendances.add(attendance);
 							//bill.getAttendances().add(attendance);
-							attendance.setAttendanceCost(attendance.getBillAmount());
+							//attendance.setAttendanceCost(attendance.getBillAmount());
 						}
 						else if(term.isExclusionsDateChargeable(date)){
 							Attendance attendance = new Attendance(term, child, room, child.getTypeOfAttendance(date), date);
@@ -105,7 +105,7 @@ public class AttendanceManager {
 							save(attendance);
 							newAttendances.add(attendance);
 							//bill.getAttendances().add(attendance);
-							attendance.setAttendanceCost(attendance.getBillAmount());
+							//attendance.setAttendanceCost(attendance.getBillAmount());
 						}
 					}
 				}
@@ -133,5 +133,23 @@ public class AttendanceManager {
 	
 	public void deleteAttendancesForTerm(Term term){
 		attendanceDao.deleteAttendancesForTerm(term);
+	}
+	
+	public List<Attendance> findAttendancesForChildInTerm(Child child, Term term){
+		return attendanceDao.findAttendancesForChildInTerm(child, term);
+	}
+	
+	public void deleteAttendance(Attendance attendance){
+		attendanceDao.deleteAttendance(attendance);
+	}
+	
+	public void deleteAttendances(List<Attendance> attendances){
+		for(Attendance attendance: attendances){
+			deleteAttendance(attendance);
+		}
+	}
+	
+	public List<Attendance> findAttendancesForChild(Child child, Date termStartsBefore){
+		return attendanceDao.findAttendancesForChild(child, termStartsBefore);
 	}
 }

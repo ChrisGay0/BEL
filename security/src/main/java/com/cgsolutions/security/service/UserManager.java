@@ -24,4 +24,8 @@ public class UserManager {
 	public List<User> findAll(){
 		return userDao.findAll();
 	}
+	
+	public String getSchoolName(){
+		return userDao.getSchoolName();
+	}
 }

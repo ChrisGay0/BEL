@@ -12,32 +12,36 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
+import org.springframework.web.context.WebApplicationContext;
 
 import com.cgsolutions.security.domain.User;
+import com.cgsolutions.security.service.UserManager;
 import com.cgsolutions.security.thread.LoggedInUser;
 
 public class SecurityFilter implements Filter{
-  public void destroy(){
-	  
-  }
- 
-  public void doFilter(ServletRequest request, ServletResponse response, FilterChain filterChain) throws IOException, ServletException {
-	 if(!((HttpServletRequest)request).getRequestURI().contains("login")){
-		 if(((HttpServletRequest)request).getSession().getAttribute("validUser") != null){
-			 LoggedInUser.setLoggedInUser((User)((HttpServletRequest)request).getSession().getAttribute("validUser"));
-	    	 filterChain.doFilter(request, response);
-	     }
-	     else{
-	    	 ((HttpServletResponse)response).sendRedirect("login.htm");  
-	     }
+	public void destroy(){
+		  
+	}
+	 
+	public void doFilter(ServletRequest request, ServletResponse response, FilterChain filterChain) throws IOException, ServletException {
+		if(!((HttpServletRequest)request).getRequestURI().contains("login")){
+			if(((HttpServletRequest)request).getSession().getAttribute("validUser") != null){
+				LoggedInUser.setLoggedInUser((User)((HttpServletRequest)request).getSession().getAttribute("validUser"));
+				((HttpServletRequest)request).getSession().setAttribute("schoolName", ((HttpServletRequest)request).getSession().getAttribute("schoolName"));
+				filterChain.doFilter(request, response);
+		    }
+		    else{
+		    	((HttpServletResponse)response).sendRedirect("login.htm");  
+		    }
+		}
+		else{
+			filterChain.doFilter(request, response);
+		}
 	 }
-	 else{
-		 filterChain.doFilter(request, response);
-	 }
-  }
-
-  public void init(FilterConfig arg0) throws ServletException {
 	
-  }
+	 public void init(FilterConfig arg0) throws ServletException {
+		
+	 }
 }

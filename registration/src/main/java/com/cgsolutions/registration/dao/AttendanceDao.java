@@ -17,4 +17,7 @@ public interface AttendanceDao {
 	List<Attendance> findAttendancesForChild(Child child);
 	int deleteAttendances(Child child, Term term);
 	List<Child> findChildrenForTerm(Term term);
+	List<Attendance> findAttendancesForChildInTerm(Child child, Term term);
+	void deleteAttendance(Attendance attendance);
+	List<Attendance> findAttendancesForChild(Child child, Date termStartsBefore);
 }

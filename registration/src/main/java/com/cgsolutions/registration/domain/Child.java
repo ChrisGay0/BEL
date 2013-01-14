@@ -78,6 +78,8 @@ public class Child {
 	private boolean welcomeLetterPrinted;
 	private int fundedSessions;
 	private int fundedLunches;
+	private Date requestedStartDate;
+	private Date registeredDate;
 	@JoinColumn(name="childId")
 	@OneToMany(targetEntity=Guardian.class, cascade=CascadeType.ALL)
 	private List<Guardian> guardians;
@@ -110,6 +112,18 @@ public class Child {
 	}
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
+	}
+	public Date getRequestedStartDate() {
+		return requestedStartDate;
+	}
+	public void setRequestedStartDate(Date requestedStartDate) {
+		this.requestedStartDate = requestedStartDate;
+	}
+	public Date getRegisteredDate() {
+		return registeredDate;
+	}
+	public void setRegisteredDate(Date registeredDate) {
+		this.registeredDate = registeredDate;
 	}
 	public String getSurname() {
 		return surname;
@@ -378,8 +392,8 @@ public class Child {
 		}
 	}
 	
-	public int getChildsAge(){
-		int days = MyDateUtils.getDifferenceInDaysBetweenDates(new Date(), this.getDateOfBirth());
+	public int getChildsAge(Date termStartDate){
+		int days = MyDateUtils.getDifferenceInDaysBetweenDates(termStartDate, this.getDateOfBirth());
 		int years = 0;
 		while(days > 0){
 			Date dateToProcess = MyDateUtils.incrementByYears(this.getDateOfBirth(), years);
@@ -410,6 +424,25 @@ public class Child {
 		BigDecimal rounded = total.setScale(2, BigDecimal.ROUND_HALF_UP);
 		
 		return rounded.toPlainString();
+	}
+	
+	
+	public String getTotalAmountDue(){
+		float currentBalance = Float.parseFloat(getCurrentBalance());
+		
+		if(!isRegistrationFeePaid()){
+			currentBalance += getRegistrationFee();
+		}
+		if(getDepositPaid() == null || getDepositPaid() < getDepositRequired()){
+			if(getDepositPaid() == null){
+				currentBalance += getDepositRequired();
+			}
+			else{
+				currentBalance += (getDepositRequired() - getDepositPaid());
+			}
+		}
+		
+		return (currentBalance * -1) + "";
 	}
 	
 	public float getBillTotal(){
@@ -457,5 +490,8 @@ public class Child {
 	}
 	public void setWelcomeLetterPrinted(boolean welcomeLetterPrinted) {
 		this.welcomeLetterPrinted = welcomeLetterPrinted;
+	}
+	public String getFullName(){
+		return this.firstName + " " + this.surname;
 	}
 }

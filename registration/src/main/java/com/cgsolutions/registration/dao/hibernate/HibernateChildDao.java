@@ -72,4 +72,11 @@ public class HibernateChildDao extends HibernateDaoSupport implements ChildDao{
 		
 		return query.list();
 	}
+	
+	public List<Child> findChildrenOnWaitingList(int roomId){
+		Query query = getSession().createQuery("from Child where startDate is null and room.id = :roomId order by registeredDate, requestedStartDate");
+		query.setParameter("roomId", roomId);
+		
+		return query.list();
+	}
 }

@@ -46,6 +46,47 @@
 		</property>
 	</bean>
 	
+	<bean id="WaitingListController" class="com.cgsolutions.report.WaitingListController">
+		<property name="methodNameResolver">
+			<ref local="resolver"/>
+		</property>	
+		<property name="roomManager" ref="roomManager"/>
+		<property name="childManager" ref="childManager"/>
+	</bean>
+	
+	<bean id="WaitingListCompile" class="org.springframework.web.servlet.view.jasperreports.JasperReportsPdfView">
+		<property name="reportDataKey">
+			<value>dataSource</value>
+		</property>
+		<property name="url">
+			<value>/WEB-INF/reports/WaitingList.jasper</value>
+		</property>
+	</bean>
+	
+	<bean id="ChildListController" class="com.cgsolutions.report.ChildListController">
+		<property name="methodNameResolver">
+			<ref local="resolver"/>
+		</property>	
+		<property name="roomManager" ref="roomManager"/>
+		<property name="childManager" ref="childManager"/>
+	</bean>
+	
+	<bean id="ChildListCompile" class="org.springframework.web.servlet.view.jasperreports.JasperReportsPdfView">
+		<property name="reportDataKey">
+			<value>dataSource</value>
+		</property>
+		<property name="url">
+			<value>/WEB-INF/reports/ChildList.jasper</value>
+		</property>
+		<property name="subReportUrls">
+			<map>					
+				<entry key="childListSubReport">
+					<value>/WEB-INF/reports/ChildListSubReport.jasper</value>
+				</entry>
+			</map>
+		</property>
+	</bean>
+	
 	<bean id="WelcomeLetterController" class="com.cgsolutions.report.WelcomeLetterController">
 		<property name="methodNameResolver">
 			<ref local="resolver"/>
@@ -87,6 +128,8 @@
 				<prop key="/register.pdf">RegisterController</prop>
 				<prop key="/invoice.pdf">InvoiceController</prop>
 				<prop key="/welcomeLetter.pdf">WelcomeLetterController</prop>
+				<prop key="/waitingList.pdf">WaitingListController</prop>
+				<prop key="/childList.pdf">ChildListController</prop>
 			</props>
 		</property>
 	</bean>	
@@ -97,6 +140,8 @@
 				<prop key="/register.pdf">printRegister</prop>
 				<prop key="/invoice.pdf">printInvoice</prop>
 				<prop key="/welcomeLetter.pdf">printLetter</prop>
+				<prop key="/waitingList.pdf">handleReport</prop>
+				<prop key="/childList.pdf">handleReport</prop>
 			</props>
 		</property>
 	</bean>	

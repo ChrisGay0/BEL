@@ -267,7 +267,7 @@
 				<text><![CDATA[Time in]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="248" y="13" width="62" height="20" backcolor="#CCCCCC"/>
+				<reportElement x="247" y="13" width="62" height="20" backcolor="#CCCCCC"/>
 				<box leftPadding="2">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -305,7 +305,7 @@
 				<text><![CDATA[]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="248" y="33" width="62" height="20"/>
+				<reportElement x="247" y="33" width="62" height="20"/>
 				<box>
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -341,7 +341,7 @@
 				<text><![CDATA[]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="248" y="53" width="62" height="20"/>
+				<reportElement x="247" y="53" width="62" height="20"/>
 				<box>
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -377,7 +377,7 @@
 				<text><![CDATA[]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="248" y="73" width="62" height="20"/>
+				<reportElement x="247" y="73" width="62" height="20"/>
 				<box>
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -413,7 +413,7 @@
 				<text><![CDATA[]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="248" y="93" width="62" height="20"/>
+				<reportElement x="247" y="93" width="62" height="20"/>
 				<box>
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -449,7 +449,7 @@
 				<text><![CDATA[]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="248" y="113" width="62" height="20"/>
+				<reportElement x="247" y="113" width="62" height="20"/>
 				<box>
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>

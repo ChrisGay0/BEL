@@ -14,4 +14,5 @@ public interface ChildDao {
 	List<Child> findActiveChildrenForRoom(int roomId);
 	List<Child> findChildrenNeedingWelcomeLetters();
 	List<Child> findChildrenCurrentlyAttending();
+	List<Child> findChildrenOnWaitingList(int roomId);
 }

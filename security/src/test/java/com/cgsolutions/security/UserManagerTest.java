@@ -38,4 +38,9 @@ public class UserManagerTest {
 		
 		userManager.save(user);
 	}
+	
+	@Test
+	public void findSchoolName(){
+		userManager.getSchoolName();
+	}
 }

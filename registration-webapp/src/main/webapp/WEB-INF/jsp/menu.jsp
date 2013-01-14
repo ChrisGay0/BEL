@@ -100,6 +100,12 @@
 				<li onclick="window.open('/registration-webapp/welcomeLetter.pdf');">
 					Print Welcome Letters
 				</li>
+				<li onclick="document.location = 'waitingList.htm'">
+					Waiting List
+				</li>
+				<li onclick="window.open('/registration-webapp/childList.pdf');">
+					Child Reports
+				</li>
 			</ul>
 		</div>
 	</body>

@@ -4,16 +4,16 @@
     xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
     version="2.4">
 
-	<display-name>engineering-webapp</display-name>
+	<display-name>registration-webapp</display-name>
 
   	<error-page>
   		<error-code>500</error-code>
-  		<location>/jsp/error500.jsp</location>
+  		<location>/WEB-INF/jsp/error500.jsp</location>
   	</error-page>
   
   	<error-page>
   		<error-code>404</error-code>
-  		<location>/jsp/error404.jsp</location>
+  		<location>/WEB-INF/jsp/error404.jsp</location>
   	</error-page>
 	
 	<context-param>

@@ -34,6 +34,14 @@
 						<form:input path="endDate" cssClass="date"/>
 					</td>
 				</tr>
+				<tr>
+					<td>
+						Start Date of full term (Normally January, April or September)
+					</td>
+					<td>
+						<form:input path="startDateOfFullTerm" cssClass="date"/>
+					</td>
+				</tr>
 			</table>
 		</form:form>
 		<div id="buttonBar"> 

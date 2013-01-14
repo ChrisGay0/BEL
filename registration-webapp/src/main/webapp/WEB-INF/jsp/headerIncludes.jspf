@@ -3,6 +3,25 @@
 <script type="text/javascript" src="/registration-webapp/javascript/jquery-1.4.2.js"></script>
 <script type="text/javascript" src="/registration-webapp/javascript/jquery.datepick.js"></script>
 <link type='text/css' rel='stylesheet' href='/registration-webapp/stylesheet/jquery.datepick.redmond.css'></link>
+
+<script>
+var tabberOptions = {
+	'onLoad': function(argsObj){
+		if(argsObj.tabber.id == "tab1" && $("#lastViewedTab").val() != ""){
+			var t = argsObj.tabber;
+			t.tabShow($("#lastViewedTab").val());
+		}
+	},
+
+  	'onClick':function(argsObj){
+  		if(argsObj.tabber.id == "tab1"){
+  			$("#lastViewedTab").val(argsObj.index);
+  		}
+  }
+};
+
+
+</script>
 <script type="text/javascript" src="/registration-webapp/javascript/tabber-minimized.js"></script>
 <link rel="stylesheet" href="/registration-webapp/stylesheet/tabs.css" TYPE="text/css" MEDIA="screen">
 <script type="text/javascript">

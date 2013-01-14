@@ -8,4 +8,5 @@ public interface UserDao {
 	User find(String userId);
 	void save(User user);
 	List<User> findAll();
+	String getSchoolName();
 }

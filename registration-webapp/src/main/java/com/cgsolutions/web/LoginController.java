@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.cgsolutions.registration.service.SchoolManager;
 import com.cgsolutions.security.domain.User;
 import com.cgsolutions.security.service.UserManager;
 
@@ -17,9 +18,11 @@ import com.cgsolutions.security.service.UserManager;
 public class LoginController {
 	@Autowired
 	private UserManager userManager;
+	@Autowired
+	private SchoolManager schoolManager;
 	
 	@RequestMapping(method=RequestMethod.GET)
-	public String login(){
+	public String login(HttpServletRequest request){
 		//generate the system user if this is the first time the system has been loaded
 		if(userManager.find("SYSTEM") == null){
 			User user = new User();
@@ -30,6 +33,8 @@ public class LoginController {
 						
 			userManager.save(user);
 		}
+		request.getSession().setAttribute("schoolName", schoolManager.find().getName());
+		
 		return "login";
 	}
 	
@@ -38,11 +43,12 @@ public class LoginController {
 		User user = userManager.find(request.getParameter("userId"));
 		if(user.validatePassword(request.getParameter("password"))){
 			request.getSession().setAttribute("validUser", user);
+			request.getSession().setAttribute("schoolName", schoolManager.find().getName());
 			
 			return "redirect:menu.htm";
 		}
 		else{
-			return login();
+			return login(request);
 		}
 	}
 }

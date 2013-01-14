@@ -9,10 +9,15 @@
 				if("${attendancesDeleted}" != ""){
 					alert("${attendancesDeleted} attendances deleted");
 				}
+				$("#searchNav").css("visibility", "visible").click(function(){
+					document.location = 'findChild.htm';
+				});
 			});
 			
 			function deleteAttendances(){
-				document.location = "editChild.htm?deleteAttendances=Y&childId=${formObject.child.id}";
+				if(confirm("This will delete ALL attendances for the current term. \n\nDo you want to continue?")){
+					document.location = "editChild.htm?deleteAttendances=Y&childId=${formObject.child.id}";
+				}
 			}
 			
 			function removeRow(rowId){
@@ -26,6 +31,21 @@
 			function printCurrentInvoice(){
 				window.open('/registration-webapp/invoice.pdf?childId=${formObject.child.id}');
 			}
+			
+			function recalcAttendances(){
+				if(confirm("This will recreate all future attendances that are NOT in the current term. \n\nDo you want to continue?")){
+					window.open('/registration-webapp/generateAttendances.htm?childId=${formObject.child.id}&redo=Y', 'Redo');
+				}
+			}
+			
+			function editAttendances(){
+				GB_show('Edit Attendances', '/registration-webapp/editAttendances.htm?childId=${formObject.child.id}', 600, 800);
+			}
+			$(document).ready(function() {
+				if($("#child\\.guardians0\\.title").length == 0){
+					GB_show('Add Guardian', '/registration-webapp/addGuardian.htm?childId=${formObject.child.id}', 600, 800);
+				}
+			});
 		</script>
 	</head>
 	<body>
@@ -35,7 +55,7 @@
 			Edit Child
 		</h3>
 		<form:form name="pageForm" commandName="formObject" method="post" action="/registration-webapp/editChild.htm">
-			<div class="tabber">
+			<div class="tabber" id="tab1">
 				<div class="tabbertab" title="Gerneral">
 					<table class="formTable">
 						<tr>
@@ -167,6 +187,22 @@
 						</tr>
 						<tr>
 							<td>
+								Date Registered
+							</td>
+							<td>
+								<form:input path="child.registeredDate" cssClass="date"/>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								Requested Start Date
+							</td>
+							<td>
+								<form:input path="child.requestedStartDate" cssClass="date"/>
+							</td>
+						</tr>
+						<tr>
+							<td>
 								Start Date
 							</td>
 							<td>
@@ -250,7 +286,7 @@
 						</tr>
 						<tr>
 							<td colspan="2">
-								<div class="tabber">
+								<div class="tabber" id="tab2">
 									<div class="tabbertab" title="Conditions">
 										<table class="listTable">
 											<thead>
@@ -406,7 +442,7 @@
 					</table>
 				</div>
 				<div class="tabbertab" title="Guardians">
-					<div class="tabber">
+					<div class="tabber" id="tab3">
 						<c:forEach items="${formObject.child.guardians}" var="guardian" varStatus="listIndex">
 							<spring:nestedPath path="child.guardians[${listIndex.index}]">
 								<div class="tabbertab" title="${guardian.firstName} ${guardian.surname}">
@@ -473,6 +509,14 @@
 											</td>
 											<td>
 												<form:checkbox path="allowedToCollect"/>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												Occupation
+											</td>
+											<td>
+												<form:input path="occupation" size="40" maxlength="200"/>
 											</td>
 										</tr>
 										<tr>
@@ -718,8 +762,8 @@
 					</table>
 				</div>
 				<div class="tabbertab" title="Financial">
-					<h4 style="float: right;">Current Balance ${formObject.child.currentBalance}</h4>
-					<div class="tabber">
+					<h4 style="float: right;">Current Balance ${formObject.child.totalAmountDue}</h4>
+					<div class="tabber" id="tab4">
 						<div class="tabbertab" title="General">
 							<table class="formTable">
 								<tr style="cursor: pointer;">
@@ -740,7 +784,7 @@
 								</tr>
 								<tr>
 									<td>
-										Funded Sessions
+										Funded Sessions (Per Week)
 									</td>
 									<td>
 										<form:input path="child.fundedSessions"/>
@@ -748,7 +792,7 @@
 								</tr>
 								<tr>
 									<td>
-										Funded Lunches
+										Funded Lunches (Per Week)
 									</td>
 									<td>
 										<form:input path="child.fundedLunches"/>
@@ -773,10 +817,16 @@
 											End Date
 										</th>
 										<th>
-											Lunches
+											Lunches (Funded)
 										</th>
 										<th>
-											Sessions
+											Lunch Cost
+										</th>
+										<th>
+											Sessions (Funded)
+										</th>
+										<th>
+											Session Cost
 										</th>
 										<th>
 											Cost
@@ -799,10 +849,16 @@
 												<fmt:formatDate value="${bill.term.endDate}" pattern="dd MMM yyyy"/>
 											</td>
 											<td>
-												${bill.lunches} (£${bill.totalLunchesCost})
+												${bill.lunches} (${bill.fundedLunches})
 											</td>
 											<td>
-												${bill.sessions} (£${bill.totalSessionsCost})
+												£${bill.totalLunchesCost}
+											</td>
+											<td>
+												${bill.sessions} (${bill.fundedSessions})
+											</td>
+											<td>
+												(£${bill.totalSessionsCost})											
 											</td>
 											<td>
 												£${bill.totalCost}
@@ -883,12 +939,14 @@
 				</div>			
 			</div>
 			<input type="hidden" name="action" value=""/>
+			<input type='hidden' name='lastViewedTab' id='lastViewedTab' value='${lastViewedTab}'/>
 		</form:form>
 		<div id="buttonBar"> 
 			<div id="holder">
 				<button onclick="document.pageForm.action.value='Save';document.pageForm.submit();return false;">Save</button>
 				<button onclick="GB_show('Add Guardian', '/registration-webapp/addGuardian.htm?childId=${formObject.child.id}', 600, 800);return false;">Add Guardian</button>
-				<button onclick="window.open('/registration-webapp/generateAttendances.htm?childId=${formObject.child.id}&redo=Y', 'Redo');return false;">Recalculate Attendances</button>
+				<button onclick="recalcAttendances();return false;">Recalculate Attendances</button>
+				<button onclick="editAttendances();return false;">Edit Current Attendances</button>
 				<button onclick="deleteAttendances();return false;">Delete Attendances</button>
 				<button onclick="printWelcomeLetter();return false;">Welcome Letter</button>
 				<button onclick="printCurrentInvoice();return false;">Current Invoice</button>
