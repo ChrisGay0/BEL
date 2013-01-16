@@ -15,7 +15,7 @@
 						First Name
 					</td>
 					<td>
-						<form:input path="firstName"/>
+						<form:input path="firstName" cssClass="mandatoryField"/>
 					</td>
 				</tr>
 				<tr>
@@ -23,7 +23,7 @@
 						Surname
 					</td>
 					<td>
-						<form:input path="surname"/>
+						<form:input path="surname" cssClass="mandatoryField"/>
 					</td>
 				</tr>
 				<tr>
@@ -31,7 +31,7 @@
 						Date of Birth
 					</td>
 					<td>
-						<form:input path="dateOfBirth" cssClass="date"/>
+						<form:input path="dateOfBirth" cssClass="date mandatoryField"/>
 					</td>
 				</tr>
 				<tr>
@@ -39,7 +39,7 @@
 						Date Registered
 					</td>
 					<td>
-						<form:input path="registeredDate" cssClass="date"/>
+						<form:input path="registeredDate" cssClass="date mandatoryField"/>
 					</td>
 				</tr>
 				<tr>
@@ -47,7 +47,7 @@
 						Requested Start Date
 					</td>
 					<td>
-						<form:input path="requestedStartDate" cssClass="date"/>
+						<form:input path="requestedStartDate" cssClass="date mandatoryField"/>
 					</td>
 				</tr>
 				<tr>
@@ -74,7 +74,7 @@
 						Deposit(£)
 					</td>
 					<td>
-						<form:input path="depositPaid" size="4"/>
+						<form:input path="depositPaid" size="4" cssClass="numeric"/>
 					</td>
 				</tr>
 				<tr>
@@ -129,7 +129,7 @@
 		</form:form>
 		<div id="buttonBar"> 
 			<div id="holder">
-				<button onclick="document.pageForm.submit();return false;">Create</button>
+				<button onclick="doSubmit(document.pageForm);return false;">Create</button>
 			</div>
 		</div>
 	</body>

@@ -15,7 +15,7 @@
 						Username
 					</td>
 					<td>
-						<form:input path="userId"/>
+						<form:input path="userId" cssClass="mandatoryField"/>
 					</td>
 				</tr>
 				<tr>
@@ -23,7 +23,7 @@
 						First name
 					</td>
 					<td>
-						<form:input path="firstName"/>
+						<form:input path="firstName" cssClass="mandatoryField"/>
 					</td>
 				</tr>
 				<tr>
@@ -31,7 +31,7 @@
 						Surname
 					</td>
 					<td>
-						<form:input path="surname"/>
+						<form:input path="surname" cssClass="mandatoryField"/>
 					</td>
 				</tr>
 				<tr>
@@ -39,14 +39,14 @@
 						Password
 					</td>
 					<td>
-						<form:password path="password"/>
+						<form:password path="password" cssClass="mandatoryField"/>
 					</td>
 				</tr>
 			</table>
 		</form:form>
 		<div id="buttonBar"> 
 			<div id="holder">
-				<button onclick="document.pageForm.submit();return false;">Create</button>
+				<button onclick="doSubmit(document.pageForm);return false;">Create</button>
 			</div>
 		</div>
 	</body>

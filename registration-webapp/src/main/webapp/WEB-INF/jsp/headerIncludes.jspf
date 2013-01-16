@@ -2,6 +2,7 @@
 <link type='text/css' rel='stylesheet' href='/registration-webapp/stylesheet/styling.css'></link>
 <script type="text/javascript" src="/registration-webapp/javascript/jquery-1.4.2.js"></script>
 <script type="text/javascript" src="/registration-webapp/javascript/jquery.datepick.js"></script>
+<script type="text/javascript" src="/registration-webapp/javascript/global.js"></script>
 <link type='text/css' rel='stylesheet' href='/registration-webapp/stylesheet/jquery.datepick.redmond.css'></link>
 
 <script>
@@ -30,7 +31,7 @@ var tabberOptions = {
 		buttonText: 'Choose a date...',
 		buttonImageOnly: true,
 		buttonImage: '/registration-webapp/images/calendar.gif',
-		dateFormat: 'd M yy',
+		dateFormat: 'dd M yy',
 		autoSize: true,
 		showAnim: 'fadeIn',
 		alignment: 'right',

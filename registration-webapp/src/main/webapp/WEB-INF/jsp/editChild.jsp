@@ -79,7 +79,7 @@
 								First Name
 							</td>
 							<td>
-								<form:input path="child.firstName"/>
+								<form:input path="child.firstName" cssClass="mandatoryField"/>
 							</td>
 						</tr>
 						<tr>
@@ -87,7 +87,7 @@
 								Surname
 							</td>
 							<td>
-								<form:input path="child.surname"/>
+								<form:input path="child.surname" cssClass="mandatoryField"/>
 							</td>
 						</tr>
 						<tr>
@@ -95,7 +95,7 @@
 								Date of Birth
 							</td>
 							<td>
-								<form:input path="child.dateOfBirth" cssClass="date"/>
+								<form:input path="child.dateOfBirth" cssClass="date mandatoryField"/>
 							</td>
 						</tr>
 						<tr>
@@ -190,7 +190,7 @@
 								Date Registered
 							</td>
 							<td>
-								<form:input path="child.registeredDate" cssClass="date"/>
+								<form:input path="child.registeredDate" cssClass="date mandatoryField"/>
 							</td>
 						</tr>
 						<tr>
@@ -198,7 +198,7 @@
 								Requested Start Date
 							</td>
 							<td>
-								<form:input path="child.requestedStartDate" cssClass="date"/>
+								<form:input path="child.requestedStartDate" cssClass="date mandatoryField"/>
 							</td>
 						</tr>
 						<tr>
@@ -779,7 +779,7 @@
 										Deposit(£)
 									</td>
 									<td>
-										<form:input path="child.depositPaid" size="4"/>
+										<form:input path="child.depositPaid" size="4" cssClass="numeric"/>
 									</td>
 								</tr>
 								<tr>
@@ -787,7 +787,7 @@
 										Funded Sessions (Per Week)
 									</td>
 									<td>
-										<form:input path="child.fundedSessions"/>
+										<form:input path="child.fundedSessions" cssClass="numeric"/>
 									</td>
 								</tr>
 								<tr>
@@ -795,7 +795,7 @@
 										Funded Lunches (Per Week)
 									</td>
 									<td>
-										<form:input path="child.fundedLunches"/>
+										<form:input path="child.fundedLunches" cssClass="numeric"/>
 									</td>
 								</tr>
 							</table>
@@ -900,7 +900,7 @@
 													<form:input path="datePaid" onchange="cloneRow('payment', ${listIndex.index});" cssClass="date"/>
 												</td>
 												<td style="vertical-align: top;">
-													<form:input path="amount" size="5" maxlength="11"/>
+													£<form:input path="amount" size="5" maxlength="11" cssClass="numeric"/>
 												</td>
 												<td style="vertical-align: top;">
 													<form:select path="paymentType" items="${paymentList}" itemLabel="description"/>
@@ -943,7 +943,7 @@
 		</form:form>
 		<div id="buttonBar"> 
 			<div id="holder">
-				<button onclick="document.pageForm.action.value='Save';document.pageForm.submit();return false;">Save</button>
+				<button onclick="document.pageForm.action.value='Save';doSubmit(document.pageForm);return false;">Save</button>
 				<button onclick="GB_show('Add Guardian', '/registration-webapp/addGuardian.htm?childId=${formObject.child.id}', 600, 800);return false;">Add Guardian</button>
 				<button onclick="recalcAttendances();return false;">Recalculate Attendances</button>
 				<button onclick="editAttendances();return false;">Edit Current Attendances</button>

@@ -131,4 +131,12 @@ public class ChildManager {
 	public List<Child> findChildrenNeedingWelcomeLetters(){
 		return childDao.findChildrenNeedingWelcomeLetters();
 	}
+	
+	public void saveChildren(List<Child> children){
+		if(!CollectionUtils.isEmpty(children)){
+			for(Child child: children){
+				saveChild(child);
+			}
+		}
+	}
 }

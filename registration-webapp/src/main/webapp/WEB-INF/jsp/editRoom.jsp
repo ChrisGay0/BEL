@@ -31,7 +31,7 @@
 						Name
 					</td>
 					<td>
-						<form:input path="name"/>
+						<form:input path="name" cssClass="mandatoryField"/>
 					</td>
 				</tr>
 				<tr>

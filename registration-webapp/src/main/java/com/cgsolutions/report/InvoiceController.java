@@ -58,6 +58,7 @@ public class InvoiceController extends MultiActionController {
 			model.put("school", school);
 			model.put("term", term);
 			model.put("dataSource", datasource);
+			model.put("domain", request.getLocalAddr());
 			
 			return new ModelAndView("InvoiceCompile", model);
 		}

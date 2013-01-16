@@ -88,7 +88,7 @@
 						Child Deposit Required
 					</td>
 					<td>
-						£<form:input path="depositAmount"/>
+						£<form:input path="depositAmount" cssClass="numeric"/>
 					</td>
 				</tr>
 				<tr>
@@ -96,7 +96,7 @@
 						Registration Fee
 					</td>
 					<td>
-						£<form:input path="registrationFee"/>
+						£<form:input path="registrationFee" cssClass="numeric"/>
 					</td>
 				</tr>
 				<tr>
@@ -111,7 +111,7 @@
 		</form:form>
 		<div id="buttonBar"> 
 			<div id="holder">
-				<button onclick="document.pageForm.submit();return false;">Save</button>
+				<button onclick="doSubmit(document.pageForm);return false;">Save</button>
 			</div>
 		</div>
 	</body>

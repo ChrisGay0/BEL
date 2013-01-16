@@ -15,7 +15,7 @@
 						Term Name
 					</td>
 					<td>
-						<form:input path="termName"/>
+						<form:input path="termName" cssClass="mandatoryField"/>
 					</td>
 				</tr>
 				<tr>
@@ -23,7 +23,7 @@
 						Start Date
 					</td>
 					<td>
-						<form:input path="startDate" cssClass="date"/>
+						<form:input path="startDate" cssClass="date mandatoryField"/>
 					</td>
 				</tr>
 				<tr>
@@ -31,7 +31,7 @@
 						End Date
 					</td>
 					<td>
-						<form:input path="endDate" cssClass="date"/>
+						<form:input path="endDate" cssClass="date mandatoryField"/>
 					</td>
 				</tr>
 				<tr>
@@ -39,14 +39,14 @@
 						Start Date of full term (Normally January, April or September)
 					</td>
 					<td>
-						<form:input path="startDateOfFullTerm" cssClass="date"/>
+						<form:input path="startDateOfFullTerm" cssClass="date mandatoryField"/>
 					</td>
 				</tr>
 			</table>
 		</form:form>
 		<div id="buttonBar"> 
 			<div id="holder">
-				<button onclick="document.pageForm.submit();return false;">Create</button>
+				<button onclick="doSubmit(document.pageForm);return false;">Create</button>
 			</div>
 		</div>
 	</body>
