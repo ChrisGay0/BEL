@@ -22,6 +22,7 @@ import javax.persistence.Transient;
 import javax.persistence.Version;
 
 import org.springframework.util.CollectionUtils;
+import org.springframework.util.StringUtils;
 
 import com.cgsolutions.registration.domain.enums.Ethnicity;
 import com.cgsolutions.registration.domain.enums.TypeOfAttendance;
@@ -493,5 +494,143 @@ public class Child {
 	}
 	public String getFullName(){
 		return this.firstName + " " + this.surname;
+	}
+	
+	public String getFullAddress(){
+		String address = "";
+		if(StringUtils.hasText(this.addressLine1)){
+			address += this.addressLine1 + ", ";
+		}
+		if(StringUtils.hasText(this.addressLine2)){
+			address += this.addressLine2 + ", ";
+		}
+		if(StringUtils.hasText(this.addressLine3)){
+			address += this.addressLine3 + ", ";
+		}
+		if(StringUtils.hasText(this.city)){
+			address += this.city + ", ";
+		}
+		if(StringUtils.hasText(this.county)){
+			address += this.county + ", ";
+		}
+		if(StringUtils.hasText(this.postCode)){
+			address += this.postCode + ", ";
+		}
+		
+		//Remove last comma
+		if(address.length() > 1){
+			address = address.substring(0, address.length() - 2) + ".";
+		}
+		return address;
+	}
+	
+	public String getSessionInfo(){
+		String sessionInfo = "";
+		if(this.mondayAttendance != null){
+			sessionInfo += "Mon - " + getSessionString(this.mondayAttendance) + ", ";
+		}
+		if(this.tuesdayAttendance != null){
+			sessionInfo += "Tue - " + getSessionString(this.tuesdayAttendance) + ", ";
+		}
+		if(this.wednesdayAttendance != null){
+			sessionInfo += "Wed - " + getSessionString(this.wednesdayAttendance) + ", ";
+		}
+		if(this.thursdayAttendance != null){
+			sessionInfo += "Thu - " + getSessionString(this.thursdayAttendance) + ", ";
+		}
+		if(this.fridayAttendance != null){
+			sessionInfo += "Fri - " + getSessionString(this.fridayAttendance) + ", ";
+		}
+		
+		//remove last comma
+		if(sessionInfo.length() > 1){
+			sessionInfo.substring(0, sessionInfo.length() - 2);
+		}
+		
+		return sessionInfo;
+	}
+	
+	private String getSessionString(TypeOfAttendance typeOfAttendance){
+		if(typeOfAttendance.equals(TypeOfAttendance.FULL)){
+			return "AM | Lunch | PM";
+		}
+		else if(typeOfAttendance.equals(TypeOfAttendance.MORNING)){
+			return "AM";
+		}
+		else if(typeOfAttendance.equals(TypeOfAttendance.MORNINGWITHLUNCH)){
+			return "AM | Lunch";
+		}
+		else if(typeOfAttendance.equals(TypeOfAttendance.AFTERNOON)){
+			return "PM";
+		}
+		else if(typeOfAttendance.equals(TypeOfAttendance.AFTERNOONWITHLUNCH)){
+			return "Lunch | PM";
+		}
+
+		return "";
+	}
+	
+	public String getGuardianInfo(){
+		String guardianInfo = "";
+		if(!CollectionUtils.isEmpty(this.guardians)){
+			for(Guardian guardian: this.guardians){
+				guardianInfo += guardian.getFirstName() + " " + guardian.getSurname() + " Tel1: " + guardian.getContactNumber1();
+				if(StringUtils.hasText(guardian.getContactNumber2())){
+					guardianInfo += " Tel2: " + guardian.getContactNumber2();
+				}
+				guardianInfo += ", ";
+			}
+			
+			guardianInfo = guardianInfo.substring(0, guardianInfo.length() - 2);
+		}
+		
+		return guardianInfo;
+	}
+	
+	public String getContactInfo(){
+		String contactInfo = "";
+		if(!CollectionUtils.isEmpty(this.contacts)){
+			for(Contact contact: this.contacts){
+				contactInfo += contact.getFirstName() + " " + contact.getSurname() + " Tel " + contact.getPhoneNumber() + ", ";
+			}
+			
+			contactInfo = contactInfo.substring(0, contactInfo.length() - 2);
+		}
+		
+		return contactInfo;
+	}
+	
+	public String getIntoleranceInfo(){
+		String intoleranceInfo = "";
+		if(!CollectionUtils.isEmpty(this.intolerances)){
+			for(Intolerance intolerance: this.intolerances){
+				intoleranceInfo += intolerance.getIntolerance();
+				if(StringUtils.hasText(intolerance.getPrecaution())){
+					intoleranceInfo += ": " + intolerance.getPrecaution();
+				}
+				intoleranceInfo += ", ";
+			}
+			
+			intoleranceInfo = intoleranceInfo.substring(0, intoleranceInfo.length() - 2);
+		}
+		
+		return intoleranceInfo;
+	}
+	
+	public String getConditionInfo(){
+		String conditionInfo = "";
+		if(!CollectionUtils.isEmpty(this.medicalInfo)){
+			for(MedicalInfo medicalInfo: this.medicalInfo){
+				conditionInfo += medicalInfo.getMedicalCondition();
+				if(StringUtils.hasText(medicalInfo.getNotes())){
+					conditionInfo += ": " + medicalInfo.getNotes();
+				}
+				conditionInfo += ", ";
+			}
+			
+			conditionInfo = conditionInfo.substring(0, conditionInfo.length() - 2);
+		}
+		
+		return conditionInfo;
 	}
 }

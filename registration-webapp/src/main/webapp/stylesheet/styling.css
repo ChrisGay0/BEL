@@ -140,3 +140,7 @@ table.listTable tbody tr:hover{
 	background: #EBECE4;
 	text-align: center;
 }
+
+.mandatoryField{
+	background-color: #F0FEC5;
+}
