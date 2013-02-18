@@ -41,7 +41,7 @@ public class LoginController {
 	@RequestMapping(method=RequestMethod.POST)
 	public String validate(HttpServletRequest request){
 		User user = userManager.find(request.getParameter("userId"));
-		if(user.validatePassword(request.getParameter("password"))){
+		if(user != null && user.validatePassword(request.getParameter("password"))){
 			request.getSession().setAttribute("validUser", user);
 			request.getSession().setAttribute("schoolName", schoolManager.find().getName());
 			

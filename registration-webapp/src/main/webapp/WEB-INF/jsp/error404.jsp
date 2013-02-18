@@ -1,6 +1,6 @@
 <html>
 <head>
-<title>Marshall Aerospace - MAWeb</title>
+<title>Error 404</title>
 <link type='text/css' rel='stylesheet' href='/registration-webapp/stylesheet/reset.css'></link>
 <link type='text/css' rel='stylesheet' href='/registration-webapp/stylesheet/styling.css'></link>
 </head>

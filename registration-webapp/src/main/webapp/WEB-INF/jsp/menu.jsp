@@ -103,7 +103,7 @@
 				<li onclick="document.location = 'waitingList.htm'">
 					Waiting List
 				</li>
-				<li onclick="window.open('/registration-webapp/childList.pdf');">
+				<li onclick="document.location = 'childReport.htm'">
 					Child Reports
 				</li>
 			</ul>

@@ -1,5 +1,6 @@
 package com.cgsolutions.report;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,12 +21,20 @@ public class ChildListController extends MultiActionController {
 	
 	public ModelAndView handleReport(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		Map<String, Object> model = new HashMap<String, Object>();
-		List<Room> rooms = roomManager.findAllActive();
-		for(Room room: rooms){
+		List<Room> rooms = new ArrayList<Room>();
+		for(String roomId: request.getParameter("rooms").split(",")){
+			Room room = roomManager.find(Integer.parseInt(roomId));
 			room.setChildren(childManager.findActiveChildrenForRoom(room.getId()));
+			rooms.add(room);
 		}
+		
 		model.put("reportTitle", "Current Children");
 		model.put("dataSource", rooms);
+		model.put("includeDays", request.getParameter("includeDays"));
+		model.put("includeGuardians", request.getParameter("includeGuardians"));
+		model.put("includeContacts", request.getParameter("includeContacts"));
+		model.put("includeMedical", request.getParameter("includeMedical"));
+		model.put("includeAddress", request.getParameter("includeAddress"));
 		
 		return new ModelAndView("ChildListCompile", model);
 	}

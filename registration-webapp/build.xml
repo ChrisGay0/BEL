@@ -2,8 +2,19 @@
 
 	<property name="target.dir" value="${basedir}/target" />
 	<property name="tomcat.username" value="admin" />
-	<property name="tomcat.password" value="x" />
-	<property name="tomcat.manager.url" value="http://localhost/manager" />
+	<property name="tomcat.password" value="adminX" />
+	<property name="tomcat.manager.url" value="http://localhost/manager/text" />
+
+	<path id="tomcat.classpath">
+	    <fileset dir="${tomcat.home}/bin">
+	    	<include name="tomcat-juli.jar" />
+	    </fileset>
+	    <fileset dir="${tomcat.home}/lib">
+	        <include name="catalina-ant.jar" />
+	        <include name="tomcat-coyote.jar" />
+	    	<include name="tomcat-util.jar" />
+		</fileset>
+	</path>
 
 	<target name="buildAndDeploy">
 		<ant target="package" />
@@ -33,7 +44,7 @@
 		</copy>
 	</target>
 
-	<target name="deploy">
+	<target name="deploy" >
 		<deploy url="${tomcat.manager.url}" username="${tomcat.username}" password="${tomcat.password}" path="/${ant.project.name}" war="${target.dir}/${ant.project.name}.war" />
 	</target>
 
@@ -41,7 +52,7 @@
 		<undeploy url="${tomcat.manager.url}" username="${tomcat.username}" password="${tomcat.password}" path="/${ant.project.name}" failonerror="false" />
 	</target>
 
-	<taskdef name="deploy" classname="org.apache.catalina.ant.DeployTask" />
-	<taskdef name="undeploy" classname="org.apache.catalina.ant.UndeployTask" />
+	<taskdef name="deploy" classname="org.apache.catalina.ant.DeployTask" classpathref="tomcat.classpath"/>
+	<taskdef name="undeploy" classname="org.apache.catalina.ant.UndeployTask" classpathref="tomcat.classpath"/>
 
 </project>

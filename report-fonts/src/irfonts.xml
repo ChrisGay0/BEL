@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<fontFamilies>
+   <fontFamily name="Arial">
+       <normal><![CDATA[arial.ttf]]></normal>
+       <bold><![CDATA[arialbd.ttf]]></bold>
+       <italic><![CDATA[ariali.ttf]]></italic>
+       <boldItalic><![CDATA[arialbi.ttf]]></boldItalic>
+       <pdfEmbedded><![CDATA[true]]></pdfEmbedded>
+   </fontFamily>
+	<fontFamily name="SansSerif">
+		<exportFonts>
+			<export key="net.sf.jasperreports.html">Arial, Helvetica, sans-serif</export>
+			<export key="net.sf.jasperreports.xhtml">Arial, Helvetica, sans-serif</export>
+		</exportFonts>
+	</fontFamily>
+	<fontFamily name="Courier New">
+       <normal><![CDATA[Courier_New.ttf]]></normal>
+       <bold><![CDATA[courier-new-bold.ttf]]></bold>
+       <italic><![CDATA[Courier_New_Italic.ttf]]></italic>
+       <boldItalic><![CDATA[Courier_New_Bold_Italic.ttf]]></boldItalic>
+       <pdfEmbedded><![CDATA[true]]></pdfEmbedded>
+   </fontFamily>
+   <fontFamily name="Calibri">
+       <normal><![CDATA[calibri.ttf]]></normal>
+       <bold><![CDATA[calibrib.ttf]]></bold>
+       <italic><![CDATA[calibrii.ttf]]></italic>
+       <boldItalic><![CDATA[calibriz.ttf]]></boldItalic>
+       <pdfEmbedded><![CDATA[true]]></pdfEmbedded>
+   </fontFamily>
+</fontFamilies>

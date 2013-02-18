@@ -1,11 +1,11 @@
 <%@ page isErrorPage="true" contentType="text/html" %>
-<%@ include file="/jsp/taglibraries.jspf" %>
+<%@ include file="taglibraries.jspf" %>
 
 <%@page import="java.util.List"%>
 <%@page import="java.util.ArrayList"%>
 <html>
 	<head>
-		<title>Marshall Aerospace - MAWeb</title>
+		<title>Error 500</title>
 		<link type='text/css' rel='stylesheet' href='/registration-webapp/stylesheet/reset.css'></link>
 		<link type='text/css' rel='stylesheet' href='/registration-webapp/stylesheet/styling.css'></link>
 	</head>
@@ -25,7 +25,7 @@
 					<table height="100%" width="100%" ID="bgimage">
 						<tr style="min-height:350px;">
 							<td align="center">
-								<textarea wrap="off" rows="8" cols="120">Request URI: ${pageContext.errorData.requestURI}
+								<textarea wrap="off" rows="80" cols="120">Request URI: ${pageContext.errorData.requestURI}
 									Servlet Name: ${pageContext.errorData.servletName}
 									Status Code: ${pageContext.errorData.statusCode}
 									Exception: ${pageContext.errorData.throwable}
