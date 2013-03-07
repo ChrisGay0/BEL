@@ -421,7 +421,7 @@ public class Child {
 	}
 	
 	public String getCurrentBalance(){
-		BigDecimal total = new BigDecimal(getPaymentTotal() - getBillTotal());
+		BigDecimal total = new BigDecimal(getBillTotal() - getPaymentTotal());
 		BigDecimal rounded = total.setScale(2, BigDecimal.ROUND_HALF_UP);
 		
 		return rounded.toPlainString();
@@ -443,7 +443,7 @@ public class Child {
 			}
 		}
 		
-		return (currentBalance * -1) + "";
+		return currentBalance + "";
 	}
 	
 	public float getBillTotal(){

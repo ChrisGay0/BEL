@@ -22,6 +22,12 @@
 						<th>
 							New Payment
 						</th>
+						<th>
+							Registration Fee Paid
+						</th>
+						<th>
+							Deposit Paid
+						</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -38,6 +44,12 @@
 								<form:select path="formObject.newPayments[${listIndex.index}].paymentType" items="${paymentList}" itemLabel="description"/>
 								<form:input path="formObject.newPayments[${listIndex.index}].comments" size="60" maxlength="255"/>
 							</td>	
+							<td>
+								<form:checkbox path="formObject.children[${listIndex.index}].registrationFeePaid"/>
+							</td>
+							<td>
+								<form:input path="formObject.children[${listIndex.index}].depositPaid" size="5" maxlength="11" cssClass="numeric"/>
+							</td>
 						</tr>
 					</c:forEach>
 				</tbody>

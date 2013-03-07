@@ -858,7 +858,7 @@
 												${bill.sessions} (${bill.fundedSessions})
 											</td>
 											<td>
-												(£${bill.totalSessionsCost})											
+												£${bill.totalSessionsCost}								
 											</td>
 											<td>
 												£${bill.totalCost}

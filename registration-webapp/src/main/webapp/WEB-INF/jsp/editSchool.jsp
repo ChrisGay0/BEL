@@ -77,6 +77,14 @@
 				</tr>
 				<tr>
 					<td>
+						Email
+					</td>
+					<td>
+						<form:input path="email"/>
+					</td>
+				</tr>
+				<tr>
+					<td>
 						Charity Number
 					</td>
 					<td>

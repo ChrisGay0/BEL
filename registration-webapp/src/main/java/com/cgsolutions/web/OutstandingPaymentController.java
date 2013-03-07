@@ -41,7 +41,7 @@ public class OutstandingPaymentController {
 		if(!CollectionUtils.isEmpty(children)){
 			for(Child child: children){
 				child.setBills(billManager.findBillsForChild(child));
-				if(Float.parseFloat(child.getCurrentBalance()) < 0){
+				if(Float.parseFloat(child.getCurrentBalance()) > 0){
 					outstanding.add(child);
 				}
 				
@@ -62,13 +62,15 @@ public class OutstandingPaymentController {
 		List<Child> saveList = new ArrayList<Child>();
 		for(int i = 0; i < formObject.getNewPayments().size(); i++){
 			Payment newPayment = formObject.getNewPayments().get(i);
+			Child child = childManager.findChild(formObject.getChildren().get(i).getId());
+			child.setRegistrationFeePaid(formObject.getChildren().get(i).isRegistrationFeePaid());
+			child.setDepositPaid(formObject.getChildren().get(i).getDepositPaid());
 			if(newPayment.getAmount() != null){
-				Child child = childManager.findChild(formObject.getChildren().get(i).getId());
 				newPayment.setChildId(child.getId());
 				newPayment.setDatePaid(new Date());
 				child.getPayments().add(newPayment);
-				saveList.add(child);
 			}
+			saveList.add(child);
 		}
 		
 		childManager.saveChildren(saveList);
