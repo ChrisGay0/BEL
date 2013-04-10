@@ -5,6 +5,11 @@
 	<property name="ireport.y" value="0"/>
 	<parameter name="reportTitle" class="java.lang.String"/>
 	<parameter name="childListSubReport" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="includeDays" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="includeGuardians" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="includeContacts" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="includeMedical" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="includeAddress" class="java.lang.String"/>
 	<field name="children" class="java.util.List"/>
 	<field name="name" class="java.lang.String"/>
 	<background>
@@ -14,15 +19,7 @@
 		<band splitType="Stretch"/>
 	</title>
 	<pageHeader>
-		<band height="20" splitType="Stretch">
-			<textField>
-				<reportElement uuid="075cfb30-85e9-4e64-a1b7-3511255173fb" x="0" y="0" width="802" height="20"/>
-				<textElement textAlignment="Center">
-					<font size="14"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$P{reportTitle}]]></textFieldExpression>
-			</textField>
-		</band>
+		<band splitType="Stretch"/>
 	</pageHeader>
 	<columnHeader>
 		<band splitType="Stretch"/>
@@ -38,6 +35,21 @@
 			</textField>
 			<subreport isUsingCache="false">
 				<reportElement uuid="7a4dd17d-3aeb-493f-8721-bb3c751a538c" positionType="Float" stretchType="RelativeToTallestObject" x="0" y="40" width="802" height="23"/>
+				<subreportParameter name="includeMedical">
+					<subreportParameterExpression><![CDATA[$P{includeMedical}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="includeDays">
+					<subreportParameterExpression><![CDATA[$P{includeDays}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="includeContacts">
+					<subreportParameterExpression><![CDATA[$P{includeContacts}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="includeGuardians">
+					<subreportParameterExpression><![CDATA[$P{includeGuardians}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="includeAddress">
+					<subreportParameterExpression><![CDATA[$P{includeAddress}]]></subreportParameterExpression>
+				</subreportParameter>
 				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{children})]]></dataSourceExpression>
 				<subreportExpression><![CDATA[$P{childListSubReport}]]></subreportExpression>
 			</subreport>

@@ -26,6 +26,22 @@
 		</property>
 	</bean>
 	
+	<bean id="PaymentController" class="com.cgsolutions.report.PaymentController">
+		<property name="methodNameResolver">
+			<ref local="resolver"/>
+		</property>	
+		<property name="paymentManager" ref="paymentManager"/>
+	</bean>
+	
+	<bean id="PaymentCompile" class="org.springframework.web.servlet.view.jasperreports.JasperReportsPdfView">
+		<property name="reportDataKey">
+			<value>dataSource</value>
+		</property>
+		<property name="url">
+			<value>/WEB-INF/reports/payments.jasper</value>
+		</property>
+	</bean>
+	
 	<bean id="InvoiceController" class="com.cgsolutions.report.InvoiceController">
 		<property name="methodNameResolver">
 			<ref local="resolver"/>
@@ -130,6 +146,7 @@
 				<prop key="/welcomeLetter.pdf">WelcomeLetterController</prop>
 				<prop key="/waitingList.pdf">WaitingListController</prop>
 				<prop key="/childList.pdf">ChildListController</prop>
+				<prop key="/payments.pdf">PaymentController</prop>
 			</props>
 		</property>
 	</bean>	
@@ -142,6 +159,7 @@
 				<prop key="/welcomeLetter.pdf">printLetter</prop>
 				<prop key="/waitingList.pdf">handleReport</prop>
 				<prop key="/childList.pdf">handleReport</prop>
+				<prop key="/payments.pdf">printReport</prop>
 			</props>
 		</property>
 	</bean>	

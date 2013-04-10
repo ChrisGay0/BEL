@@ -41,7 +41,13 @@
 					</td>
 				</tr>
 				<tr>
-					<td colspan="4" style="text-align: right;">
+					<td>
+						On Waiting List
+					</td>
+					<td>
+						<form:checkbox path="onWaitingList"/>
+					</td>
+					<td colspan="2" style="text-align: right;">
 						<button>Search</button>
 					</td>
 				</tr>
@@ -59,6 +65,9 @@
 					<th>
 						Room
 					</th>
+					<th>
+						On Waiting List
+					</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -72,6 +81,16 @@
 						</td>
 						<td>
 							${child.room.name}
+						</td>
+						<td>
+							<c:choose>
+								<c:when test="${not empty child.startDate}">
+									No
+								</c:when>
+								<c:otherwise>
+									Yes
+								</c:otherwise>
+							</c:choose>
 						</td>
 					</tr>
 				</c:forEach>

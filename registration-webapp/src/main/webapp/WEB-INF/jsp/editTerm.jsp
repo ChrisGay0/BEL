@@ -15,7 +15,7 @@
 	<body>
 		<%@ include file="/WEB-INF/jsp/header.jsp" %>
 		<br/>
-		<h3>Edit Term</h3>		
+		<h3>Edit Half Term</h3>		
 		<form:form name="pageForm" commandName="formObject" method="post" action="/registration-webapp/editTerm.htm">
 			<table class="formTable" style="width: 100%">
 				<tr>

@@ -1,17 +1,21 @@
 package com.cgsolutions.registration.domain;
 
 import java.util.Date;
+import java.util.List;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.persistence.Version;
+
+import org.springframework.util.CollectionUtils;
 
 import com.cgsolutions.registration.domain.enums.PaymentType;
 
@@ -23,8 +27,9 @@ public class Payment {
 	private int id;
 	@Version
 	private Date lastUpdate;
-	@Column(nullable=true)
-	private int childId;
+	@ManyToOne
+	@JoinColumn(name="childId", nullable=true)
+	private Child child;
 	private Date datePaid;
 	private Float amount;
 	private String comments;
@@ -45,11 +50,12 @@ public class Payment {
 	public void setLastUpdate(Date lastUpdate) {
 		this.lastUpdate = lastUpdate;
 	}
-	public int getChildId() {
-		return childId;
+	
+	public Child getChild() {
+		return child;
 	}
-	public void setChildId(int childId) {
-		this.childId = childId;
+	public void setChild(Child child) {
+		this.child = child;
 	}
 	public Date getDatePaid() {
 		return datePaid;
@@ -80,5 +86,16 @@ public class Payment {
 	}
 	public void setSelected(boolean selected) {
 		this.selected = selected;
+	}
+	
+	public static float getTotal(List<Payment> payments){
+		float total = 0;
+		if(!CollectionUtils.isEmpty(payments)){
+			for(Payment payment: payments){
+				total += payment.getAmount();
+			}
+		}
+		
+		return total;
 	}
 }

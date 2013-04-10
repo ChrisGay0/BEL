@@ -5,6 +5,8 @@ public class ChildSearchBean {
 	private String surname;
 	private Room room;
 	private boolean includeLeft;
+	private boolean onWaitingList;
+	
 	public String getFirstName() {
 		return firstName;
 	}
@@ -28,5 +30,11 @@ public class ChildSearchBean {
 	}
 	public void setIncludeLeft(boolean includeLeft) {
 		this.includeLeft = includeLeft;
+	}
+	public boolean isOnWaitingList() {
+		return onWaitingList;
+	}
+	public void setOnWaitingList(boolean onWaitingList) {
+		this.onWaitingList = onWaitingList;
 	}
 }

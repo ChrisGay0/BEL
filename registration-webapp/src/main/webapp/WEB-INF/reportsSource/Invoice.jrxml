@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Invoice" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="a8c59874-84d3-4d98-b38b-2cfa65b2693d">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="158"/>
+	<property name="ireport.y" value="205"/>
 	<parameter name="school" class="com.cgsolutions.registration.domain.School" isForPrompting="false"/>
 	<parameter name="term" class="com.cgsolutions.registration.domain.Term" isForPrompting="false"/>
 	<parameter name="domain" class="java.lang.String"/>
@@ -281,7 +281,7 @@
 			</staticText>
 			<staticText>
 				<reportElement uuid="f5006440-cd96-4bb9-b2a8-5051c6925b89" positionType="Float" x="464" y="297" width="10" height="20">
-					<printWhenExpression><![CDATA[$F{child}.getDepositPaid() < $F{child}.getDepositRequired()]]></printWhenExpression>
+					<printWhenExpression><![CDATA[$F{child}.getDepositPaid() == null || ($F{child}.getDepositPaid() < $F{child}.getDepositRequired())]]></printWhenExpression>
 				</reportElement>
 				<textElement>
 					<font isBold="true"/>
@@ -299,7 +299,7 @@
 			</staticText>
 			<textField pattern="0.00">
 				<reportElement uuid="2f9cb0b3-836a-4c36-8a78-4400712ee473" x="474" y="297" width="75" height="20">
-					<printWhenExpression><![CDATA[$F{child}.getDepositPaid() < $F{child}.getDepositRequired()]]></printWhenExpression>
+					<printWhenExpression><![CDATA[$F{child}.getDepositPaid() == null || ($F{child}.getDepositPaid() < $F{child}.getDepositRequired())]]></printWhenExpression>
 				</reportElement>
 				<textElement/>
 				<textFieldExpression><![CDATA[$F{child}.getDepositRequired()]]></textFieldExpression>

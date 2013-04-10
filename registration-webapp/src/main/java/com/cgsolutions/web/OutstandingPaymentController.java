@@ -66,7 +66,7 @@ public class OutstandingPaymentController {
 			child.setRegistrationFeePaid(formObject.getChildren().get(i).isRegistrationFeePaid());
 			child.setDepositPaid(formObject.getChildren().get(i).getDepositPaid());
 			if(newPayment.getAmount() != null){
-				newPayment.setChildId(child.getId());
+				newPayment.setChild(child);
 				newPayment.setDatePaid(new Date());
 				child.getPayments().add(newPayment);
 			}

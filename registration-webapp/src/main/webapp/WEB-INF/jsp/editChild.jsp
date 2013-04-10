@@ -762,7 +762,7 @@
 					</table>
 				</div>
 				<div class="tabbertab" title="Financial">
-					<h4 style="float: right;">Current Balance ${formObject.child.totalAmountDue}</h4>
+					<h4 style="float: right;">Current Balance <fmt:formatNumber value="${formObject.child.totalAmountDue}" minFractionDigits="2" maxFractionDigits="2"/></h4>
 					<div class="tabber" id="tab4">
 						<div class="tabbertab" title="General">
 							<table class="formTable">
@@ -852,16 +852,16 @@
 												${bill.lunches} (${bill.fundedLunches})
 											</td>
 											<td>
-												£${bill.totalLunchesCost}
+												£<fmt:formatNumber value="${bill.totalLunchesCost}" minFractionDigits="2" maxFractionDigits="2"/>
 											</td>
 											<td>
 												${bill.sessions} (${bill.fundedSessions})
 											</td>
 											<td>
-												£${bill.totalSessionsCost}								
+												£<fmt:formatNumber value="${bill.totalSessionsCost}" minFractionDigits="2" maxFractionDigits="2"/>							
 											</td>
 											<td>
-												£${bill.totalCost}
+												£<fmt:formatNumber value="${bill.totalCost}" minFractionDigits="2" maxFractionDigits="2"/>
 											</td>
 										</tr>
 									</c:forEach>

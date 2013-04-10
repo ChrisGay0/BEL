@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="WelcomeLetter" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="7a13726b-0e05-42be-afd9-c31a7948f81e">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="235"/>
+	<property name="ireport.y" value="283"/>
 	<parameter name="welcomeLetter" class="com.cgsolutions.registration.domain.WelcomeLetter" isForPrompting="false"/>
 	<parameter name="school" class="com.cgsolutions.registration.domain.School" isForPrompting="false"/>
 	<field name="child" class="com.cgsolutions.registration.domain.Child"/>
@@ -19,121 +19,121 @@
 		<band splitType="Stretch"/>
 	</columnHeader>
 	<detail>
-		<band height="528" splitType="Stretch">
-			<textField>
-				<reportElement uuid="43cec140-4109-488e-a363-2c2849acb59a" positionType="Float" x="19" y="14" width="355" height="20"/>
+		<band height="548" splitType="Stretch">
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="43cec140-4109-488e-a363-2c2849acb59a" positionType="Float" x="19" y="14" width="355" height="20" isRemoveLineWhenBlank="true"/>
 				<textElement>
 					<font fontName="SansSerif" size="12"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{child}.getGuardianNames()]]></textFieldExpression>
+				<textFieldExpression><![CDATA["To the parents of " $F{child}.getFirstName() + " " + $F{child}.getSurname()]]></textFieldExpression>
 			</textField>
-			<textField>
-				<reportElement uuid="668898ee-0b99-4c16-ad29-e4ddaaaf915b" positionType="Float" x="19" y="34" width="355" height="20"/>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="668898ee-0b99-4c16-ad29-e4ddaaaf915b" positionType="Float" x="19" y="34" width="355" height="20" isRemoveLineWhenBlank="true"/>
 				<textElement>
 					<font fontName="SansSerif" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{child}.getAddressLine1()]]></textFieldExpression>
 			</textField>
-			<textField>
-				<reportElement uuid="42a61d40-52ab-410d-97f4-109a909dbbc2" positionType="Float" x="19" y="54" width="355" height="20"/>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="42a61d40-52ab-410d-97f4-109a909dbbc2" positionType="Float" x="19" y="54" width="355" height="20" isRemoveLineWhenBlank="true"/>
 				<textElement>
 					<font fontName="SansSerif" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{child}.getAddressLine2()]]></textFieldExpression>
 			</textField>
-			<textField>
-				<reportElement uuid="9f56757c-3b68-412d-9011-c3c0dc114a66" positionType="Float" x="19" y="74" width="355" height="20"/>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="9f56757c-3b68-412d-9011-c3c0dc114a66" positionType="Float" x="19" y="74" width="355" height="20" isRemoveLineWhenBlank="true"/>
 				<textElement>
 					<font fontName="SansSerif" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{child}.getAddressLine3()]]></textFieldExpression>
 			</textField>
-			<textField>
-				<reportElement uuid="8a4dc65e-4f75-4443-b84a-7f448fdd02f9" positionType="Float" x="19" y="114" width="355" height="20"/>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="8a4dc65e-4f75-4443-b84a-7f448fdd02f9" positionType="Float" x="19" y="134" width="355" height="20" isRemoveLineWhenBlank="true"/>
 				<textElement>
 					<font fontName="SansSerif" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{child}.getPostCode()]]></textFieldExpression>
 			</textField>
-			<textField>
-				<reportElement uuid="18deefae-865b-4d9d-843b-738e22b5b113" positionType="Float" x="19" y="94" width="355" height="20"/>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="18deefae-865b-4d9d-843b-738e22b5b113" positionType="Float" x="19" y="114" width="355" height="20" isRemoveLineWhenBlank="true"/>
 				<textElement>
 					<font fontName="SansSerif" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{child}.getCounty()]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement uuid="792ef095-921f-413e-954c-e49c0e33890b" positionType="Float" x="19" y="151" width="355" height="20"/>
+				<reportElement uuid="792ef095-921f-413e-954c-e49c0e33890b" positionType="Float" x="19" y="171" width="355" height="20"/>
 				<textElement>
 					<font fontName="SansSerif" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{child}.getGuardianTitleAndSurnames()]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement uuid="99f2ef18-637f-4077-85af-eedd5922436f" positionType="Float" x="19" y="184" width="526" height="20"/>
+				<reportElement uuid="99f2ef18-637f-4077-85af-eedd5922436f" positionType="Float" x="19" y="204" width="526" height="20"/>
 				<textElement markup="html">
 					<font fontName="SansSerif" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{welcomeLetter}.getSectionOneText($F{child})]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement uuid="fdff4052-ee14-4429-bfda-cbb174ee6c09" positionType="Float" x="19" y="285" width="526" height="20"/>
+				<reportElement uuid="fdff4052-ee14-4429-bfda-cbb174ee6c09" positionType="Float" x="19" y="305" width="526" height="20"/>
 				<textElement markup="html">
 					<font fontName="SansSerif" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{welcomeLetter}.getSectionTwoText($F{child})]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement uuid="0866bdbd-4573-4c75-8b90-239e7fb37178" positionType="Float" x="19" y="316" width="526" height="20"/>
+				<reportElement uuid="0866bdbd-4573-4c75-8b90-239e7fb37178" positionType="Float" x="19" y="336" width="526" height="20"/>
 				<textElement markup="html">
 					<font fontName="SansSerif" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{welcomeLetter}.getSectionThreeText($F{child})]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement uuid="b287112e-ba55-4ee2-8e88-4d5369dea478" positionType="Float" x="19" y="348" width="526" height="20"/>
+				<reportElement uuid="b287112e-ba55-4ee2-8e88-4d5369dea478" positionType="Float" x="19" y="368" width="526" height="20"/>
 				<textElement markup="html">
 					<font fontName="SansSerif" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{welcomeLetter}.getSectionFourText($F{child})]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement uuid="00a3c340-e47b-4bd7-9f10-b3834f5c5f28" positionType="Float" x="19" y="380" width="526" height="20"/>
+				<reportElement uuid="00a3c340-e47b-4bd7-9f10-b3834f5c5f28" positionType="Float" x="19" y="400" width="526" height="20"/>
 				<textElement markup="html">
 					<font fontName="SansSerif" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{welcomeLetter}.getSectionFiveText($F{child})]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement uuid="6ebe091e-d909-4d08-9569-fd2c5ab8f99a" positionType="Float" x="19" y="413" width="526" height="20"/>
+				<reportElement uuid="6ebe091e-d909-4d08-9569-fd2c5ab8f99a" positionType="Float" x="19" y="433" width="526" height="20"/>
 				<textElement markup="html">
 					<font fontName="SansSerif" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{welcomeLetter}.getSectionSixText($F{child})]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement uuid="82f6a925-2a04-4a6e-ad08-47e886453b20" positionType="Float" x="19" y="215" width="100" height="20"/>
+				<reportElement uuid="82f6a925-2a04-4a6e-ad08-47e886453b20" positionType="Float" x="19" y="235" width="100" height="20"/>
 				<textElement>
 					<font fontName="SansSerif" size="12"/>
 				</textElement>
 				<text><![CDATA[9.00 - 12.00am]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="81083d05-3b0c-45ef-b480-1701209f4c4b" positionType="Float" x="19" y="235" width="126" height="20"/>
+				<reportElement uuid="81083d05-3b0c-45ef-b480-1701209f4c4b" positionType="Float" x="19" y="255" width="126" height="20"/>
 				<textElement>
 					<font fontName="SansSerif" size="12" isUnderline="true"/>
 				</textElement>
 				<text><![CDATA[12.00 - 12.30pm. Lunch]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="46d05b26-1d00-4fa6-8e95-58c1691821f6" positionType="Float" x="19" y="255" width="100" height="20"/>
+				<reportElement uuid="46d05b26-1d00-4fa6-8e95-58c1691821f6" positionType="Float" x="19" y="275" width="100" height="20"/>
 				<textElement>
 					<font fontName="SansSerif" size="12"/>
 				</textElement>
 				<text><![CDATA[12.30 - 3.30pm]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="a11b3634-bcb4-4e12-b7d1-654094e8abfd" positionType="Float" mode="Opaque" x="157" y="215" width="55" height="20" backcolor="#E8E7E7">
+				<reportElement uuid="a11b3634-bcb4-4e12-b7d1-654094e8abfd" positionType="Float" mode="Opaque" x="157" y="235" width="55" height="20" backcolor="#E8E7E7">
 					<printWhenExpression><![CDATA[$F{child}.getMondayAttendance() != null && (
 $F{child}.getMondayAttendance().toString().equals("MORNING") ||
 $F{child}.getMondayAttendance().toString().equals("MORNINGWITHLUNCH") ||
@@ -145,7 +145,7 @@ $F{child}.getMondayAttendance().toString().equals("FULL"))]]></printWhenExpressi
 				<text><![CDATA[Monday]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="1aa80d71-99c9-4c2d-8070-30131f897916" positionType="Float" mode="Opaque" x="212" y="215" width="55" height="20" backcolor="#E8E7E7">
+				<reportElement uuid="1aa80d71-99c9-4c2d-8070-30131f897916" positionType="Float" mode="Opaque" x="212" y="235" width="55" height="20" backcolor="#E8E7E7">
 					<printWhenExpression><![CDATA[$F{child}.getTuesdayAttendance() != null && (
 $F{child}.getTuesdayAttendance().toString().equals("MORNING") ||
 $F{child}.getTuesdayAttendance().toString().equals("MORNINGWITHLUNCH") ||
@@ -157,7 +157,7 @@ $F{child}.getTuesdayAttendance().toString().equals("FULL"))]]></printWhenExpress
 				<text><![CDATA[Tuesday]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="de895ed4-aa4f-47b5-bc34-06475f3527ed" positionType="Float" mode="Opaque" x="267" y="215" width="82" height="20" backcolor="#E8E7E7">
+				<reportElement uuid="de895ed4-aa4f-47b5-bc34-06475f3527ed" positionType="Float" mode="Opaque" x="267" y="235" width="82" height="20" backcolor="#E8E7E7">
 					<printWhenExpression><![CDATA[$F{child}.getWednesdayAttendance() != null && (
 $F{child}.getWednesdayAttendance().toString().equals("MORNING") ||
 $F{child}.getWednesdayAttendance().toString().equals("MORNINGWITHLUNCH") ||
@@ -169,7 +169,7 @@ $F{child}.getWednesdayAttendance().toString().equals("FULL"))]]></printWhenExpre
 				<text><![CDATA[Wednesday]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="def4ce1d-1b15-41c0-a0ab-5e37839b2e45" positionType="Float" mode="Opaque" x="349" y="215" width="67" height="20" backcolor="#E8E7E7">
+				<reportElement uuid="def4ce1d-1b15-41c0-a0ab-5e37839b2e45" positionType="Float" mode="Opaque" x="349" y="235" width="67" height="20" backcolor="#E8E7E7">
 					<printWhenExpression><![CDATA[$F{child}.getThursdayAttendance() != null && (
 $F{child}.getThursdayAttendance().toString().equals("MORNING") ||
 $F{child}.getThursdayAttendance().toString().equals("MORNINGWITHLUNCH") ||
@@ -181,7 +181,7 @@ $F{child}.getThursdayAttendance().toString().equals("FULL"))]]></printWhenExpres
 				<text><![CDATA[Thursday]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="47dca2cb-9f3d-4ec3-a4ab-8095ce1598ed" positionType="Float" mode="Opaque" x="416" y="215" width="55" height="20" backcolor="#E8E7E7">
+				<reportElement uuid="47dca2cb-9f3d-4ec3-a4ab-8095ce1598ed" positionType="Float" mode="Opaque" x="416" y="235" width="55" height="20" backcolor="#E8E7E7">
 					<printWhenExpression><![CDATA[$F{child}.getFridayAttendance() != null && (
 $F{child}.getFridayAttendance().toString().equals("MORNING") ||
 $F{child}.getFridayAttendance().toString().equals("MORNINGWITHLUNCH") ||
@@ -193,7 +193,7 @@ $F{child}.getFridayAttendance().toString().equals("FULL"))]]></printWhenExpressi
 				<text><![CDATA[Friday]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="03953943-0987-42cd-a205-3053f6bdcd34" positionType="Float" mode="Opaque" x="267" y="235" width="82" height="20" backcolor="#E8E7E7">
+				<reportElement uuid="03953943-0987-42cd-a205-3053f6bdcd34" positionType="Float" mode="Opaque" x="267" y="255" width="82" height="20" backcolor="#E8E7E7">
 					<printWhenExpression><![CDATA[$F{child}.getWednesdayAttendance() != null && (
 $F{child}.getWednesdayAttendance().toString().equals("MORNINGWITHLUNCH") ||
 $F{child}.getWednesdayAttendance().toString().equals("AFTERNOONWITHLUNCH") ||
@@ -205,7 +205,7 @@ $F{child}.getWednesdayAttendance().toString().equals("FULL"))]]></printWhenExpre
 				<text><![CDATA[Wednesday]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="53e17187-21ca-408a-b901-552ce40c4913" positionType="Float" mode="Opaque" x="157" y="235" width="55" height="20" backcolor="#E8E7E7">
+				<reportElement uuid="53e17187-21ca-408a-b901-552ce40c4913" positionType="Float" mode="Opaque" x="157" y="255" width="55" height="20" backcolor="#E8E7E7">
 					<printWhenExpression><![CDATA[$F{child}.getMondayAttendance() != null && (
 $F{child}.getMondayAttendance().toString().equals("MORNINGWITHLUNCH") ||
 $F{child}.getMondayAttendance().toString().equals("AFTERNOONWITHLUNCH") ||
@@ -217,7 +217,7 @@ $F{child}.getMondayAttendance().toString().equals("FULL"))]]></printWhenExpressi
 				<text><![CDATA[Monday]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="e9204106-22d2-4ab1-ab87-ac5aa9d4b33a" positionType="Float" mode="Opaque" x="212" y="235" width="55" height="20" backcolor="#E8E7E7">
+				<reportElement uuid="e9204106-22d2-4ab1-ab87-ac5aa9d4b33a" positionType="Float" mode="Opaque" x="212" y="255" width="55" height="20" backcolor="#E8E7E7">
 					<printWhenExpression><![CDATA[$F{child}.getTuesdayAttendance() != null && (
 $F{child}.getTuesdayAttendance().toString().equals("MORNINGWITHLUNCH") ||
 $F{child}.getTuesdayAttendance().toString().equals("AFTERNOONWITHLUNCH") ||
@@ -229,7 +229,7 @@ $F{child}.getTuesdayAttendance().toString().equals("FULL"))]]></printWhenExpress
 				<text><![CDATA[Tuesday]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="d27be210-3eb2-4f8d-8160-310ba04ac96c" positionType="Float" mode="Opaque" x="416" y="235" width="55" height="20" backcolor="#E8E7E7">
+				<reportElement uuid="d27be210-3eb2-4f8d-8160-310ba04ac96c" positionType="Float" mode="Opaque" x="416" y="255" width="55" height="20" backcolor="#E8E7E7">
 					<printWhenExpression><![CDATA[$F{child}.getFridayAttendance() != null && (
 $F{child}.getFridayAttendance().toString().equals("MORNINGWITHLUNCH") ||
 $F{child}.getFridayAttendance().toString().equals("AFTERNOONWITHLUNCH") ||
@@ -241,7 +241,7 @@ $F{child}.getFridayAttendance().toString().equals("FULL"))]]></printWhenExpressi
 				<text><![CDATA[Friday]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="2f3b194e-8abd-458b-b18c-3d8b38d07cea" positionType="Float" mode="Opaque" x="349" y="235" width="67" height="20" backcolor="#E8E7E7">
+				<reportElement uuid="2f3b194e-8abd-458b-b18c-3d8b38d07cea" positionType="Float" mode="Opaque" x="349" y="255" width="67" height="20" backcolor="#E8E7E7">
 					<printWhenExpression><![CDATA[$F{child}.getThursdayAttendance() != null && (
 $F{child}.getThursdayAttendance().toString().equals("MORNINGWITHLUNCH") ||
 $F{child}.getThursdayAttendance().toString().equals("AFTERNOONWITHLUNCH") ||
@@ -253,7 +253,7 @@ $F{child}.getThursdayAttendance().toString().equals("FULL"))]]></printWhenExpres
 				<text><![CDATA[Thursday]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="486530b4-bbca-4c01-8b92-f349f7ef1a52" positionType="Float" mode="Opaque" x="267" y="255" width="82" height="20" backcolor="#E8E7E7">
+				<reportElement uuid="486530b4-bbca-4c01-8b92-f349f7ef1a52" positionType="Float" mode="Opaque" x="267" y="275" width="82" height="20" backcolor="#E8E7E7">
 					<printWhenExpression><![CDATA[$F{child}.getWednesdayAttendance() != null && (
 $F{child}.getWednesdayAttendance().toString().equals("AFTERNOONWITHLUNCH") ||
 $F{child}.getWednesdayAttendance().toString().equals("AFTERNOON") ||
@@ -265,7 +265,7 @@ $F{child}.getWednesdayAttendance().toString().equals("FULL"))]]></printWhenExpre
 				<text><![CDATA[Wednesday]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="f2e2931d-c9b7-42e0-b147-ac3f58a7f11b" positionType="Float" mode="Opaque" x="157" y="255" width="55" height="20" backcolor="#E8E7E7">
+				<reportElement uuid="f2e2931d-c9b7-42e0-b147-ac3f58a7f11b" positionType="Float" mode="Opaque" x="157" y="275" width="55" height="20" backcolor="#E8E7E7">
 					<printWhenExpression><![CDATA[$F{child}.getMondayAttendance() != null && (
 $F{child}.getMondayAttendance().toString().equals("AFTERNOONWITHLUNCH") ||
 $F{child}.getMondayAttendance().toString().equals("AFTERNOON") ||
@@ -277,7 +277,7 @@ $F{child}.getMondayAttendance().toString().equals("FULL"))]]></printWhenExpressi
 				<text><![CDATA[Monday]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="6d978286-baf2-4491-b172-e0b7ea5f767c" positionType="Float" mode="Opaque" x="212" y="255" width="55" height="20" backcolor="#E8E7E7">
+				<reportElement uuid="6d978286-baf2-4491-b172-e0b7ea5f767c" positionType="Float" mode="Opaque" x="212" y="275" width="55" height="20" backcolor="#E8E7E7">
 					<printWhenExpression><![CDATA[$F{child}.getTuesdayAttendance() != null && (
 $F{child}.getTuesdayAttendance().toString().equals("AFTERNOONWITHLUNCH") ||
 $F{child}.getTuesdayAttendance().toString().equals("AFTERNOON") ||
@@ -289,7 +289,7 @@ $F{child}.getTuesdayAttendance().toString().equals("FULL"))]]></printWhenExpress
 				<text><![CDATA[Tuesday]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="5f29fa47-46b8-402a-93a8-47878c74861c" positionType="Float" mode="Opaque" x="416" y="255" width="55" height="20" backcolor="#E8E7E7">
+				<reportElement uuid="5f29fa47-46b8-402a-93a8-47878c74861c" positionType="Float" mode="Opaque" x="416" y="275" width="55" height="20" backcolor="#E8E7E7">
 					<printWhenExpression><![CDATA[$F{child}.getFridayAttendance() != null && (
 $F{child}.getFridayAttendance().toString().equals("AFTERNOONWITHLUNCH") ||
 $F{child}.getFridayAttendance().toString().equals("AFTERNOON") ||
@@ -301,7 +301,7 @@ $F{child}.getFridayAttendance().toString().equals("FULL"))]]></printWhenExpressi
 				<text><![CDATA[Friday]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="9cc97581-8bab-4a6d-9174-283fc4c76296" positionType="Float" mode="Opaque" x="349" y="255" width="67" height="20" backcolor="#E8E7E7">
+				<reportElement uuid="9cc97581-8bab-4a6d-9174-283fc4c76296" positionType="Float" mode="Opaque" x="349" y="275" width="67" height="20" backcolor="#E8E7E7">
 					<printWhenExpression><![CDATA[$F{child}.getThursdayAttendance() != null && (
 $F{child}.getThursdayAttendance().toString().equals("AFTERNOONWITHLUNCH") ||
 $F{child}.getThursdayAttendance().toString().equals("AFTERNOON") ||
@@ -313,7 +313,7 @@ $F{child}.getThursdayAttendance().toString().equals("FULL"))]]></printWhenExpres
 				<text><![CDATA[Thursday]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="18032939-1403-4f3b-b7ef-8c15034de9d8" positionType="Float" x="212" y="235" width="55" height="20">
+				<reportElement uuid="18032939-1403-4f3b-b7ef-8c15034de9d8" positionType="Float" x="212" y="255" width="55" height="20">
 					<printWhenExpression><![CDATA[$F{child}.getTuesdayAttendance() == null || !(
 $F{child}.getTuesdayAttendance().toString().equals("MORNINGWITHLUNCH") ||
 $F{child}.getTuesdayAttendance().toString().equals("AFTERNOONWITHLUNCH") ||
@@ -325,7 +325,7 @@ $F{child}.getTuesdayAttendance().toString().equals("FULL"))]]></printWhenExpress
 				<text><![CDATA[Tuesday]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="935bcb13-ddbd-4694-bdec-148704b4dda7" positionType="Float" x="157" y="235" width="55" height="20">
+				<reportElement uuid="935bcb13-ddbd-4694-bdec-148704b4dda7" positionType="Float" x="157" y="255" width="55" height="20">
 					<printWhenExpression><![CDATA[$F{child}.getMondayAttendance() == null || !(
 $F{child}.getMondayAttendance().toString().equals("MORNINGWITHLUNCH") ||
 $F{child}.getMondayAttendance().toString().equals("AFTERNOONWITHLUNCH") ||
@@ -337,7 +337,7 @@ $F{child}.getMondayAttendance().toString().equals("FULL"))]]></printWhenExpressi
 				<text><![CDATA[Monday]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="5179c25a-cd36-43e9-859f-0fea2c3420bb" positionType="Float" x="157" y="255" width="55" height="20">
+				<reportElement uuid="5179c25a-cd36-43e9-859f-0fea2c3420bb" positionType="Float" x="157" y="275" width="55" height="20">
 					<printWhenExpression><![CDATA[$F{child}.getMondayAttendance() == null || !(
 $F{child}.getMondayAttendance().toString().equals("AFTERNOONWITHLUNCH") ||
 $F{child}.getMondayAttendance().toString().equals("AFTERNOON") ||
@@ -349,7 +349,7 @@ $F{child}.getMondayAttendance().toString().equals("FULL"))]]></printWhenExpressi
 				<text><![CDATA[Monday]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="1aecff2a-9da8-44ca-ad46-9654a8d65445" positionType="Float" x="212" y="215" width="55" height="20">
+				<reportElement uuid="1aecff2a-9da8-44ca-ad46-9654a8d65445" positionType="Float" x="212" y="235" width="55" height="20">
 					<printWhenExpression><![CDATA[$F{child}.getTuesdayAttendance() == null || !(
 $F{child}.getTuesdayAttendance().toString().equals("MORNING") ||
 $F{child}.getTuesdayAttendance().toString().equals("MORNINGWITHLUNCH") ||
@@ -361,7 +361,7 @@ $F{child}.getTuesdayAttendance().toString().equals("FULL"))]]></printWhenExpress
 				<text><![CDATA[Tuesday]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="cd1ec2f7-eec5-4295-a24f-71d0f32a589a" positionType="Float" x="267" y="215" width="82" height="20">
+				<reportElement uuid="cd1ec2f7-eec5-4295-a24f-71d0f32a589a" positionType="Float" x="267" y="235" width="82" height="20">
 					<printWhenExpression><![CDATA[$F{child}.getWednesdayAttendance() == null || !(
 $F{child}.getWednesdayAttendance().toString().equals("MORNING") ||
 $F{child}.getWednesdayAttendance().toString().equals("MORNINGWITHLUNCH") ||
@@ -373,7 +373,7 @@ $F{child}.getWednesdayAttendance().toString().equals("FULL"))]]></printWhenExpre
 				<text><![CDATA[Wednesday]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="9a3de00e-d292-48e6-abb2-6c6768b54730" positionType="Float" x="212" y="255" width="55" height="20">
+				<reportElement uuid="9a3de00e-d292-48e6-abb2-6c6768b54730" positionType="Float" x="212" y="275" width="55" height="20">
 					<printWhenExpression><![CDATA[$F{child}.getTuesdayAttendance() == null || !(
 $F{child}.getTuesdayAttendance().toString().equals("AFTERNOONWITHLUNCH") ||
 $F{child}.getTuesdayAttendance().toString().equals("AFTERNOON") ||
@@ -385,7 +385,7 @@ $F{child}.getTuesdayAttendance().toString().equals("FULL"))]]></printWhenExpress
 				<text><![CDATA[Tuesday]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="9891fc22-11d0-4e90-a2f5-c9dbba49ec1d" positionType="Float" x="157" y="215" width="55" height="20">
+				<reportElement uuid="9891fc22-11d0-4e90-a2f5-c9dbba49ec1d" positionType="Float" x="157" y="235" width="55" height="20">
 					<printWhenExpression><![CDATA[$F{child}.getMondayAttendance() == null || !(
 $F{child}.getMondayAttendance().toString().equals("MORNING") ||
 $F{child}.getMondayAttendance().toString().equals("MORNINGWITHLUNCH") ||
@@ -397,7 +397,7 @@ $F{child}.getMondayAttendance().toString().equals("FULL"))]]></printWhenExpressi
 				<text><![CDATA[Monday]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="ab45cf7e-a34f-497a-bebd-7c0bc863a8b6" positionType="Float" x="416" y="235" width="55" height="20">
+				<reportElement uuid="ab45cf7e-a34f-497a-bebd-7c0bc863a8b6" positionType="Float" x="416" y="255" width="55" height="20">
 					<printWhenExpression><![CDATA[$F{child}.getFridayAttendance() == null || !(
 $F{child}.getFridayAttendance().toString().equals("MORNINGWITHLUNCH") ||
 $F{child}.getFridayAttendance().toString().equals("AFTERNOONWITHLUNCH") ||
@@ -409,7 +409,7 @@ $F{child}.getFridayAttendance().toString().equals("FULL"))]]></printWhenExpressi
 				<text><![CDATA[Friday]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="2a73f210-cf76-4481-9636-4f47f7f55353" positionType="Float" x="416" y="255" width="55" height="20">
+				<reportElement uuid="2a73f210-cf76-4481-9636-4f47f7f55353" positionType="Float" x="416" y="275" width="55" height="20">
 					<printWhenExpression><![CDATA[$F{child}.getFridayAttendance() == null || !(
 $F{child}.getFridayAttendance().toString().equals("AFTERNOONWITHLUNCH") ||
 $F{child}.getFridayAttendance().toString().equals("AFTERNOON") ||
@@ -421,7 +421,7 @@ $F{child}.getFridayAttendance().toString().equals("FULL"))]]></printWhenExpressi
 				<text><![CDATA[Friday]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="5a86db34-c98f-473a-b6b3-a8fdb0fb7c43" positionType="Float" x="349" y="215" width="67" height="20">
+				<reportElement uuid="5a86db34-c98f-473a-b6b3-a8fdb0fb7c43" positionType="Float" x="349" y="235" width="67" height="20">
 					<printWhenExpression><![CDATA[$F{child}.getThursdayAttendance() == null || !(
 $F{child}.getThursdayAttendance().toString().equals("MORNING") ||
 $F{child}.getThursdayAttendance().toString().equals("MORNINGWITHLUNCH") ||
@@ -433,7 +433,7 @@ $F{child}.getThursdayAttendance().toString().equals("FULL"))]]></printWhenExpres
 				<text><![CDATA[Thursday]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="31195ea6-e543-4cea-90a7-55518a38bb8f" positionType="Float" x="267" y="255" width="82" height="20">
+				<reportElement uuid="31195ea6-e543-4cea-90a7-55518a38bb8f" positionType="Float" x="267" y="275" width="82" height="20">
 					<printWhenExpression><![CDATA[$F{child}.getWednesdayAttendance() == null || !(
 $F{child}.getWednesdayAttendance().toString().equals("AFTERNOONWITHLUNCH") ||
 $F{child}.getWednesdayAttendance().toString().equals("AFTERNOON") ||
@@ -445,7 +445,7 @@ $F{child}.getWednesdayAttendance().toString().equals("FULL"))]]></printWhenExpre
 				<text><![CDATA[Wednesday]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="79039213-eebb-4fca-a75e-dc50535447b8" positionType="Float" x="267" y="235" width="82" height="20">
+				<reportElement uuid="79039213-eebb-4fca-a75e-dc50535447b8" positionType="Float" x="267" y="255" width="82" height="20">
 					<printWhenExpression><![CDATA[$F{child}.getWednesdayAttendance() == null || !(
 $F{child}.getWednesdayAttendance().toString().equals("MORNINGWITHLUNCH") ||
 $F{child}.getWednesdayAttendance().toString().equals("AFTERNOONWITHLUNCH") ||
@@ -457,7 +457,7 @@ $F{child}.getWednesdayAttendance().toString().equals("FULL"))]]></printWhenExpre
 				<text><![CDATA[Wednesday]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="f9cc253a-7100-43fa-b403-28e4970b6135" positionType="Float" x="349" y="235" width="67" height="20">
+				<reportElement uuid="f9cc253a-7100-43fa-b403-28e4970b6135" positionType="Float" x="349" y="255" width="67" height="20">
 					<printWhenExpression><![CDATA[$F{child}.getThursdayAttendance() == null || !(
 $F{child}.getThursdayAttendance().toString().equals("MORNINGWITHLUNCH") ||
 $F{child}.getThursdayAttendance().toString().equals("AFTERNOONWITHLUNCH") ||
@@ -469,7 +469,7 @@ $F{child}.getThursdayAttendance().toString().equals("FULL"))]]></printWhenExpres
 				<text><![CDATA[Thursday]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="30726037-5f5b-43bc-8cc3-a6971a0f9b75" positionType="Float" x="349" y="255" width="67" height="20">
+				<reportElement uuid="30726037-5f5b-43bc-8cc3-a6971a0f9b75" positionType="Float" x="349" y="275" width="67" height="20">
 					<printWhenExpression><![CDATA[$F{child}.getThursdayAttendance() == null || !(
 $F{child}.getThursdayAttendance().toString().equals("AFTERNOONWITHLUNCH") ||
 $F{child}.getThursdayAttendance().toString().equals("AFTERNOON") ||
@@ -481,7 +481,7 @@ $F{child}.getThursdayAttendance().toString().equals("FULL"))]]></printWhenExpres
 				<text><![CDATA[Thursday]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="029805c7-0f60-4525-aefd-756ef6c7dbef" positionType="Float" x="416" y="215" width="55" height="20">
+				<reportElement uuid="029805c7-0f60-4525-aefd-756ef6c7dbef" positionType="Float" x="416" y="235" width="55" height="20">
 					<printWhenExpression><![CDATA[$F{child}.getFridayAttendance() == null || !(
 $F{child}.getFridayAttendance().toString().equals("MORNING") ||
 $F{child}.getFridayAttendance().toString().equals("MORNINGWITHLUNCH") ||
@@ -493,33 +493,40 @@ $F{child}.getFridayAttendance().toString().equals("FULL"))]]></printWhenExpressi
 				<text><![CDATA[Friday]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="b25aaccc-8be1-4336-8ca0-369605bdd830" positionType="Float" x="19" y="444" width="100" height="20"/>
+				<reportElement uuid="b25aaccc-8be1-4336-8ca0-369605bdd830" positionType="Float" x="19" y="464" width="100" height="20"/>
 				<textElement>
 					<font size="12"/>
 				</textElement>
 				<text><![CDATA[Yours faithfully]]></text>
 			</staticText>
 			<textField>
-				<reportElement uuid="1120855f-4769-47db-83e8-165d264f5975" positionType="Float" x="19" y="479" width="283" height="20"/>
+				<reportElement uuid="1120855f-4769-47db-83e8-165d264f5975" positionType="Float" x="19" y="499" width="283" height="20"/>
 				<textElement>
 					<font size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{school}.getManager()]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement uuid="d63dc9ec-7549-4347-9cff-be64e3577f0e" positionType="Float" x="19" y="499" width="100" height="20"/>
+				<reportElement uuid="d63dc9ec-7549-4347-9cff-be64e3577f0e" positionType="Float" x="19" y="519" width="100" height="20"/>
 				<textElement>
 					<font size="12"/>
 				</textElement>
 				<text><![CDATA[Manager]]></text>
 			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="9f56757c-3b68-412d-9011-c3c0dc114a66" positionType="Float" x="19" y="94" width="355" height="20" isRemoveLineWhenBlank="true"/>
+				<textElement>
+					<font fontName="SansSerif" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{child}.getCity()]]></textFieldExpression>
+			</textField>
 		</band>
 	</detail>
 	<columnFooter>
 		<band splitType="Stretch"/>
 	</columnFooter>
 	<pageFooter>
-		<band height="62" splitType="Stretch">
+		<band height="103" splitType="Stretch">
 			<textField isStretchWithOverflow="true">
 				<reportElement uuid="6ebe091e-d909-4d08-9569-fd2c5ab8f99a" positionType="Float" x="19" y="0" width="526" height="21"/>
 				<textElement markup="none">

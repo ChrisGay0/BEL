@@ -24,19 +24,31 @@
 								<th>
 									Registration Date
 								</th>
+								<th>
+									Guardians
+								</th>
+								<th>
+									Telephone
+								</th>
 							</tr>
 						</thead>
 						<tbody>
 							<c:forEach items="${roomMap[room.name]}" var="child">
 								<tr onclick="document.location = 'editChild.htm?childId=${child.id}'" style="cursor: pointer;">
 									<td>
-										${child.firstName}
+										${child.firstName} ${child.surname}
 									</td>	
+									<td>
+										<fmt:formatDate value="${child.requestedStartDate}" pattern="dd MMM yyyy"/>
+									</td>
 									<td>
 										<fmt:formatDate value="${child.registeredDate}" pattern="dd MMM yyyy"/>
 									</td>
 									<td>
-										<fmt:formatDate value="${child.requestedStartDate}" pattern="dd MMM yyyy"/>
+										${child.guardianTitleAndSurnames}
+									</td>
+									<td>
+										${child.contactNumbers}
 									</td>
 								</tr>
 							</c:forEach>

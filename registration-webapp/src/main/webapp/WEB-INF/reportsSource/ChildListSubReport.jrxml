@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ChildListSubReport" pageWidth="802" pageHeight="555" orientation="Landscape" columnWidth="802" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="307dd611-53cf-4fed-add1-785752cf0213">
 	<property name="ireport.zoom" value="1.0"/>
-	<property name="ireport.x" value="10"/>
+	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
+	<parameter name="includeDays" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="includeGuardians" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="includeContacts" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="includeMedical" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="includeAddress" class="java.lang.String"/>
 	<field name="surname" class="java.lang.String"/>
 	<field name="firstName" class="java.lang.String"/>
 	<field name="dateOfBirth" class="java.util.Date"/>
@@ -121,7 +126,7 @@
 		<band splitType="Stretch"/>
 	</columnHeader>
 	<detail>
-		<band height="136" splitType="Stretch">
+		<band height="126" splitType="Stretch">
 			<textField>
 				<reportElement uuid="4a770ff5-625d-4cf7-9160-6dec6fa96c4d" positionType="Float" x="379" y="0" width="119" height="18"/>
 				<box leftPadding="2">
@@ -173,7 +178,9 @@
 				<textFieldExpression><![CDATA[$F{dateOfBirth}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement uuid="ee3a8b83-3ae4-4501-9876-a508e0ecdf38" positionType="Float" mode="Opaque" x="67" y="18" width="90" height="18" backcolor="#CCCCCC"/>
+				<reportElement uuid="ee3a8b83-3ae4-4501-9876-a508e0ecdf38" positionType="Float" mode="Opaque" x="67" y="18" width="90" height="18" isRemoveLineWhenBlank="true" backcolor="#CCCCCC">
+					<printWhenExpression><![CDATA[$P{includeAddress}.equals("true") && (!$F{fullAddress}.equals(""))]]></printWhenExpression>
+				</reportElement>
 				<box leftPadding="3">
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -186,7 +193,9 @@
 				<text><![CDATA[Address]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="ee3a8b83-3ae4-4501-9876-a508e0ecdf38" positionType="Float" mode="Opaque" x="67" y="54" width="90" height="18" backcolor="#CCCCCC"/>
+				<reportElement uuid="ee3a8b83-3ae4-4501-9876-a508e0ecdf38" positionType="Float" mode="Opaque" x="67" y="54" width="90" height="18" isRemoveLineWhenBlank="true" backcolor="#CCCCCC">
+					<printWhenExpression><![CDATA[$P{includeGuardians}.equals("true") && (!$F{guardianInfo}.equals(""))]]></printWhenExpression>
+				</reportElement>
 				<box leftPadding="3">
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -199,7 +208,9 @@
 				<text><![CDATA[Guardian(s)]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="ee3a8b83-3ae4-4501-9876-a508e0ecdf38" positionType="Float" mode="Opaque" x="67" y="72" width="90" height="18" backcolor="#CCCCCC"/>
+				<reportElement uuid="ee3a8b83-3ae4-4501-9876-a508e0ecdf38" positionType="Float" mode="Opaque" x="67" y="72" width="90" height="18" isRemoveLineWhenBlank="true" backcolor="#CCCCCC">
+					<printWhenExpression><![CDATA[$P{includeContacts}.equals("true") &&(!$F{contactInfo}.equals(""))]]></printWhenExpression>
+				</reportElement>
 				<box leftPadding="3">
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -212,7 +223,9 @@
 				<text><![CDATA[Contact(s)]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="ee3a8b83-3ae4-4501-9876-a508e0ecdf38" positionType="Float" mode="Opaque" x="67" y="90" width="90" height="18" backcolor="#CCCCCC"/>
+				<reportElement uuid="ee3a8b83-3ae4-4501-9876-a508e0ecdf38" positionType="Float" mode="Opaque" x="67" y="90" width="90" height="18" isRemoveLineWhenBlank="true" backcolor="#CCCCCC">
+					<printWhenExpression><![CDATA[$P{includeMedical}.equals("true") && (!$F{conditionInfo}.equals(""))]]></printWhenExpression>
+				</reportElement>
 				<box leftPadding="3">
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -225,7 +238,9 @@
 				<text><![CDATA[Conditions]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="ee3a8b83-3ae4-4501-9876-a508e0ecdf38" positionType="Float" mode="Opaque" x="67" y="108" width="90" height="18" backcolor="#CCCCCC"/>
+				<reportElement uuid="ee3a8b83-3ae4-4501-9876-a508e0ecdf38" positionType="Float" mode="Opaque" x="67" y="108" width="90" height="18" isRemoveLineWhenBlank="true" backcolor="#CCCCCC">
+					<printWhenExpression><![CDATA[$P{includeMedical}.equals("true") && (!$F{intoleranceInfo}.equals(""))]]></printWhenExpression>
+				</reportElement>
 				<box leftPadding="3">
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -238,7 +253,9 @@
 				<text><![CDATA[Intollerance]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="ee3a8b83-3ae4-4501-9876-a508e0ecdf38" positionType="Float" mode="Opaque" x="67" y="36" width="90" height="18" backcolor="#CCCCCC"/>
+				<reportElement uuid="ee3a8b83-3ae4-4501-9876-a508e0ecdf38" positionType="Float" mode="Opaque" x="67" y="36" width="90" height="18" isRemoveLineWhenBlank="true" backcolor="#CCCCCC">
+					<printWhenExpression><![CDATA[$P{includeDays}.equals("true") && (!$F{sessionInfo}.equals(""))]]></printWhenExpression>
+				</reportElement>
 				<box leftPadding="3">
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -250,8 +267,10 @@
 				</textElement>
 				<text><![CDATA[Sessions]]></text>
 			</staticText>
-			<textField>
-				<reportElement uuid="8d717a6b-0ed2-4129-85bc-6be96768a18d" positionType="Float" x="67" y="18" width="697" height="18"/>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="8d717a6b-0ed2-4129-85bc-6be96768a18d" positionType="Float" x="67" y="18" width="697" height="18" isRemoveLineWhenBlank="true">
+					<printWhenExpression><![CDATA[$P{includeAddress}.equals("true")]]></printWhenExpression>
+				</reportElement>
 				<box leftPadding="92">
 					<leftPen lineWidth="0.5"/>
 					<bottomPen lineWidth="0.5"/>
@@ -260,8 +279,10 @@
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{fullAddress}]]></textFieldExpression>
 			</textField>
-			<textField>
-				<reportElement uuid="8d717a6b-0ed2-4129-85bc-6be96768a18d" positionType="Float" x="67" y="36" width="697" height="18"/>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="8d717a6b-0ed2-4129-85bc-6be96768a18d" positionType="Float" x="67" y="36" width="697" height="18" isRemoveLineWhenBlank="true">
+					<printWhenExpression><![CDATA[$P{includeDays}.equals("true")]]></printWhenExpression>
+				</reportElement>
 				<box leftPadding="92">
 					<leftPen lineWidth="0.5"/>
 					<bottomPen lineWidth="0.5"/>
@@ -270,8 +291,10 @@
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{sessionInfo}]]></textFieldExpression>
 			</textField>
-			<textField>
-				<reportElement uuid="8d717a6b-0ed2-4129-85bc-6be96768a18d" positionType="Float" x="67" y="54" width="697" height="18"/>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="8d717a6b-0ed2-4129-85bc-6be96768a18d" positionType="Float" x="67" y="54" width="697" height="18" isRemoveLineWhenBlank="true">
+					<printWhenExpression><![CDATA[$P{includeGuardians}.equals("true")]]></printWhenExpression>
+				</reportElement>
 				<box leftPadding="92">
 					<leftPen lineWidth="0.5"/>
 					<bottomPen lineWidth="0.5"/>
@@ -280,8 +303,10 @@
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{guardianInfo}]]></textFieldExpression>
 			</textField>
-			<textField>
-				<reportElement uuid="8d717a6b-0ed2-4129-85bc-6be96768a18d" positionType="Float" x="67" y="72" width="697" height="18"/>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="8d717a6b-0ed2-4129-85bc-6be96768a18d" positionType="Float" x="67" y="72" width="697" height="18" isRemoveLineWhenBlank="true">
+					<printWhenExpression><![CDATA[$P{includeContacts}.equals("true")]]></printWhenExpression>
+				</reportElement>
 				<box leftPadding="92">
 					<leftPen lineWidth="0.5"/>
 					<bottomPen lineWidth="0.5"/>
@@ -290,8 +315,10 @@
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{contactInfo}]]></textFieldExpression>
 			</textField>
-			<textField>
-				<reportElement uuid="8d717a6b-0ed2-4129-85bc-6be96768a18d" positionType="Float" x="67" y="108" width="697" height="18"/>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="8d717a6b-0ed2-4129-85bc-6be96768a18d" positionType="Float" x="67" y="108" width="697" height="18" isRemoveLineWhenBlank="true">
+					<printWhenExpression><![CDATA[$P{includeMedical}.equals("true")]]></printWhenExpression>
+				</reportElement>
 				<box leftPadding="92">
 					<leftPen lineWidth="0.5"/>
 					<bottomPen lineWidth="0.5"/>
@@ -300,8 +327,10 @@
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{intoleranceInfo}]]></textFieldExpression>
 			</textField>
-			<textField>
-				<reportElement uuid="8d717a6b-0ed2-4129-85bc-6be96768a18d" positionType="Float" x="67" y="90" width="697" height="18"/>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="8d717a6b-0ed2-4129-85bc-6be96768a18d" positionType="Float" x="67" y="90" width="697" height="18" isRemoveLineWhenBlank="true">
+					<printWhenExpression><![CDATA[$P{includeMedical}.equals("true")]]></printWhenExpression>
+				</reportElement>
 				<box leftPadding="92">
 					<leftPen lineWidth="0.5"/>
 					<bottomPen lineWidth="0.5"/>

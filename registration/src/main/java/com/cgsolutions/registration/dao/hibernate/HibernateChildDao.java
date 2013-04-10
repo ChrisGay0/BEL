@@ -50,6 +50,9 @@ public class HibernateChildDao extends HibernateDaoSupport implements ChildDao{
 		if(!searchBean.isIncludeLeft()){
 			hql += "and leftSchool = false";
 		}
+		if(searchBean.isOnWaitingList()){
+			hql += " and startDate is null";
+		}
 		
 		return getHibernateTemplate().find(hql);
 	}
@@ -68,7 +71,7 @@ public class HibernateChildDao extends HibernateDaoSupport implements ChildDao{
 	}
 	
 	public List<Child> findChildrenCurrentlyAttending(){
-		Query query = getSession().createQuery("from Child where leftSchool = false and startDate is not null");
+		Query query = getSession().createQuery("from Child where leftSchool = false and startDate is not null order by surname asc");
 		
 		return query.list();
 	}

@@ -63,7 +63,7 @@ public class ChildEditForm {
 		List<Payment> returnList = new ArrayList<Payment>();
 		for(Payment payment: this.newPayments){
 			if(payment.getAmount() != null){
-				payment.setChildId(this.child.getId());
+				payment.setChild(this.child);
 				returnList.add(payment);
 			}
 		}

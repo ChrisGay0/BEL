@@ -47,10 +47,10 @@
 			<h2>Terms</h2>
 			<ul class="list">
 				<li onclick="document.location = 'createTerm.htm'">
-					Create Term
+					Create Half Term
 				</li>
 				<li onclick="document.location = 'findTerm.htm'">
-					Find Term
+					Find Half Term
 				</li>
 			</ul>
 		</div>
@@ -93,6 +93,9 @@
 				</li>
 				<li onclick="document.location = 'invoice.htm'">
 					Invoice
+				</li>
+				<li onclick="document.location = 'findPayments.htm'">
+					Find Payments
 				</li>
 				<li onclick="document.location = 'outstandingPayments.htm'">
 					Outstanding Payments

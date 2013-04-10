@@ -633,4 +633,17 @@ public class Child {
 		
 		return conditionInfo;
 	}
+	
+	public String getContactNumbers(){
+		String numbers = "";
+		if(!CollectionUtils.isEmpty(this.guardians)){
+			for(Guardian guardian: guardians){
+				if(numbers.indexOf(guardian.getContactNumber1()) == - 1){
+					numbers += guardian.getContactNumber1() + ", ";
+				}
+			}
+		}
+		
+		return numbers.length() > 0 ? numbers.substring(0, numbers.length() - 2) : "";
+	}
 }

@@ -7,12 +7,12 @@
 	</head>
 	<body>
 		<%@ include file="/WEB-INF/jsp/header.jsp" %>
-		<h3>Create New Term</h3>		
+		<h3>Create New Half Term</h3>		
 		<form:form name="pageForm" commandName="newTerm" method="post" action="/registration-webapp/createTerm.htm">
 			<table class="formTable">
 				<tr>
 					<td>
-						Term Name
+						Half Term Name
 					</td>
 					<td>
 						<form:input path="termName" cssClass="mandatoryField"/>

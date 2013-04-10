@@ -15,5 +15,9 @@ public enum PaymentType {
 	public String getDescription() {
 		return description;
 	}
+	
+	public String getStringValue(){
+		return this.toString();
+	}
 
 }

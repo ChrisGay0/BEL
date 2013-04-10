@@ -31,6 +31,7 @@ public class Room {
 	private String name;
 	@OneToMany(targetEntity=Child.class)
 	@JoinColumn(name="roomId")
+	@OrderBy(value="dateOfBirth desc")
 	private List<Child> children;
 	private boolean active = true;
 	@OneToMany(mappedBy="room", fetch=FetchType.EAGER, cascade=CascadeType.ALL)

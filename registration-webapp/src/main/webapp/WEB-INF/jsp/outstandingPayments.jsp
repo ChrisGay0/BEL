@@ -37,7 +37,7 @@
 								<a style="cursor: pointer;" onclick="document.location = 'editChild.htm?childId=${child.id}'">${child.firstName} ${child.surname}</a>
 							</td>
 							<td>
-								£${child.totalAmountDue}
+								£<fmt:formatNumber value="${child.totalAmountDue}" minFractionDigits="2" maxFractionDigits="2"/>
 							</td>
 							<td>                   
 								£<form:input path="formObject.newPayments[${listIndex.index}].amount" size="5" maxlength="11" cssClass="numeric"/>
