@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mock.staticmock.MockStaticEntityMethods;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -53,8 +54,14 @@ public class BulkRoomChange {
 	
 	@RequestMapping(method=RequestMethod.POST)
 	public String bulkChange(SessionStatus status, @ModelAttribute("formObject")BulkRoomChangeForm form, HttpServletRequest request){
-		Room newRoom = roomManager.find(Integer.parseInt(request.getParameter("newRoomId")));
-		int moved = childManager.bulkRoomChange(form.getChildren(), newRoom);
+		int moved = 0;
+		if(StringUtils.hasText(request.getParameter("bulkLeave"))){
+			moved = childManager.bulkLeave(form.getChildren());
+		}
+		else{
+			Room newRoom = roomManager.find(Integer.parseInt(request.getParameter("newRoomId")));
+			moved = childManager.bulkRoomChange(form.getChildren(), newRoom);
+		}
 		
 		status.setComplete();
 		return "redirect:bulkRoomChange.htm?childrenMoved=" + moved;

@@ -21,14 +21,14 @@ public class HibernateSchoolDao extends HibernateDaoSupport implements SchoolDao
 		}
 		catch(EmptyResultDataAccessException e){
 			School school = new School();
-			save(school);
+			getSession().save(school);
 			
 			return school;
 		}
 	}
 	
 	public void save(School school){
-		getSession().saveOrUpdate(school);
+		getSession().update(school);
 	}
 
 }

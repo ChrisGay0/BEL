@@ -34,10 +34,14 @@
 						</form:select>
 					</td>
 					<td>
-						Include those that have left
+						Left School
 					</td>
 					<td>
-						<form:checkbox path="includeLeft"/>
+						<form:select path="includeLeft">
+							<form:option value=""></form:option>
+							<form:option value="Yes"></form:option>
+							<form:option value="No"></form:option>
+						</form:select>
 					</td>
 				</tr>
 				<tr>
@@ -45,9 +49,47 @@
 						On Waiting List
 					</td>
 					<td>
-						<form:checkbox path="onWaitingList"/>
+						<form:select path="onWaitingList">
+							<form:option value=""></form:option>
+							<form:option value="Yes"></form:option>
+							<form:option value="No"></form:option>
+						</form:select>
 					</td>
-					<td colspan="2" style="text-align: right;">
+					<td>
+						Non Starter
+					</td>
+					<td>
+						<form:select path="nonStarter">
+							<form:option value=""></form:option>
+							<form:option value="Yes"></form:option>
+							<form:option value="No"></form:option>
+						</form:select>
+					</td>
+					<script>
+						if("${searchBean.nonStarter}" == "true"){
+							$("#nonStarter").val("Yes");
+						}
+						else if ("${searchBean.nonStarter}" == "false"){
+							$("#nonStarter").val("No");
+						}
+						
+						if("${searchBean.onWaitingList}" == "true"){
+							$("#onWaitingList").val("Yes");
+						}
+						else if ("${searchBean.onWaitingList}" == "false"){
+							$("#onWaitingList").val("No");
+						}
+						
+						if("${searchBean.includeLeft}" == "true"){
+							$("#includeLeft").val("Yes");
+						}
+						else if ("${searchBean.includeLeft}" == "false"){
+							$("#includeLeft").val("No");
+						}
+					</script>
+				</tr>
+				<tr>
+					<td colspan="4" style="text-align: right;">
 						<button>Search</button>
 					</td>
 				</tr>

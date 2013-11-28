@@ -65,7 +65,7 @@
 		<band splitType="Stretch"/>
 	</columnHeader>
 	<detail>
-		<band height="385" splitType="Stretch">
+		<band height="401" splitType="Stretch">
 			<staticText>
 				<reportElement uuid="5008e283-4176-4695-851b-89948acda6a5" positionType="Float" x="12" y="17" width="100" height="20"/>
 				<textElement/>
@@ -224,14 +224,14 @@
 				<textFieldExpression><![CDATA[$F{currentBalance}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement uuid="1a15f318-d10c-4b6a-b653-d4956634ebf8" positionType="Float" x="12" y="350" width="100" height="20"/>
+				<reportElement uuid="1a15f318-d10c-4b6a-b653-d4956634ebf8" positionType="Float" x="12" y="371" width="100" height="20"/>
 				<textElement>
 					<font size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Total Due:]]></text>
 			</staticText>
 			<textField pattern="0.00">
-				<reportElement uuid="b186da5a-1142-495d-9e11-54300c55097f" positionType="Float" x="474" y="350" width="75" height="20"/>
+				<reportElement uuid="b186da5a-1142-495d-9e11-54300c55097f" positionType="Float" x="474" y="371" width="75" height="20"/>
 				<textElement>
 					<font size="12" isBold="true"/>
 				</textElement>
@@ -273,7 +273,7 @@
 				<text><![CDATA[£]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="b1e4c46d-2562-42dd-9aa5-5ff94aad809a" positionType="Float" x="463" y="350" width="11" height="20"/>
+				<reportElement uuid="b1e4c46d-2562-42dd-9aa5-5ff94aad809a" positionType="Float" x="463" y="371" width="11" height="20"/>
 				<textElement>
 					<font size="12" isBold="true"/>
 				</textElement>
@@ -315,6 +315,29 @@
 				<reportElement uuid="eedb3ecf-c1f1-414a-bd3f-69940f1d2007" positionType="Float" x="112" y="97" width="327" height="20" isRemoveLineWhenBlank="true"/>
 				<textElement/>
 				<textFieldExpression><![CDATA[$F{child}.getCity()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="9a58737b-56a1-49d6-a157-3afe75fa3209" positionType="Float" x="12" y="337" width="100" height="20">
+					<printWhenExpression><![CDATA[$F{child}.getDepositRefunded() != null && $F{child}.getDepositRefunded() > 0]]></printWhenExpression>
+				</reportElement>
+				<textElement/>
+				<text><![CDATA[Deposit Refund:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="6acdb471-d3d2-46ac-952b-a910eec9fef1" positionType="Float" x="463" y="337" width="11" height="20">
+					<printWhenExpression><![CDATA[$F{child}.getDepositRefunded() != null && $F{child}.getDepositRefunded() > 0]]></printWhenExpression>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[£]]></text>
+			</staticText>
+			<textField pattern="0.00">
+				<reportElement uuid="b1deb963-a5d3-4388-b32f-d6012634978f" x="474" y="337" width="75" height="20">
+					<printWhenExpression><![CDATA[$F{child}.getDepositRefunded() != null && $F{child}.getDepositRefunded() > 0]]></printWhenExpression>
+				</reportElement>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{child}.getDepositRefunded()]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

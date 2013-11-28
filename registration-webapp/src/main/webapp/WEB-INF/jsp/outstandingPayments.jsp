@@ -13,19 +13,22 @@
 			<table class="listTable">
 				<thead>
 					<tr>
-						<th>
+						<th nowrap="nowrap">
 							Child Name
 						</th>
-						<th>
+						<th nowrap="nowrap">
 							Current Balance
 						</th>
-						<th>
+						<th nowrap="nowrap">
 							New Payment
 						</th>
 						<th>
+							New Payment Date
+						</th>
+						<th nowrap="nowrap">
 							Registration Fee Paid
 						</th>
-						<th>
+						<th nowrap="nowrap">
 							Deposit Paid
 						</th>
 					</tr>
@@ -42,8 +45,11 @@
 							<td>                   
 								£<form:input path="formObject.newPayments[${listIndex.index}].amount" size="5" maxlength="11" cssClass="numeric"/>
 								<form:select path="formObject.newPayments[${listIndex.index}].paymentType" items="${paymentList}" itemLabel="description"/>
-								<form:input path="formObject.newPayments[${listIndex.index}].comments" size="60" maxlength="255"/>
+								<form:input path="formObject.newPayments[${listIndex.index}].comments" size="40" maxlength="255"/>
 							</td>	
+							<td>
+								<form:input path="formObject.newPayments[${listIndex.index}].datePaid" class="date"/>
+							</td>
 							<td>
 								<form:checkbox path="formObject.children[${listIndex.index}].registrationFeePaid"/>
 							</td>

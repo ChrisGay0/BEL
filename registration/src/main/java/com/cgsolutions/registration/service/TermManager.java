@@ -1,6 +1,7 @@
 package com.cgsolutions.registration.service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,5 +40,8 @@ public class TermManager {
 	}
 	public List<Term> findAllFutureTerms(boolean attendancesGenerated){
 		return termDao.findAllFutureTerms(attendancesGenerated);
+	}
+	public List<Term> findTermsSince(Date dateFrom){
+		return termDao.findTermsSince(dateFrom);
 	}
 }

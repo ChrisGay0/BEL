@@ -4,6 +4,18 @@
 <html>
 	<head>
 		<%@ include file="headerIncludes.jspf" %>
+		<script type="text/javascript">
+			function doAdd(){
+				$("#addAttendances").val("Y");
+				document.pageForm.submit();
+			}
+			
+			function doDelete(){
+				if(confirm("Are you sure you want to delete the selected attendances?")){
+					document.pageForm.submit();
+				}
+			}
+		</script>
 	</head>
 	<body style="width: 100%;">
 		<h3>Edit Attendances</h3>		
@@ -46,6 +58,27 @@
 						</th>
 					</tr>
 				</thead>
+				<c:forEach items="${form.newAttendances}" var="newAttendance" varStatus="listIndex">
+					<spring:nestedPath path="newAttendances[${listIndex.index}]">
+						<tr>
+							<td>
+							
+							</td>
+							<td>
+							
+							</td>
+							<td>
+								<form:input path="attendanceDate" class="date"/>
+							</td>
+							<td>
+								<form:select path="typeOfAttendance" items="${attendanceTypes}" itemLabel="description"/>
+							</td>
+							<td>
+								<form:select path="room" items="${rooms}" itemLabel="name" itemValue="id"/>
+							</td>
+						</tr>
+					</spring:nestedPath>
+				</c:forEach>
 				<c:forEach items="${form.attendances}" var="attendance" varStatus="listIndex">
 					<spring:nestedPath path="attendances[${listIndex.index}]">
 						<tr>
@@ -70,10 +103,12 @@
 				</c:forEach>
 			</table>
 			<form:hidden path="child.id"/>
+			<input type="hidden" name="addAttendances" id="addAttendances"/>
 		</form:form>
 		<div id="buttonBar"> 
 			<div id="holder">
-				<button onclick="document.pageForm.submit();return false;">Delete</button>
+				<button onclick="doAdd();return false;">Add Attendances</button>
+				<button onclick="doDelete();return false;">Delete</button>
 			</div>
 		</div>
 	</body>

@@ -81,6 +81,15 @@ public class AttendanceManagerTest {
 		attendanceManager.save(attendance);
 		assertTrue(attendance.getId() != 0);
 	}
+	@Test
+	public void getHoursBetweenDates(){
+		attendanceManager.getTotalHours(MyDateUtils.getDateFromString("30 07 2012", "dd MM yyyy"), new Date());
+	}
+	
+	@Test
+	public void findChildrenForLunch(){
+		attendanceManager.findChildrenForLunch(new Date());
+	}
 	
 	@Test
 	public void generateAttendances(){

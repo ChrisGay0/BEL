@@ -1,6 +1,7 @@
 package com.cgsolutions.registration.service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,7 @@ import com.cgsolutions.registration.domain.Intolerance;
 import com.cgsolutions.registration.domain.MedicalInfo;
 import com.cgsolutions.registration.domain.Room;
 import com.cgsolutions.registration.domain.School;
+import com.cgsolutions.registration.domain.Term;
 
 @Service
 public class ChildManager {
@@ -60,8 +62,8 @@ public class ChildManager {
 		return childDao.searchForChildren(searchBean);
 	}
 	
-	public List<Child> findChildrenOnWaitingList(int roomId){
-		return childDao.findChildrenOnWaitingList(roomId);
+	public List<Child> findChildrenOnWaitingList(Integer roomId, Term term){
+		return childDao.findChildrenOnWaitingList(roomId, term);
 	}
 	
 	public void deleteSelectedItems(Child child){
@@ -114,7 +116,7 @@ public class ChildManager {
 					//make sure we have the latest child object for hibernate
 					child = findChild(child.getId());
 					child.setRoom(newRoom);
-					saveChild(child);
+					childDao.saveChild(child);
 					
 					childrenMoved++;
 				}
@@ -138,5 +140,25 @@ public class ChildManager {
 				saveChild(child);
 			}
 		}
+	}
+	
+	public int bulkLeave(List<Child> children){
+		int childrenLeft = 0;
+		if(!CollectionUtils.isEmpty(children)){
+			for(Child child: children){
+				if(child.isSelected()){
+					child.setLeftSchool(true);
+					child.setDateLeft(new Date());
+					childDao.saveChild(child);
+					childrenLeft++;
+				}
+			}
+		}
+		
+		return childrenLeft;
+	}
+	
+	public List<Child> findActiveChildrenWithAllergiesForRoom(int roomId){
+		return childDao.findActiveChildrenWithAllergiesForRoom(roomId);
 	}
 }

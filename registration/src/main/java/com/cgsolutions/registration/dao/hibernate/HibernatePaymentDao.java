@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import com.cgsolutions.registration.dao.PaymentDao;
 import com.cgsolutions.registration.domain.Payment;
+import com.cgsolutions.security.utility.MyDateUtils;
 @Repository
 public class HibernatePaymentDao extends HibernateDaoSupport implements PaymentDao {
 	@Autowired
@@ -20,8 +21,8 @@ public class HibernatePaymentDao extends HibernateDaoSupport implements PaymentD
 	
 	public List<Payment> findPayments(Date dateFrom, Date toDate) {
 		Query query = getSession().createQuery("from Payment where datePaid >= :dateFrom and datePaid <= :toDate");
-		query.setParameter("dateFrom", dateFrom);
-		query.setParameter("toDate", toDate);
+		query.setParameter("dateFrom", MyDateUtils.setTimeToMidnight(dateFrom));
+		query.setParameter("toDate", MyDateUtils.setTimeToOneMinuteToMidnight(toDate));
 		
 		return query.list();
 	}

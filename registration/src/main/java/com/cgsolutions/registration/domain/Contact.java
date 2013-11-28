@@ -23,6 +23,7 @@ public class Contact {
 	private String surname;
 	private boolean allowedToCollect;
 	private String phoneNumber;
+	private String relationship;
 	@Transient
 	private boolean selected;
 	@Column(nullable=true)
@@ -69,6 +70,12 @@ public class Contact {
 	}
 	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
+	}
+	public String getRelationship() {
+		return relationship;
+	}
+	public void setRelationship(String relationship) {
+		this.relationship = relationship;
 	}
 	public boolean isSelected() {
 		return selected;

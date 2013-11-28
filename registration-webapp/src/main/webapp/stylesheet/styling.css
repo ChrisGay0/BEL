@@ -18,6 +18,14 @@ button{
 	cursor: pointer;
 }
 
+.mainError{
+	font-size: 14px;	
+}
+
+.error{
+	color: red;
+	font-weight: bold;
+}
 h1{
 	padding-top: 35px;
 	padding-bottom: 35px;

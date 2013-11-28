@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.cgsolutions.registration.domain.Child;
 import com.cgsolutions.registration.domain.ChildSearchBean;
+import com.cgsolutions.registration.domain.Term;
 
 public interface ChildDao {
 	void saveChild(Child child);
@@ -14,5 +15,6 @@ public interface ChildDao {
 	List<Child> findActiveChildrenForRoom(int roomId);
 	List<Child> findChildrenNeedingWelcomeLetters();
 	List<Child> findChildrenCurrentlyAttending();
-	List<Child> findChildrenOnWaitingList(int roomId);
+	List<Child> findChildrenOnWaitingList(Integer roomId, Term term);
+	List<Child> findActiveChildrenWithAllergiesForRoom(int roomId);
 }

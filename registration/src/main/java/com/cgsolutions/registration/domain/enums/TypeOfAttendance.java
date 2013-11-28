@@ -16,4 +16,17 @@ public enum TypeOfAttendance {
 	public String getDescription() {
 		return description;
 	}
+	
+	public int getNumberOfSessions(){
+		return this.toString().equals("FULL") ? 2 : 1;
+	}
+	
+	public boolean includesLunch(){
+		if(this.toString().equals("FULL")){
+			return true;
+		}
+		else{
+			return this.toString().endsWith("WITHLUNCH");
+		}
+	}
 }

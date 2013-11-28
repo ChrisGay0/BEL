@@ -43,14 +43,6 @@
 						</tr>
 						<tr>
 							<td>
-								Date of Birth
-							</td>
-							<td>
-								<form:input path="dateOfBirth" cssClass="date"/>
-							</td>
-						</tr>
-						<tr>
-							<td>
 								Relation
 							</td>
 							<td>

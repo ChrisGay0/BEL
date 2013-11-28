@@ -67,6 +67,7 @@ public class InvoiceController extends MultiActionController {
 			child.setBills(billManager.findBillsForChild(child));
 			InvoiceBean bean = new InvoiceBean();
 			bean.setChild(child);
+
 			for(TermBill bill: child.getBills()){
 				if(bill.getTerm().getId() == term.getId()){
 					bean.setTotalLunches(bill.getLunches() - bill.getFundedLunches());
@@ -76,7 +77,11 @@ public class InvoiceController extends MultiActionController {
 				}
 			}
 			//Current balance shouldn't include this terms cost
-			bean.setCurrentBalance(Float.parseFloat(child.getCurrentBalance()) + (bean.getTotalLunchCost() + bean.getTotalSessionCost()));
+			bean.setCurrentBalance(Float.parseFloat(child.getCurrentBalance()) - (bean.getTotalLunchCost() + bean.getTotalSessionCost()));
+			//also shouldnt include deposit refunds (if there are any)
+			if(child.getDepositRefunded() != null){
+				bean.setCurrentBalance(bean.getCurrentBalance() + child.getDepositRefunded());
+			}
 		
 			return bean;
 		}

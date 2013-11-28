@@ -10,12 +10,12 @@
 				padding: 3%
 			}
 			
-			#school, #child, #reports{
+			#school, #child, #quickReports{
 				float: left;	
 				clear: left;			
 			}
 			
-			#term, #system{
+			#term, #system, #reportScreens{
 				float: right;
 				clear: right;
 			}
@@ -85,11 +85,29 @@
 			</ul>
 		</div>
 		
-		<div id="reports">
-			<h2>Reports</h2>
+		<div id="quickReports">
+			<h2>Quick Reports</h2>
+			<ul class="list">
+				<li onclick="window.open('/registration-webapp/fullChildList.xls');">
+					Full Child List
+				</li>
+				<li onclick="window.open('/registration-webapp/shortChildList.xls');">
+					Short Child List
+				</li>
+				<li onclick="window.open('/registration-webapp/welcomeLetter.pdf');">
+					Print Welcome Letters
+				</li>
+			</ul>
+		</div>
+		
+		<div id="reportScreens">
+			<h2>Report Screens</h2>
 			<ul class="list">
 				<li onclick="document.location = 'chooseRegister.htm'">
 					Registers
+				</li>
+				<li onclick="document.location = 'chooseLunchRegister.htm'">
+					Lunch Registers
 				</li>
 				<li onclick="document.location = 'invoice.htm'">
 					Invoice
@@ -100,14 +118,14 @@
 				<li onclick="document.location = 'outstandingPayments.htm'">
 					Outstanding Payments
 				</li>
-				<li onclick="window.open('/registration-webapp/welcomeLetter.pdf');">
-					Print Welcome Letters
-				</li>
 				<li onclick="document.location = 'waitingList.htm'">
 					Waiting List
 				</li>
 				<li onclick="document.location = 'childReport.htm'">
 					Child Reports
+				</li>
+				<li onclick="document.location = 'showHours.htm'">
+					Hours Between Dates
 				</li>
 			</ul>
 		</div>

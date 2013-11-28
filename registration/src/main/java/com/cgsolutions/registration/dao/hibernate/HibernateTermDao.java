@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import com.cgsolutions.registration.dao.TermDao;
 import com.cgsolutions.registration.domain.Term;
+import com.cgsolutions.security.utility.MyDateUtils;
 
 @Repository
 public class HibernateTermDao extends HibernateDaoSupport implements TermDao {
@@ -29,8 +30,8 @@ public class HibernateTermDao extends HibernateDaoSupport implements TermDao {
 	
 	public Term findCurrentTerm(){
 		Query query = getSession().createQuery("from Term where startDate <= :start and endDate >= :end");
-		query.setParameter("start", new Date());
-		query.setParameter("end", new Date());
+		query.setParameter("start", MyDateUtils.setTimeToMidnight(new Date()));
+		query.setParameter("end", MyDateUtils.setTimeToMidnight(new Date()));
 		
 		return (Term)query.uniqueResult();
 	}
@@ -43,6 +44,13 @@ public class HibernateTermDao extends HibernateDaoSupport implements TermDao {
 		Query query = getSession().createQuery("from Term where startDate > :todaysDate and lockTerm = :lockTerm");
 		query.setParameter("lockTerm", attendancesGenerated);
 		query.setParameter("todaysDate", new Date());
+		
+		return query.list();
+	}
+	
+	public List<Term> findTermsSince(Date dateFrom){
+		Query query = getSession().createQuery("from Term where startDate >= :dateFrom");
+		query.setParameter("dateFrom", dateFrom);
 		
 		return query.list();
 	}

@@ -34,7 +34,12 @@ public class ChildManagerTest {
 	
 	@Test
 	public void testFindChildrenOnWaitingList(){
-		childManager.findChildrenOnWaitingList(1);
+		childManager.findChildrenOnWaitingList(1, null);
+	}
+	
+	@Test
+	public void testFindAactiveChildrenWithAlergies(){
+		childManager.findActiveChildrenWithAllergiesForRoom(1);
 	}
 	
 	@Test

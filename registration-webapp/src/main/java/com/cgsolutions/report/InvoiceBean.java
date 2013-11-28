@@ -53,7 +53,7 @@ public class InvoiceBean {
 		return this.lunchCost * this.totalLunches;
 	}
 	public float getTotalCost(){
-		float total = getTotalLunchCost() + getTotalSessionCost() - this.currentBalance;
+		float total = this.currentBalance + getTotalLunchCost() + getTotalSessionCost();
 		if(!child.isRegistrationFeePaid()){
 			total += child.getRegistrationFee();
 		}
@@ -65,6 +65,10 @@ public class InvoiceBean {
 				total += (child.getDepositRequired() - child.getDepositPaid());
 			}
 		}
+		if(child.getDepositRefunded() != null){
+			total -= child.getDepositRefunded();
+		}
+		
 		return total;
 	}
 }

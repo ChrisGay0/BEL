@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.springframework.util.StringUtils;
+
 @Entity
 @Table(name="guardian")
 public class Guardian {
@@ -142,5 +144,33 @@ public class Guardian {
 	}
 	public void setOccupation(String occupation) {
 		this.occupation = occupation;
+	}
+	
+	public String getFullAddress(){
+		String address = "";
+		if(StringUtils.hasText(this.addressLine1)){
+			address += this.addressLine1 + ", ";
+		}
+		if(StringUtils.hasText(this.addressLine2)){
+			address += this.addressLine2 + ", ";
+		}
+		if(StringUtils.hasText(this.addressLine3)){
+			address += this.addressLine3 + ", ";
+		}
+		if(StringUtils.hasText(this.city)){
+			address += this.city + ", ";
+		}
+		if(StringUtils.hasText(this.county)){
+			address += this.county + ", ";
+		}
+		if(StringUtils.hasText(this.postCode)){
+			address += this.postCode + ", ";
+		}
+		
+		//Remove last comma
+		if(address.length() > 1){
+			address = address.substring(0, address.length() - 2) + ".";
+		}
+		return address;
 	}
 }

@@ -3,6 +3,7 @@ package com.cgsolutions.registration.service;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,6 +31,13 @@ public class AttendanceManager {
 		attendanceDao.save(attendance);
 	}
 	
+	public void save(List<Attendance> attendances){
+		if(!CollectionUtils.isEmpty(attendances)){
+			for(Attendance attendance: attendances){
+				save(attendance);
+			}
+		}
+	}
 	public List<Attendance> findForTerm(int termId){
 		return attendanceDao.findForTerm(termId);
 	}
@@ -54,6 +62,9 @@ public class AttendanceManager {
 		return newAttendances;
 	}
 	
+	public List<Attendance> findChildrenForLunch(Date date){
+		return attendanceDao.findChildrenForLunch(date);
+	}
 	public List<Attendance> redoAttendancesForChild(Child child){
 		deleteFutureAttendancesForChild(child);
 		List<Attendance> newAttendances = new ArrayList<Attendance>();
@@ -151,5 +162,9 @@ public class AttendanceManager {
 	
 	public List<Attendance> findAttendancesForChild(Child child, Date termStartsBefore){
 		return attendanceDao.findAttendancesForChild(child, termStartsBefore);
+	}
+	
+	public Map<String, String> getTotalHours(Date date1, Date date2){
+		return attendanceDao.getTotalHours(date1, date2);
 	}
 }

@@ -2,6 +2,7 @@ package com.cgsolutions.registration.dao;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import com.cgsolutions.registration.domain.Attendance;
 import com.cgsolutions.registration.domain.Child;
@@ -20,4 +21,6 @@ public interface AttendanceDao {
 	List<Attendance> findAttendancesForChildInTerm(Child child, Term term);
 	void deleteAttendance(Attendance attendance);
 	List<Attendance> findAttendancesForChild(Child child, Date termStartsBefore);
+	Map<String, String> getTotalHours(Date date1, Date date2);
+	List<Attendance> findChildrenForLunch(Date date);
 }

@@ -26,6 +26,61 @@
 		</property>
 	</bean>
 	
+	<bean id="FullChildListCompile" class="org.springframework.web.servlet.view.jasperreports.JasperReportsXlsView">
+		<property name="reportDataKey">
+			<value>dataSource</value>
+		</property>
+		<property name="url">
+			<value>/WEB-INF/reports/FullChildList.jasper</value>
+		</property>
+		<property name="subReportUrls">
+			<map>					
+				<entry key="FullChildListSubReport">
+					<value>/WEB-INF/reports/FullChildListSubReport.jasper</value>
+				</entry>
+			</map>
+		</property>
+	</bean>
+	
+	<bean id="ShortChildListCompile" class="org.springframework.web.servlet.view.jasperreports.JasperReportsXlsView">
+		<property name="reportDataKey">
+			<value>dataSource</value>
+		</property>
+		<property name="url">
+			<value>/WEB-INF/reports/ShortChildList.jasper</value>
+		</property>
+		<property name="subReportUrls">
+			<map>					
+				<entry key="ShortChildListSubReport">
+					<value>/WEB-INF/reports/ShortChildListSubReport.jasper</value>
+				</entry>
+			</map>
+		</property>
+	</bean>
+	
+	<bean id="LunchRegisterController" class="com.cgsolutions.report.LunchRegisterController">
+		<property name="methodNameResolver">
+			<ref local="resolver"/>
+		</property>	
+		<property name="attendanceManager" ref="attendanceManager"/>
+	</bean>
+	
+	<bean id="LunchRegisterCompile" class="org.springframework.web.servlet.view.jasperreports.JasperReportsPdfView">
+		<property name="reportDataKey">
+			<value>dataSource</value>
+		</property>
+		<property name="url">
+			<value>/WEB-INF/reports/lunchRegister.jasper</value>
+		</property>
+		<property name="subReportUrls">
+			<map>					
+				<entry key="lunchRegisterSubReport">
+					<value>/WEB-INF/reports/lunchRegisterSubReport.jasper</value>
+				</entry>
+			</map>
+		</property>
+	</bean>
+	
 	<bean id="PaymentController" class="com.cgsolutions.report.PaymentController">
 		<property name="methodNameResolver">
 			<ref local="resolver"/>
@@ -68,6 +123,7 @@
 		</property>	
 		<property name="roomManager" ref="roomManager"/>
 		<property name="childManager" ref="childManager"/>
+		<property name="termManager" ref="termManager"/>
 	</bean>
 	
 	<bean id="WaitingListCompile" class="org.springframework.web.servlet.view.jasperreports.JasperReportsPdfView">
@@ -142,10 +198,13 @@
 		<property name="mappings">
 			<props>
 				<prop key="/register.pdf">RegisterController</prop>
+				<prop key="/lunchRegister.pdf">LunchRegisterController</prop>
 				<prop key="/invoice.pdf">InvoiceController</prop>
 				<prop key="/welcomeLetter.pdf">WelcomeLetterController</prop>
 				<prop key="/waitingList.pdf">WaitingListController</prop>
 				<prop key="/childList.pdf">ChildListController</prop>
+				<prop key="/fullChildList.xls">ChildListController</prop>
+				<prop key="/shortChildList.xls">ChildListController</prop>
 				<prop key="/payments.pdf">PaymentController</prop>
 			</props>
 		</property>
@@ -155,10 +214,13 @@
 		<property name="mappings">
 			<props>
 				<prop key="/register.pdf">printRegister</prop>
+				<prop key="/lunchRegister.pdf">printLunchRegister</prop>
 				<prop key="/invoice.pdf">printInvoice</prop>
 				<prop key="/welcomeLetter.pdf">printLetter</prop>
 				<prop key="/waitingList.pdf">handleReport</prop>
 				<prop key="/childList.pdf">handleReport</prop>
+				<prop key="/fullChildList.xls">handleFullReport</prop>
+				<prop key="/shortChildList.xls">handleShortReport</prop>
 				<prop key="/payments.pdf">printReport</prop>
 			</props>
 		</property>

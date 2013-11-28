@@ -49,4 +49,8 @@ public class TermManagerTest {
 	public void testFindAllFutureTerms(){
 		termManager.findAllFutureTerms(true);
 	}
+	@Test
+	public void testFindTermsSince(){
+		termManager.findTermsSince(new Date());
+	}
 }

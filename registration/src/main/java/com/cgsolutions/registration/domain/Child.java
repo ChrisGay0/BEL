@@ -72,8 +72,12 @@ public class Child {
 	private String sex;
 	private Date startDate;
 	private boolean leftSchool;
+	private Date dateLeft;
 	private boolean registrationFeePaid;
-	private float registrationFee;
+	private boolean nonStarter;
+	private Date nonStarterDate;
+	private Float registrationFee;
+	private Float depositRefunded;
 	@Transient
 	private boolean selected;
 	private boolean welcomeLetterPrinted;
@@ -228,6 +232,18 @@ public class Child {
 	public void setDoctorsName(String doctorsName) {
 		this.doctorsName = doctorsName;
 	}
+	public boolean isNonStarter() {
+		return nonStarter;
+	}
+	public void setNonStarter(boolean nonStarter) {
+		this.nonStarter = nonStarter;
+	}
+	public Date getNonStarterDate() {
+		return nonStarterDate;
+	}
+	public void setNonStarterDate(Date nonStarterDate) {
+		this.nonStarterDate = nonStarterDate;
+	}
 	public String getDoctorsContactNumber() {
 		return doctorsContactNumber;
 	}
@@ -336,10 +352,22 @@ public class Child {
 	public void setPayments(List<Payment> payments) {
 		this.payments = payments;
 	}
-	public float getRegistrationFee() {
+	public Date getDateLeft() {
+		return dateLeft;
+	}
+	public void setDateLeft(Date dateLeft) {
+		this.dateLeft = dateLeft;
+	}
+	public Float getDepositRefunded() {
+		return depositRefunded;
+	}
+	public void setDepositRefunded(Float depositRefunded) {
+		this.depositRefunded = depositRefunded;
+	}
+	public Float getRegistrationFee() {
 		return registrationFee;
 	}
-	public void setRegistrationFee(float registrationFee) {
+	public void setRegistrationFee(Float registrationFee) {
 		this.registrationFee = registrationFee;
 	}
 	public TypeOfAttendance getTypeOfAttendance(Date attendanceDate){
@@ -421,7 +449,13 @@ public class Child {
 	}
 	
 	public String getCurrentBalance(){
-		BigDecimal total = new BigDecimal(getBillTotal() - getPaymentTotal());
+		BigDecimal total;
+		if(getDepositRefunded() != null){
+			total = new BigDecimal(getBillTotal() - getPaymentTotal() - getDepositRefunded());
+		}
+		else{
+			total = new BigDecimal(getBillTotal() - getPaymentTotal());
+		}
 		BigDecimal rounded = total.setScale(2, BigDecimal.ROUND_HALF_UP);
 		
 		return rounded.toPlainString();
@@ -634,6 +668,20 @@ public class Child {
 		return conditionInfo;
 	}
 	
+	public String getAuthorisationInfo(){
+		String authorisationInfo = "";
+		if(!CollectionUtils.isEmpty(this.authorisations)){
+			for(Authorisation authorisation: this.authorisations){
+				authorisationInfo += authorisation.getActivity();
+				authorisationInfo += ", ";
+			}
+			
+			authorisationInfo = authorisationInfo.substring(0, authorisationInfo.length() - 2);
+		}
+		
+		return authorisationInfo;
+	}
+	
 	public String getContactNumbers(){
 		String numbers = "";
 		if(!CollectionUtils.isEmpty(this.guardians)){
@@ -645,5 +693,142 @@ public class Child {
 		}
 		
 		return numbers.length() > 0 ? numbers.substring(0, numbers.length() - 2) : "";
+	}
+	public String getFirstGuardiansName(){
+		return getGuardiansName(0);
+	}
+	
+	public String getFirstGuardiansContactNumbers(){
+		return getGuardiansContactNumbers(0);
+	}
+	
+	public String getSecondGuardiansContactNumbers(){
+		return getGuardiansContactNumbers(1);
+	}
+	
+	public String getSecondGuardiansName(){
+		return getGuardiansName(1);
+	}
+	
+	public String getFirstGuardiansAddress(){
+		if(!CollectionUtils.isEmpty(this.guardians)){
+			return this.guardians.get(0).getFullAddress();
+		}
+		else{
+			return "";
+		}
+	}
+	
+	public String getSecondGuardiansAddress(){
+		if(!CollectionUtils.isEmpty(this.guardians) && this.guardians.size() >= 2){
+			return this.guardians.get(1).getFullAddress();
+		}
+		else{
+			return "";
+		}
+	}
+	
+	public String getGuardiansContactNumbers(int positionInList){
+		if(this.guardians != null && this.guardians.size() >= (positionInList + 1)){
+			String numbers = this.guardians.get(positionInList).getContactNumber1();
+			if(StringUtils.hasText(this.guardians.get(positionInList).getContactNumber2())){
+				numbers += " " + this.guardians.get(positionInList).getContactNumber2();
+			}
+			
+			return numbers;
+		}
+		else{
+			return "";
+		}
+	}
+	
+	public String getGuardiansName(int positionInList){
+		if(this.guardians != null && this.guardians.size() >= (positionInList + 1)){
+			return this.guardians.get(positionInList).getFirstName() + " " + this.guardians.get(positionInList).getSurname();
+		}
+		else{
+			return "";
+		}
+	}
+	
+	public String getFullMedicalInfo(){
+		String conditions = getConditionInfo();
+		String authorisations = getAuthorisationInfo();
+		String intolerances = getIntoleranceInfo();
+
+		String returnString = "";
+		if(!conditions.equals("")){
+			returnString += conditions;
+		}
+		if(!authorisations.equals("")){
+			if(!returnString.equals("")){
+				returnString += "\n";
+			}
+			returnString += authorisations;
+		}
+		if(!intolerances.equals("")){
+			if(!returnString.equals("")){
+				returnString += "\n";
+			}
+			returnString += intolerances;
+		}
+		
+		return returnString;
+	}
+	
+	public int getTotalSessions(){
+		int total = 0;
+		if(this.mondayAttendance != null){
+			total += this.mondayAttendance.getNumberOfSessions();
+		}
+		if(this.tuesdayAttendance != null){
+			total += this.tuesdayAttendance.getNumberOfSessions();
+		}
+		if(this.wednesdayAttendance != null){
+			total += this.wednesdayAttendance.getNumberOfSessions();
+		}
+		if(this.thursdayAttendance != null){
+			total += this.thursdayAttendance.getNumberOfSessions();
+		}
+		if(this.fridayAttendance != null){
+			total += this.fridayAttendance.getNumberOfSessions();
+		}
+		
+		return total;
+	}
+	
+	public int getTotalPaidSessions(){
+		int total = getTotalSessions();
+		total -= this.fundedLunches;
+		
+		return total > 0 ? total : 0;
+	}
+	
+	public int getTotalLunches(){
+		int total = 0;
+		if(this.mondayAttendance != null && this.mondayAttendance.includesLunch()){
+			total++;
+		}
+		if(this.tuesdayAttendance != null && this.tuesdayAttendance.includesLunch()){
+			total++;
+		}
+		if(this.wednesdayAttendance != null && this.wednesdayAttendance.includesLunch()){
+			total++;
+		}
+		if(this.thursdayAttendance != null && this.thursdayAttendance.includesLunch()){
+			total++;
+		}
+		if(this.fridayAttendance != null && this.fridayAttendance.includesLunch()){
+			total++;
+		}
+		
+		return total;
+	}
+	
+	public int getTotalPaidLunches(){
+		int total = getTotalLunches();
+		total -= this.fundedLunches;
+		
+		return total > 0 ? total : 0;
 	}
 }

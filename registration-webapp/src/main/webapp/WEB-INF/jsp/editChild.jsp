@@ -71,7 +71,19 @@
 								Left school
 							</td>
 							<td>
-								<form:checkbox path="child.leftSchool"/>
+								<form:checkbox path="child.leftSchool"/> 
+								Date 
+								<form:input path="child.dateLeft" class="date"/>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								Non Starter
+							</td>
+							<td>
+								<form:checkbox path="child.nonStarter"/> 
+								Date 
+								<form:input path="child.nonStarterDate" class="date"/>
 							</td>
 						</tr>
 						<tr>
@@ -473,14 +485,6 @@
 										</tr>
 										<tr>
 											<td>
-												Date of Birth
-											</td>
-											<td>
-												<form:input path="dateOfBirth" cssClass="date"/>
-											</td>
-										</tr>
-										<tr>
-											<td>
 												Relation
 											</td>
 											<td>
@@ -653,6 +657,9 @@
 									Phone Number
 								</th>
 								<th>
+									Relationship
+								</th>
+								<th>
 									Can Collect
 								</th>
 							</tr>
@@ -674,6 +681,9 @@
 											<form:input path="phoneNumber"/>
 										</td>
 										<td style="vertical-align: top;">
+											<form:input path="relationship"/>
+										</td>
+										<td style="vertical-align: top;">
 											<form:checkbox path="allowedToCollect"/>
 										</td>
 									</tr>
@@ -693,6 +703,9 @@
 										</td>
 										<td style="vertical-align: top;">
 											<form:input path="phoneNumber"/>
+										</td>
+										<td style="vertical-align: top;">
+											<form:input path="relationship"/>
 										</td>
 										<td style="vertical-align: top;">
 											<form:checkbox path="allowedToCollect"/>
@@ -766,7 +779,15 @@
 					<div class="tabber" id="tab4">
 						<div class="tabbertab" title="General">
 							<table class="formTable">
-								<tr style="cursor: pointer;">
+								<tr>
+									<td>
+										Registration Fee
+									</td>
+									<td>
+										<form:input path="child.registrationFee" size="4" cssClass="numeric"/>
+									</td>
+								</tr>
+								<tr>
 									<td>
 										Registration Fee Paid
 									</td>
@@ -784,10 +805,18 @@
 								</tr>
 								<tr>
 									<td>
+										Deposit Refunded(£)
+									</td>
+									<td>
+										<form:input path="child.depositRefunded" size="4" cssClass="numeric"/>
+									</td>
+								</tr>
+								<tr>
+									<td>
 										Funded Sessions (Per Week)
 									</td>
 									<td>
-										<form:input path="child.fundedSessions" cssClass="numeric"/>
+										<form:input path="child.fundedSessions" cssClass="numeric" size="4"/>
 									</td>
 								</tr>
 								<tr>
@@ -795,7 +824,7 @@
 										Funded Lunches (Per Week)
 									</td>
 									<td>
-										<form:input path="child.fundedLunches" cssClass="numeric"/>
+										<form:input path="child.fundedLunches" cssClass="numeric" size="4"/>
 									</td>
 								</tr>
 							</table>

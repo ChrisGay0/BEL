@@ -18,6 +18,7 @@ import javax.persistence.OrderColumn;
 import javax.persistence.Table;
 import javax.persistence.Version;
 
+import org.hibernate.annotations.Where;
 import org.springframework.util.CollectionUtils;
 
 @Entity
@@ -32,6 +33,7 @@ public class Room {
 	@OneToMany(targetEntity=Child.class)
 	@JoinColumn(name="roomId")
 	@OrderBy(value="dateOfBirth desc")
+	@Where(clause="leftSchool = 0 and startDate is not null")
 	private List<Child> children;
 	private boolean active = true;
 	@OneToMany(mappedBy="room", fetch=FetchType.EAGER, cascade=CascadeType.ALL)

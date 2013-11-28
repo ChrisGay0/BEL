@@ -4,6 +4,14 @@
 <html>
 	<head>
 		<%@ include file="headerIncludes.jspf" %>
+		<script type="text/javascript">
+			function doBulkLeave(){
+				if(confirm("The selected children will be set to 'Left School'. \n Are you sure you want to contine?")){
+					$("#bulkLeave").val("Y");
+					document.bulkRoomForm.submit();
+				}
+			}
+		</script>
 	</head>
 	<body>
 		<%@ include file="/WEB-INF/jsp/header.jsp" %>
@@ -92,12 +100,14 @@
 					</table>
 				</c:when>
 			</c:choose>
+			<input type="hidden" name="bulkLeave" id="bulkLeave"/>
 		</form:form>
 		<div id="buttonBar"> 
 			<div id="holder">
 				<button onClick="document.location = 'bulkRoomChange.htm?action=showChildren&roomId=' + $('#roomId').val();">Find Children</button>
 				<c:if test="${not empty formObject.children}">
 					<button onclick="document.bulkRoomForm.submit();return false;">Transfer</button>
+					<button onclick="doBulkLeave();return false;">Bulk Leave</button>
 				</c:if>
 			</div>
 		</div>

@@ -12,8 +12,9 @@
 				var includeContacts = $("#contacts").attr("checked");
 				var includeMedical = $("#medical").attr("checked");
 				var includeAddress = $("#address").attr("checked");
+				var allergiesOnly = $("#allergiesOnly").attr("checked");
 				
-				window.open('/registration-webapp/childList.pdf?rooms=' + rooms + "&includeDays=" + includeDays + "&includeGuardians=" + includeGuardians + "&includeContacts=" + includeContacts + "&includeMedical=" + includeMedical + "&includeAddress=" + includeAddress);
+				window.open('/registration-webapp/childList.pdf?rooms=' + rooms + "&includeDays=" + includeDays + "&includeGuardians=" + includeGuardians + "&includeContacts=" + includeContacts + "&includeMedical=" + includeMedical + "&includeAddress=" + includeAddress + "&allergiesOnly=" + allergiesOnly);
 			}
 		</script>
 	</head>
@@ -74,6 +75,15 @@
 					</td>
 					<td>
 						<input type="checkbox" id="medical"/>
+					</td>
+					<td>
+				</tr>
+				<tr>
+					<td>
+						Only Children With Allergies
+					</td>
+					<td>
+						<input type="checkbox" id="allergiesOnly"/>
 					</td>
 					<td>
 				</tr>
